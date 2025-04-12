@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Fullscreen Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 2em;
+        }
+
+        input {
+            font-size: 1em;
+            padding: 5px;
+            margin: 10px;
+            color: black;
+        }
+
+        button {
+            font-size: 1em;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <p id="displayArea"></p>
+    <input type="text" id="userInput" placeholder="Enter text">
+    <button onclick="sendInput()">Submit</button>
+    <button onclick="closeWindow()">Close Window</button>
+
+    <script>
+        function closeWindow() {
+            window.close();
+        }
+
+        function sendInput() {
+            const userInput = document.getElementById('userInput').value;
+            const url = new URL(window.location.href);
+            const googleScriptUrl = url.searchParams.get('googleScriptUrl');
+            if (googleScriptUrl) {
+                fetch(googleScriptUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ userInput: userInput })
+                });
+            }
+        }
+
+        function displayData(data) {
+            document.getElementById("displayArea").innerHTML = data;
+        }
+
+        function getGoogleData() {
+            const url = new URL(window.location.href);
+            const googleScriptUrl = url.searchParams.get('googleScriptUrl');
+            if (googleScriptUrl) {
+                fetch(googleScriptUrl).then(response => response.text()).then(data => displayData(data));
+            }
+        }
+        getGoogleData();
+
+    </script>
+</body>
+
+</html>
