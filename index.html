@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <style>
+        /* Your existing styles... */
         body {
             margin: 0;
             padding: 0;
@@ -230,6 +231,7 @@
     <div id="d2Display"></div>
     <div id="e2Display"></div>
     <div id="f2Display"></div>
+    <div id="dataContainer"></div>
 
     <p id="displayArea"></p>
     <input type="text" id="userInput" placeholder="Enter text">
@@ -385,10 +387,29 @@
     </div>
 
     <script>
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        var dataParam = getUrlParameter('data');
+        if (dataParam) {
+            var data = JSON.parse(dataParam);
+            var rowValues = data.rowValues;
+
+            var dataContainer = document.getElementById('dataContainer');
+            for (var i = 0; i < rowValues.length; i++) {
+                var div = document.createElement('div');
+                div.textContent = rowValues[i];
+                dataContainer.appendChild(div);
+            }
+        }
+        //Your existing Javascript code
         function fetchData() {
             const url = new URL(window.location.href);
             const googleScriptUrl = url.searchParams.get('googleScriptUrl');
-
             if (googleScriptUrl) {
                 fetch(googleScriptUrl)
                     .then(response => response.json())
@@ -723,50 +744,50 @@
             const emailTemplateRejectOriginalButton = document.getElementById('emailTemplateRejectOriginalButton');
             const emailTemplateRejectAlternativeButton = document.getElementById('emailTemplateRejectAlternativeButton');
 
-            if (publishUniverseOrReject == "Publish") {
-                if (alternativeButtonPublish.innerText == "Alternative") {
-                    emailSubject.value = "<?= publishEmailSubjectAlternative ?>";
-                    emailBody.value = "<?= publishEmailBodyAlternative ?>";
-                    alternativeButtonPublish.innerText = "Original";
+            if (publishUniverseOrReject == 'Publish') {
+                if (alternativeButtonPublish.innerText == 'Alternative') {
+                    emailSubject.value = emailSubjectAlternative.value;
+                    emailBody.value = emailBodyAlternative.value;
+                    alternativeButtonPublish.innerText = 'Original';
                     emailTemplatePublishOriginalButton.style.display = 'none';
                     emailTemplatePublishAlternativeButton.style.display = 'inline-block';
                 }
-                else if (alternativeButtonPublish.innerText == "Original") {
+                else {
                     emailSubject.value = "<?= publishEmailSubject ?>";
                     emailBody.value = "<?= publishEmailBody ?>";
-                    alternativeButtonPublish.innerText = "Alternative";
+                    alternativeButtonPublish.innerText = 'Alternative';
                     emailTemplatePublishOriginalButton.style.display = 'inline-block';
                     emailTemplatePublishAlternativeButton.style.display = 'none';
                 }
             }
-            else if (publishUniverseOrReject == "Universe") {
-                if (alternativeButtonUniverse.innerText == "Alternative") {
-                    emailSubject.value = "<?= universeEmailSubjectAlternative ?>";
-                    emailBody.value = "<?= universeEmailBodyAlternative ?>";
-                    alternativeButtonUniverse.innerText = "Original";
+            else if (publishUniverseOrReject == 'Universe') {
+                if (alternativeButtonUniverse.innerText == 'Alternative') {
+                    emailSubject.value = emailSubjectAlternative.value;
+                    emailBody.value = emailBodyAlternative.value;
+                    alternativeButtonUniverse.innerText = 'Original';
                     emailTemplateUniverseOriginalButton.style.display = 'none';
                     emailTemplateUniverseAlternativeButton.style.display = 'inline-block';
                 }
-                else if (alternativeButtonUniverse.innerText == "Original") {
+                else {
                     emailSubject.value = "<?= universeEmailSubject ?>";
                     emailBody.value = "<?= universeEmailBody ?>";
-                    alternativeButtonUniverse.innerText = "Alternative";
+                    alternativeButtonUniverse.innerText = 'Alternative';
                     emailTemplateUniverseOriginalButton.style.display = 'inline-block';
                     emailTemplateUniverseAlternativeButton.style.display = 'none';
                 }
             }
-            else if (publishUniverseOrReject == "Reject") {
-                if (alternativeButtonReject.innerText == "Alternative") {
-                    emailSubject.value = "<?= rejectEmailSubjectAlternative ?>";
-                    emailBody.value = "<?= rejectEmailBodyAlternative ?>";
-                    alternativeButtonReject.innerText = "Original";
+            else if (publishUniverseOrReject == 'Reject') {
+                if (alternativeButtonReject.innerText == 'Alternative') {
+                    emailSubject.value = emailSubjectAlternative.value;
+                    emailBody.value = emailBodyAlternative.value;
+                    alternativeButtonReject.innerText = 'Original';
                     emailTemplateRejectOriginalButton.style.display = 'none';
                     emailTemplateRejectAlternativeButton.style.display = 'inline-block';
                 }
-                else if (alternativeButtonReject.innerText == "Original") {
+                else {
                     emailSubject.value = "<?= rejectEmailSubject ?>";
                     emailBody.value = "<?= rejectEmailBody ?>";
-                    alternativeButtonReject.innerText = "Alternative";
+                    alternativeButtonReject.innerText = 'Alternative';
                     emailTemplateRejectOriginalButton.style.display = 'inline-block';
                     emailTemplateRejectAlternativeButton.style.display = 'none';
                 }
