@@ -401,7 +401,7 @@
             var rowValues = data.rowValues;
 
             // Fill the pre-defined divs with row data
-            for (var i = 1; i < rowValues.length; i++) { // Start from index 1 to skip column A
+            for (var i = 0; i < rowValues.length; i++) { // Index 0 is column B. Skip column A because that is the checkbox column.
                 var div = document.getElementById(['colB_Data', 'colC_Data', 'colD_Data', 'colE_Data', 'colF_Data'][i]);
                 if (div) {
                     div.textContent = rowValues[i];
