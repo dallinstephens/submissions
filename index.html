@@ -52,7 +52,7 @@
         function sendInput() {
             const userInput = document.getElementById('userInput').value;
             const url = new URL(window.location.href);
-            const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbyt-WpEd1G6_p-LgZfV7YduDDX2sLAG2A6FGnagdby3h7VAx_GnjYfmy0HH3dllbunS/exec';
+            const googleScriptUrl = url.searchParams.get('googleScriptUrl');
             if (googleScriptUrl) {
                 fetch(googleScriptUrl, {
                     method: 'POST',
