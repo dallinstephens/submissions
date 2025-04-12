@@ -223,6 +223,7 @@
 </head>
 
 <body>
+    <h2 id="b1Display"></h2>
     <div id="a2Display"></div>
     <div id="b2Display"></div>
     <div id="c2Display"></div>
@@ -402,6 +403,11 @@
                         } else {
                             console.error("Data length is incorrect or data is null.");
                         }
+                        if (data && data.b1Value) {
+                            document.getElementById("b1Display").innerHTML = data.b1Value;
+                        } else {
+                            console.error("B1 value is null or undefined");
+                        }
                     })
                     .catch(error => {
                         console.error("Error fetching data:", error);
@@ -409,7 +415,23 @@
             }
         }
 
-        fetchData();
+        fetchData(); // Call fetchData immediately
+
+        function displayData(data) {
+            document.getElementById("displayArea").innerHTML = data;
+        }
+
+        function getGoogleData() {
+            const url = new URL(window.location.href);
+            const googleScriptUrl = url.searchParams.get('googleScriptUrl');
+            if (googleScriptUrl) {
+                fetch(googleScriptUrl)
+                    .then(response => response.text())
+                    .then(data => displayData(data));
+            }
+        }
+
+        getGoogleData(); // Call getGoogleData immediately
 
         function closeWindow() {
             window.close();
@@ -427,29 +449,14 @@
             }
         }
 
-        function displayData(data) {
-            document.getElementById("displayArea").innerHTML = data;
-        }
-
-        function getGoogleData() {
-            const url = new URL(window.location.href);
-            const googleScriptUrl = url.searchParams.get('googleScriptUrl');
-            if (googleScriptUrl) {
-                fetch(googleScriptUrl)
-                    .then(response => response.text())
-                    .then(data => displayData(data));
-            }
-        }
-        getGoogleData();
-
         const reviewBody = document.getElementById('reviewBody');
         const publishUniverseOrRejectBody = document.getElementById('publishUniverseOrRejectBody');
         const bodyElement = document.getElementById('mainContainer');
         const buttonElement = document.querySelectorAll("button");
         const emailSubject = document.getElementById('emailSubject');
         const emailBody = document.getElementById('emailBody');
-        const emailSubjectAlternative = document.getElementById('emailSubjectAlternative');
-        const emailBodyAlternative = document.getElementById('emailBodyAlternative');
+        const emailSubjectAlternative = document.getElementById('emailSubjectAltenative');
+        const emailBodyAlternative = document.getElementById('emailBodyAltenative');
         const publishUniverseOrReject = document.getElementById('publishUniverseOrReject');
         const sendButtonPublish = document.getElementById('sendButtonPublish');
         const alternativeButtonPublish = document.getElementById('alternativeButtonPublish');
@@ -716,7 +723,7 @@
             const emailTemplateRejectOriginalButton = document.getElementById('emailTemplateRejectOriginalButton');
             const emailTemplateRejectAlternativeButton = document.getElementById('emailTemplateRejectAlternativeButton');
 
-            if (publishUniverseOrReject == 'Publish') {
+            if (publishUniverseOrReject == "Publish") {
                 if (alternativeButtonPublish.innerText == "Alternative") {
                     emailSubject.value = "<?= publishEmailSubjectAlternative ?>";
                     emailBody.value = "<?= publishEmailBodyAlternative ?>";
@@ -724,7 +731,7 @@
                     emailTemplatePublishOriginalButton.style.display = 'none';
                     emailTemplatePublishAlternativeButton.style.display = 'inline-block';
                 }
-                else {
+                else if (alternativeButtonPublish.innerText == "Original") {
                     emailSubject.value = "<?= publishEmailSubject ?>";
                     emailBody.value = "<?= publishEmailBody ?>";
                     alternativeButtonPublish.innerText = "Alternative";
@@ -732,7 +739,7 @@
                     emailTemplatePublishAlternativeButton.style.display = 'none';
                 }
             }
-            else if (publishUniverseOrReject == 'Universe') {
+            else if (publishUniverseOrReject == "Universe") {
                 if (alternativeButtonUniverse.innerText == "Alternative") {
                     emailSubject.value = "<?= universeEmailSubjectAlternative ?>";
                     emailBody.value = "<?= universeEmailBodyAlternative ?>";
@@ -740,7 +747,7 @@
                     emailTemplateUniverseOriginalButton.style.display = 'none';
                     emailTemplateUniverseAlternativeButton.style.display = 'inline-block';
                 }
-                else {
+                else if (alternativeButtonUniverse.innerText == "Original") {
                     emailSubject.value = "<?= universeEmailSubject ?>";
                     emailBody.value = "<?= universeEmailBody ?>";
                     alternativeButtonUniverse.innerText = "Alternative";
@@ -748,7 +755,7 @@
                     emailTemplateUniverseAlternativeButton.style.display = 'none';
                 }
             }
-            else if (publishUniverseOrReject == 'Reject') {
+            else if (publishUniverseOrReject == "Reject") {
                 if (alternativeButtonReject.innerText == "Alternative") {
                     emailSubject.value = "<?= rejectEmailSubjectAlternative ?>";
                     emailBody.value = "<?= rejectEmailBodyAlternative ?>";
@@ -756,7 +763,7 @@
                     emailTemplateRejectOriginalButton.style.display = 'none';
                     emailTemplateRejectAlternativeButton.style.display = 'inline-block';
                 }
-                else {
+                else if (alternativeButtonReject.innerText == "Original") {
                     emailSubject.value = "<?= rejectEmailSubject ?>";
                     emailBody.value = "<?= rejectEmailBody ?>";
                     alternativeButtonReject.innerText = "Alternative";
@@ -766,16 +773,14 @@
             }
         }
 
-        function SendInfoToOpenEmailTemplate(emailSubjectRange, emailBodyRange, ccRange, emailTemplateRange) {
+        function SendInfoToOpenEmailTemplate(range1, range2, range3, range4) {
             const url = new URL(window.location.href);
             const googleScriptUrl = url.searchParams.get('googleScriptUrl');
             if (googleScriptUrl) {
-                fetch(googleScriptUrl + "?emailSubjectRange=" + encodeURIComponent(emailSubjectRange) +
-                    "&emailBodyRange=" + encodeURIComponent(emailBodyRange) +
-                    "&ccRange=" + encodeURIComponent(ccRange) +
-                    "&emailTemplateRange=" + encodeURIComponent(emailTemplateRange))
+                fetch(googleScriptUrl + "?range1=" + encodeURIComponent(range1) + "&range2=" + encodeURIComponent(range2) + "&range3=" + encodeURIComponent(range3) + "&range4=" + encodeURIComponent(range4))
                     .then(() => {
-                        console.log("Email Template Info Sent");
+                        console.log("Email Template Sent");
+                        window.close();
                     });
             }
         }
