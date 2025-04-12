@@ -21,43 +21,24 @@
             font-size: 2em;
         }
 
-        /* Reference for root color variables: https://www.w3schools.com/css/css3_variables.asp */
-        /* Reference for color picker: https://www.w3schools.com/colors/colors_picker.asp */
         :root {
             --navButtonHoverBackgroundColor: #f9f9f9;
-            /* very light gray */
             --navButtonHoverColor: #000000;
-            /* black */
             --navButtonHoverBorderColor: #333;
-            /* #00ff2b; Fluorescent */
             --bodyBackgroundColorReview: #d3d3d3;
-            /* lightgray */
             --bodyBackgroundColorPublish: #90ee90;
-            /* lightgreen */
             --bodyBackgroundColorUniverse: #ffffb3;
-            /* light yellow */
             --bodyBackgroundColorReject: #ffb3b3;
-            /* light red */
             --buttonBackgroundColorReview: #ffe6cc;
-            /* light orange */
             --buttonBackgroundColorPublish: #00802b;
-            /* Green */
             --buttonBackgroundColorUniverse: #ffff00;
-            /* yellow */
             --buttonBackgroundColorReject: #b30000;
-            /* red */
         }
 
-        /* Reference of sticky navigation bar and dropdown: https://www.w3schools.com/css/css_navbar_horizontal.asp */
-        /* Reference on how to have dropdown work with position sticky: */
-        /* https://stackoverflow.com/questions/69415180/why-adding-sticky-to-css-drop-down-menu-breaks-it */
         .navbar {
             position: -webkit-sticky;
-            /* Safari */
             position: sticky;
             top: 4px;
-            /* Reference on how to position dropdown so that is not behind input tag and textbox: */
-            /* https://stackoverflow.com/questions/16318413/dropdown-menu-z-index-problems */
             z-index: 1;
             scrollbar-gutter: stable both-edges;
         }
@@ -68,7 +49,6 @@
             padding: 0;
             overflow: hidden;
             background-color: #333;
-            /* Reference for flex and justify-content: https://www.w3schools.com/cssref/css3_pr_justify-content.php */
             display: flex;
             justify-content: flex-start;
             width: 100%;
@@ -106,13 +86,10 @@
             border-top-right-radius: 12px;
         }
 
-        /* #4CAF50 green */
-
         li a:hover,
         .dropdown:hover .dropbtn {
             background-color: var(--navButtonHoverBackgroundColor);
             color: var(--navButtonHoverColor);
-            /* Reference for color: https://www.color-hex.com/color-palette/85486 */
             border: 4px solid var(--navButtonHoverBorderColor);
         }
 
@@ -126,7 +103,6 @@
             background-color: #f9f9f9;
             width: 200px;
             height: 390px;
-            /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
             z-index: 1;
             top: 55px;
         }
@@ -148,11 +124,8 @@
         }
 
         .dropdown-content a:hover {
-            /* Reference for color picker: https://www.w3schools.com/colors/colors_picker.asp */
             background-color: #d9d9d9;
-            /* #f1f1f1; */
             border: 4px solid #f9f9f9;
-            /* outline: 1px solid #00ff2b; Fluorescent */
         }
 
         .dropdown:hover .dropdown-content {
@@ -170,13 +143,9 @@
         }
 
         div#reviewBody h3 {
-            /* Reference for color picker: https://www.w3schools.com/colors/colors_picker.asp  */
             background-color: #ffe6cc;
-            /* light orange */
             border: 1px solid #333;
             color: #000;
-            /* Reference for border-top-left-radius & border-top-right-radius: */
-            /* https://www.w3schools.com/cssref/css3_pr_border-top-left-radius.php */
             border-top-left-radius: 6px;
             border-top-right-radius: 6px;
             padding: 10px;
@@ -187,11 +156,9 @@
             background-color: #fff;
             padding: 10px;
             border: 1px solid #333;
-            /* Reference for no top border: https://www.w3schools.com/cssref/pr_border-top_style.php */
             border-top-style: none;
         }
 
-        /* Reference for color picker: https://www.w3schools.com/colors/colors_picker.asp */
         button {
             border: 4px solid #404040;
             border-radius: 8px;
@@ -207,7 +174,6 @@
         }
 
         button:hover {
-            /* background-color: #3e8e41 !important; */
             border: 4px solid #fff;
             outline: 1px solid #000;
             border-radius: 8px;
@@ -270,10 +236,6 @@
     <button onclick="closeWindow()">Close Window</button>
     <div id="app-container">
         <nav class="navbar">
-            <!-- References for onmouseover, onmouseout, onmousenter, onmouseleave Event: -->
-            <!-- https://www.w3schools.com/jsref/event_onmouseover.asp -->
-            <!-- https://tutorials.nmdprojects.net/change_style_on_hover/ -->
-            <!-- https://www.w3schools.com/JSREF/event_onmouseenter.asp -->
             <ul>
                 <li><a id="review" onmouseover="SetOnMouseOver('Review')">Review</a></li>
                 <li><a id="publish" onmouseover="SetOnMouseOver('Publish')">Publish</a></li>
@@ -282,8 +244,6 @@
                 <li class="dropdown">
                     <a id="move" href="javascript:void(0)" class="dropbtn" onmouseover="SetOnMouseOver('Move')">Move</a>
                     <div class="dropdown-content">
-                        <!-- Reference on how to use onclick in a tag with href:  -->
-                        <!-- https://stackoverflow.com/questions/1346043/html-anchor-link-href-and-onclick-both -->
                         <a href="#" onclick="SendInfoToGsFile('Form Reponses 1'); return false">Form Responses</a>
                         <a href="#" onclick="SendInfoToGsFile('Master Submissions'); return false">Master
                             Submissions</a>
@@ -317,28 +277,24 @@
                 <div>
                     <?= contentF ?>
                 </div>
-                <!-- Audio -->
                 <h3>
                     <?= headerJ ?>
                 </h3>
                 <div>
                     <iframe frameborder='0' height='55' width='100%' src=<?=contentJ ?>></iframe>
                 </div>
-                <!-- PDF -->
                 <h3>
                     <?= headerK ?>
                 </h3>
                 <div>
                     <iframe frameborder='0' height='1000' width='100%' src=<?=contentK ?>></iframe>
                 </div>
-                <!-- Notation -->
                 <h3>
                     <?= headerI ?>
                 </h3>
                 <div>
                     <iframe frameborder='0' height='300' width='100%' src=<?=contentI ?>></iframe>
                 </div>
-                <!-- YouTube Video -->
                 <h3>
                     <?= headerM ?>
                 </h3>
@@ -392,16 +348,12 @@
 
             <div id="publishUniverseOrRejectBody" class="publishUniverseReject">
                 <input type="text" id="emailSubject">
-                <!-- Reference for hidden input tag: https://www.w3schools.com/tags/att_input_type_hidden.asp -->
                 <input type="hidden" id="responseSheetName" value="<?= responseSheetName ?>">
                 <input type="hidden" id="responseRow" value="<?= responseRow ?>">
                 <input type="hidden" id="emailSubjectAltenative">
                 <input type="hidden" id="emailBodyAltenative">
                 <input type="hidden" id="webAppUrl" value="<?= webAppUrl ?>">
                 <br><br>
-                <!-- References for textarea: -->
-                <!-- https://www.w3schools.com/tags/tag_textarea.asp -->
-                <!-- https://stackoverflow.com/questions/2803880/is-there-a-way-to-get-a-textarea-to-stretch-to-fit-its-content-without-using-php -->
                 <textarea id="emailBody"></textarea>
                 <div class="containerForButtons">
                     <button id="sendButtonPublish" onclick="sendDataToGsFile('SEND','Publish')">Send</button>
@@ -423,9 +375,6 @@
                         onclick="SendInfoToOpenEmailTemplate('H1:I1','A:F','N/A','A18:J33')">Email Template</button>
                     <button id="emailTemplateRejectAlternativeButton"
                         onclick="SendInfoToOpenEmailTemplate('H17:I17','A:F','N/A','A1:J16')">Email Template</button>
-                    <!-- <button id="cancelButtonPublish" onclick="SendDataToGsFile('CANCEL','Publish'); google.script.host.close()">Cancel</button>
-          <button id="cancelButtonUniverse" onclick="SendDataToGsFile('CANCEL','Universe'); google.script.host.close()">Cancel</button>
-          <button id="cancelButtonReject" onclick="SendDataToGsFile('CANCEL','Reject'); google.script.host.close()">Cancel</button> -->
                     <button id="cancelButtonPublish" onclick="sendDataToGsFile('CANCEL','Publish')">Cancel</button>
                     <button id="cancelButtonUniverse" onclick="sendDataToGsFile('CANCEL','Universe')">Cancel</button>
                     <button id="cancelButtonReject" onclick="sendDataToGsFile('CANCEL','Reject')">Cancel</button>
@@ -439,415 +388,397 @@
             const url = new URL(window.location.href);
             const googleScriptUrl = url.searchParams.get('googleScriptUrl');
 
-            function fetchData() {
-                const url = new URL(window.location.href);
-                const googleScriptUrl = url.searchParams.get('googleScriptUrl');
-
-                if (googleScriptUrl) {
-                    fetch(googleScriptUrl)
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data && data.a2f2Values && data.a2f2Values.length === 6) {
-                                document.getElementById("a2Display").innerHTML = data.a2f2Values[0];
-                                document.getElementById("b2Display").innerHTML = data.a2f2Values[1];
-                                document.getElementById("c2Display").innerHTML = data.a2f2Values[2];
-                                document.getElementById("d2Display").innerHTML = data.a2f2Values[3];
-                                document.getElementById("e2Display").innerHTML = data.a2f2Values[4];
-                                document.getElementById("f2Display").innerHTML = data.a2f2Values[5];
-                            } else {
-                                console.error("Data length is incorrect or data is null.");
-                            }
-                        })
-                        .catch(error => {
-                            console.error("Error fetching data:", error);
-                        });
-                }
+            if (googleScriptUrl) {
+                fetch(googleScriptUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.a2f2Values && data.a2f2Values.length === 6) {
+                            document.getElementById("a2Display").innerHTML = data.a2f2Values[0];
+                            document.getElementById("b2Display").innerHTML = data.a2f2Values[1];
+                            document.getElementById("c2Display").innerHTML = data.a2f2Values[2];
+                            document.getElementById("d2Display").innerHTML = data.a2f2Values[3];
+                            document.getElementById("e2Display").innerHTML = data.a2f2Values[4];
+                            document.getElementById("f2Display").innerHTML = data.a2f2Values[5];
+                        } else {
+                            console.error("Data length is incorrect or data is null.");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error fetching data:", error);
+                    });
             }
+        }
 
-            // Call fetchData() on page load
-            fetchData();
+        fetchData();
 
+        function closeWindow() {
+            window.close();
+        }
 
-            function closeWindow() {
-                window.close();
+        function sendInput() {
+            const userInput = document.getElementById('userInput').value;
+            const url = new URL(window.location.href);
+            const googleScriptUrl = url.searchParams.get('googleScriptUrl');
+            if (googleScriptUrl) {
+                fetch(googleScriptUrl + "?userInput=" + encodeURIComponent(userInput))
+                    .then(() => {
+                        console.log("Data Sent", userInput);
+                    });
             }
+        }
 
-            function sendInput() {
-                const userInput = document.getElementById('userInput').value;
-                const url = new URL(window.location.href);
-                const googleScriptUrl = url.searchParams.get('googleScriptUrl');
-                if (googleScriptUrl) {
-                    fetch(googleScriptUrl + "?userInput=" + encodeURIComponent(userInput))
-                        .then(() => {
-                            console.log("Data Sent", userInput);
-                        });
-                }
+        function displayData(data) {
+            document.getElementById("displayArea").innerHTML = data;
+        }
+
+        function getGoogleData() {
+            const url = new URL(window.location.href);
+            const googleScriptUrl = url.searchParams.get('googleScriptUrl');
+            if (googleScriptUrl) {
+                fetch(googleScriptUrl)
+                    .then(response => response.text())
+                    .then(data => displayData(data));
             }
+        }
+        getGoogleData();
 
-            function displayData(data) {
-                document.getElementById("displayArea").innerHTML = data;
+        const reviewBody = document.getElementById('reviewBody');
+        const publishUniverseOrRejectBody = document.getElementById('publishUniverseOrRejectBody');
+        const bodyElement = document.getElementById('mainContainer');
+        const buttonElement = document.querySelectorAll("button");
+        const emailSubject = document.getElementById('emailSubject');
+        const emailBody = document.getElementById('emailBody');
+        const emailSubjectAlternative = document.getElementById('emailSubjectAlternative');
+        const emailBodyAlternative = document.getElementById('emailBodyAlternative');
+        const publishUniverseOrReject = document.getElementById('publishUniverseOrReject');
+        const sendButtonPublish = document.getElementById('sendButtonPublish');
+        const alternativeButtonPublish = document.getElementById('alternativeButtonPublish');
+        const emailTemplatePublishOriginalButton = document.getElementById('emailTemplatePublishOriginalButton');
+        const emailTemplatePublishAlternativeButton = document.getElementById('emailTemplatePublishAlternativeButton');
+        const cancelButtonPublish = document.getElementById('cancelButtonPublish');
+        const sendButtonUniverse = document.getElementById('sendButtonUniverse');
+        const alternativeButtonUniverse = document.getElementById('alternativeButtonUniverse');
+        const emailTemplateUniverseOriginalButton = document.getElementById('emailTemplateUniverseOriginalButton');
+        const emailTemplateUniverseAlternativeButton = document.getElementById('emailTemplateUniverseAlternativeButton');
+        const cancelButtonUniverse = document.getElementById('cancelButtonUniverse');
+        const sendButtonReject = document.getElementById('sendButtonReject');
+        const alternativeButtonReject = document.getElementById('alternativeButtonReject');
+        const emailTemplateRejectOriginalButton = document.getElementById('emailTemplateRejectOriginalButton');
+        const emailTemplateRejectAlternativeButton = document.getElementById('emailTemplateRejectAlternativeButton');
+        const cancelButtonReject = document.getElementById('cancelButtonReject');
+        const review = document.getElementById('review');
+        const publish = document.getElementById('publish');
+        const universe = document.getElementById('universe');
+        const reject = document.getElementById('reject');
+        const root = document.documentElement;
+        const navButtonHoverBackgroundColor = getComputedStyle(root).getPropertyValue('--navButtonHoverBackgroundColor');
+        const navButtonHoverColor = getComputedStyle(root).getPropertyValue('--navButtonHoverColor');
+        const bodyBackgroundColorReview = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorReview');
+        const bodyBackgroundColorPublish = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorPublish');
+        const bodyBackgroundColorUniverse = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorUniverse');
+        const bodyBackgroundColorReject = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorReject');
+        const buttonBackgroundColorReview = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorReview');
+        const buttonBackgroundColorPublish = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorPublish');
+        const buttonBackgroundColorUniverse = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorUniverse');
+        const buttonBackgroundColorReject = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorReject');
+        const mainContainer = document.getElementById('mainContainer');
+
+        function SetOnMouseOver(reviewPublishUniverseRejectMoveOrDelete) {
+            if (reviewPublishUniverseRejectMoveOrDelete == "Review") {
+                reviewBody.style.display = 'block';
+                publishUniverseOrRejectBody.style.display = 'none';
+                bodyElement.style.backgroundColor = bodyBackgroundColorReview;
+
+                review.style.backgroundColor = buttonBackgroundColorReview;
+                review.style.color = "#000";
+                publish.style.backgroundColor = "#333";
+                publish.style.color = "#fff";
+                universe.style.backgroundColor = "#333";
+                universe.style.color = "#fff";
+                reject.style.backgroundColor = "#333";
+                reject.style.color = "#fff";
             }
+            else if (reviewPublishUniverseRejectMoveOrDelete == "Publish") {
+                reviewBody.style.display = 'none';
+                publishUniverseOrRejectBody.style.display = 'block';
+                bodyElement.style.backgroundColor = bodyBackgroundColorPublish;
 
-            function getGoogleData() {
-                const url = new URL(window.location.href);
-                const googleScriptUrl = url.searchParams.get('googleScriptUrl');
-                if (googleScriptUrl) {
-                    fetch(googleScriptUrl)
-                        .then(response => response.text())
-                        .then(data => displayData(data));
+                for (let i = 0; i < buttonElement.length; i++) {
+                    buttonElement[i].style.backgroundColor = buttonBackgroundColorPublish;
+                    buttonElement[i].style.color = "#fff";
                 }
+
+                emailSubject.value = "<?= publishEmailSubject ?>";
+                emailBody.value = "<?= publishEmailBody ?>";
+                alternativeButtonPublish.innerText = "Alternative";
+
+                sendButtonPublish.style.display = 'inline-block';
+                alternativeButtonPublish.style.display = 'inline-block';
+                emailTemplatePublishOriginalButton.style.display = 'inline-block';
+                emailTemplatePublishAlternativeButton.style.display = 'none';
+                cancelButtonPublish.style.display = 'inline-block';
+                sendButtonUniverse.style.display = 'none';
+                alternativeButtonUniverse.style.display = 'none';
+                emailTemplateUniverseOriginalButton.style.display = 'none';
+                emailTemplateUniverseAlternativeButton.style.display = 'none';
+                cancelButtonUniverse.style.display = 'none';
+                sendButtonReject.style.display = 'none';
+                alternativeButtonReject.style.display = 'none';
+                emailTemplateRejectOriginalButton.style.display = 'none';
+                emailTemplateRejectAlternativeButton.style.display = 'none';
+                cancelButtonReject.style.display = 'none';
+
+                review.style.backgroundColor = "#333";
+                review.style.color = "#fff";
+                publish.style.backgroundColor = buttonBackgroundColorPublish;
+                publish.style.color = "#fff";
+                universe.style.backgroundColor = "#333";
+                universe.style.color = "#fff";
+                reject.style.backgroundColor = "#333";
+                reject.style.color = "#fff";
             }
-            getGoogleData();
+            else if (reviewPublishUniverseRejectMoveOrDelete == "Universe") {
+                reviewBody.style.display = 'none';
+                publishUniverseOrRejectBody.style.display = 'block';
+                bodyElement.style.backgroundColor = bodyBackgroundColorUniverse;
 
-            const reviewBody = document.getElementById('reviewBody');
-            const publishUniverseOrRejectBody = document.getElementById('publishUniverseOrRejectBody');
-            const bodyElement = document.getElementById('mainContainer');
-            // Reference for qureySelectorAll: https://www.w3schools.com/jsref/met_document_queryselectorall.asp
-            const buttonElement = document.querySelectorAll("button");
-            const emailSubject = document.getElementById('emailSubject');
-            const emailBody = document.getElementById('emailBody');
-            const emailSubjectAlternative = document.getElementById('emailSubjectAlternative');
-            const emailBodyAlternative = document.getElementById('emailBodyAlternative');
-            const publishUniverseOrReject = document.getElementById('publishUniverseOrReject');
-            const sendButtonPublish = document.getElementById('sendButtonPublish');
-            const alternativeButtonPublish = document.getElementById('alternativeButtonPublish');
-            const emailTemplatePublishOriginalButton = document.getElementById('emailTemplatePublishOriginalButton');
-            const emailTemplatePublishAlternativeButton = document.getElementById('emailTemplatePublishAlternativeButton');
-            const cancelButtonPublish = document.getElementById('cancelButtonPublish');
-            const sendButtonUniverse = document.getElementById('sendButtonUniverse');
-            const alternativeButtonUniverse = document.getElementById('alternativeButtonUniverse');
-            const emailTemplateUniverseOriginalButton = document.getElementById('emailTemplateUniverseOriginalButton');
-            const emailTemplateUniverseAlternativeButton = document.getElementById('emailTemplateUniverseAlternativeButton');
-            const cancelButtonUniverse = document.getElementById('cancelButtonUniverse');
-            const sendButtonReject = document.getElementById('sendButtonReject');
-            const alternativeButtonReject = document.getElementById('alternativeButtonReject');
-            const emailTemplateRejectOriginalButton = document.getElementById('emailTemplateRejectOriginalButton');
-            const emailTemplateRejectAlternativeButton = document.getElementById('emailTemplateRejectAlternativeButton');
-            const cancelButtonReject = document.getElementById('cancelButtonReject');
-            const review = document.getElementById('review');
-            const publish = document.getElementById('publish');
-            const universe = document.getElementById('universe');
-            const reject = document.getElementById('reject');
-            // References on how to use javascript to change background color of element to root variable:
-            // https://vueschool.io/articles/vuejs-tutorials/how-to-update-root-css-variable-with-javascript/
-            // https://stackoverflow.com/questions/37801882/how-to-change-css-root-color-variables-in-javascript
-            const root = document.documentElement;
-            const navButtonHoverBackgroundColor = getComputedStyle(root).getPropertyValue('--navButtonHoverBackgroundColor');
-            const navButtonHoverColor = getComputedStyle(root).getPropertyValue('--navButtonHoverColor');
-            const bodyBackgroundColorReview = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorReview');
-            const bodyBackgroundColorPublish = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorPublish');
-            const bodyBackgroundColorUniverse = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorUniverse');
-            const bodyBackgroundColorReject = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorReject');
-            const buttonBackgroundColorReview = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorReview');
-            const buttonBackgroundColorPublish = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorPublish');
-            const buttonBackgroundColorUniverse = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorUniverse');
-            const buttonBackgroundColorReject = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorReject');
-            const mainContainer = document.getElementById('mainContainer');
-
-            function SetOnMouseOver(reviewPublishUniverseRejectMoveOrDelete) {
-                if (reviewPublishUniverseRejectMoveOrDelete == "Review") {
-                    reviewBody.style.display = 'block';
-                    publishUniverseOrRejectBody.style.display = 'none';
-                    bodyElement.style.backgroundColor = bodyBackgroundColorReview;
-
-                    review.style.backgroundColor = buttonBackgroundColorReview;
-                    review.style.color = "#000";
-                    publish.style.backgroundColor = "#333";
-                    publish.style.color = "#fff";
-                    universe.style.backgroundColor = "#333";
-                    universe.style.color = "#fff";
-                    reject.style.backgroundColor = "#333";
-                    reject.style.color = "#fff";
+                for (let i = 0; i < buttonElement.length; i++) {
+                    buttonElement[i].style.backgroundColor = buttonBackgroundColorUniverse;
+                    buttonElement[i].style.color = "#000";
                 }
-                else if (reviewPublishUniverseRejectMoveOrDelete == "Publish") {
-                    reviewBody.style.display = 'none';
-                    publishUniverseOrRejectBody.style.display = 'block';
-                    bodyElement.style.backgroundColor = bodyBackgroundColorPublish;
 
-                    for (let i = 0; i < buttonElement.length; i++) {
-                        buttonElement[i].style.backgroundColor = buttonBackgroundColorPublish;
-                        buttonElement[i].style.color = "#fff";
-                    }
+                emailSubject.value = "<?= universeEmailSubject ?>";
+                emailBody.value = "<?= universeEmailBody ?>";
 
-                    emailSubject.value = "<?= publishEmailSubject ?>";
-                    emailBody.value = "<?= publishEmailBody ?>";
-                    alternativeButtonPublish.innerText = "Alternative";
+                sendButtonPublish.style.display = 'none';
+                alternativeButtonPublish.style.display = 'none';
+                emailTemplatePublishOriginalButton.style.display = 'none';
+                emailTemplatePublishAlternativeButton.style.display = 'none';
+                cancelButtonPublish.style.display = 'none';
+                sendButtonUniverse.style.display = 'inline-block';
+                alternativeButtonUniverse.style.display = 'inline-block';
+                emailTemplateUniverseOriginalButton.style.display = 'inline-block';
+                emailTemplateUniverseAlternativeButton.style.display = 'none';
+                cancelButtonUniverse.style.display = 'inline-block';
+                sendButtonReject.style.display = 'none';
+                alternativeButtonReject.style.display = 'none';
+                emailTemplateRejectOriginalButton.style.display = 'none';
+                emailTemplateRejectAlternativeButton.style.display = 'none';
+                cancelButtonReject.style.display = 'none';
 
-                    sendButtonPublish.style.display = 'inline-block';
-                    alternativeButtonPublish.style.display = 'inline-block';
-                    emailTemplatePublishOriginalButton.style.display = 'inline-block';
-                    emailTemplatePublishAlternativeButton.style.display = 'none';
-                    cancelButtonPublish.style.display = 'inline-block';
-                    sendButtonUniverse.style.display = 'none';
-                    alternativeButtonUniverse.style.display = 'none';
-                    emailTemplateUniverseOriginalButton.style.display = 'none';
-                    emailTemplateUniverseAlternativeButton.style.display = 'none';
-                    cancelButtonUniverse.style.display = 'none';
-                    sendButtonReject.style.display = 'none';
-                    alternativeButtonReject.style.display = 'none';
-                    emailTemplateRejectOriginalButton.style.display = 'none';
-                    emailTemplateRejectAlternativeButton.style.display = 'none';
-                    cancelButtonReject.style.display = 'none';
-
-                    review.style.backgroundColor = "#333";
-                    review.style.color = "#fff";
-                    publish.style.backgroundColor = buttonBackgroundColorPublish;
-                    publish.style.color = "#fff";
-                    universe.style.backgroundColor = "#333";
-                    universe.style.color = "#fff";
-                    reject.style.backgroundColor = "#333";
-                    reject.style.color = "#fff";
-                }
-                else if (reviewPublishUniverseRejectMoveOrDelete == "Universe") {
-                    reviewBody.style.display = 'none';
-                    publishUniverseOrRejectBody.style.display = 'block';
-                    bodyElement.style.backgroundColor = bodyBackgroundColorUniverse;
-
-                    for (let i = 0; i < buttonElement.length; i++) {
-                        buttonElement[i].style.backgroundColor = buttonBackgroundColorUniverse;
-                        buttonElement[i].style.color = "#000";
-                    }
-
-                    emailSubject.value = "<?= universeEmailSubject ?>";
-                    emailBody.value = "<?= universeEmailBody ?>";
-
-                    sendButtonPublish.style.display = 'none';
-                    alternativeButtonPublish.style.display = 'none';
-                    emailTemplatePublishOriginalButton.style.display = 'none';
-                    emailTemplatePublishAlternativeButton.style.display = 'none';
-                    cancelButtonPublish.style.display = 'none';
-                    sendButtonUniverse.style.display = 'inline-block';
-                    alternativeButtonUniverse.style.display = 'inline-block';
-                    emailTemplateUniverseOriginalButton.style.display = 'inline-block';
-                    emailTemplateUniverseAlternativeButton.style.display = 'none';
-                    cancelButtonUniverse.style.display = 'inline-block';
-                    sendButtonReject.style.display = 'none';
-                    alternativeButtonReject.style.display = 'none';
-                    emailTemplateRejectOriginalButton.style.display = 'none';
-                    emailTemplateRejectAlternativeButton.style.display = 'none';
-                    cancelButtonReject.style.display = 'none';
-
-                    review.style.backgroundColor = "#333";
-                    review.style.color = "#fff";
-                    publish.style.backgroundColor = "#333";
-                    publish.style.color = "#fff";
-                    universe.style.backgroundColor = buttonBackgroundColorUniverse;
-                    universe.style.color = navButtonHoverColor;
-                    reject.style.backgroundColor = "#333";
-                    reject.style.color = "#fff";
-                }
-                else if (reviewPublishUniverseRejectMoveOrDelete == "Reject") {
-                    reviewBody.style.display = 'none';
-                    publishUniverseOrRejectBody.style.display = 'block';
-                    bodyElement.style.backgroundColor = bodyBackgroundColorReject;
-
-                    for (let i = 0; i < buttonElement.length; i++) {
-                        buttonElement[i].style.backgroundColor = buttonBackgroundColorReject;
-                        buttonElement[i].style.color = "#fff";
-                    }
-
-                    emailSubject.value = "<?= rejectEmailSubject ?>";
-                    emailBody.value = "<?= rejectEmailBody ?>";
-
-                    sendButtonPublish.style.display = 'none';
-                    alternativeButtonPublish.style.display = 'none';
-                    emailTemplatePublishOriginalButton.style.display = 'none';
-                    emailTemplatePublishAlternativeButton.style.display = 'none';
-                    cancelButtonPublish.style.display = 'none';
-                    sendButtonUniverse.style.display = 'none';
-                    alternativeButtonUniverse.style.display = 'none';
-                    emailTemplateUniverseOriginalButton.style.display = 'none';
-                    emailTemplateUniverseAlternativeButton.style.display = 'none';
-                    cancelButtonUniverse.style.display = 'none';
-                    sendButtonReject.style.display = 'inline-block';
-                    alternativeButtonReject.style.display = 'inline-block';
-                    emailTemplateRejectOriginalButton.style.display = 'inline-block';
-                    emailTemplateRejectAlternativeButton.style.display = 'none';
-                    cancelButtonReject.style.display = 'inline-block';
-
-                    review.style.backgroundColor = "#333";
-                    review.style.color = "#fff";
-                    publish.style.backgroundColor = "#333";
-                    publish.style.color = "#fff";
-                    universe.style.backgroundColor = "#333";
-                    universe.style.color = "#fff";
-                    reject.style.backgroundColor = buttonBackgroundColorReject;
-                    reject.style.color = "#fff";
-                }
-                else if (reviewPublishUniverseRejectMoveOrDelete == "Move" || reviewPublishUniverseRejectMoveOrDelete == "Delete") {
-                    review.style.backgroundColor = "#333";
-                    review.style.color = "#fff";
-                    publish.style.backgroundColor = "#333";
-                    publish.style.color = "#fff";
-                    universe.style.backgroundColor = "#333";
-                    universe.style.color = "#fff";
-                    reject.style.backgroundColor = "#333";
-                    reject.style.color = "#fff";
-                }
+                review.style.backgroundColor = "#333";
+                review.style.color = "#fff";
+                publish.style.backgroundColor = "#333";
+                publish.style.color = "#fff";
+                universe.style.backgroundColor = buttonBackgroundColorUniverse;
+                universe.style.color = navButtonHoverColor;
+                reject.style.backgroundColor = "#333";
+                reject.style.color = "#fff";
             }
+            else if (reviewPublishUniverseRejectMoveOrDelete == "Reject") {
+                reviewBody.style.display = 'none';
+                publishUniverseOrRejectBody.style.display = 'block';
+                bodyElement.style.backgroundColor = bodyBackgroundColorReject;
 
-            function SetOnMouseEnterBody() {
-                // Reference to get hex background color: https://stackoverflow.com/questions/62693748/cannot-get-background-style-using-javascript
-                let bodyElementBackgroundColor = getComputedStyle(bodyElement, null).getPropertyValue('background-color');
-                bodyElementBackgroundColor = rgb2hex(bodyElementBackgroundColor);
+                for (let i = 0; i < buttonElement.length; i++) {
+                    buttonElement[i].style.backgroundColor = buttonBackgroundColorReject;
+                    buttonElement[i].style.color = "#fff";
+                }
 
-                // if (bodyElement.style.backgroundColor == bodyBackgroundColorReview) {
-                //   review.style.backgroundColor = buttonBackgroundColorReview;
-                // }
-                if (bodyElementBackgroundColor == bodyBackgroundColorReview) {
-                    review.style.backgroundColor = buttonBackgroundColorReview;
-                    review.style.color = "#000";
-                }
-                else if (bodyElementBackgroundColor == bodyBackgroundColorPublish) {
-                    publish.style.backgroundColor = buttonBackgroundColorPublish;
-                    publish.style.color = "#fff";
-                }
-                else if (bodyElementBackgroundColor == bodyBackgroundColorUniverse) {
-                    universe.style.backgroundColor = buttonBackgroundColorUniverse;
-                    universe.style.color = "#000";
-                }
-                else if (bodyElementBackgroundColor == bodyBackgroundColorReject) {
-                    reject.style.backgroundColor = buttonBackgroundColorReject;
-                    reject.style.color = "#fff";
-                }
+                emailSubject.value = "<?= rejectEmailSubject ?>";
+                emailBody.value = "<?= rejectEmailBody ?>";
+
+                sendButtonPublish.style.display = 'none';
+                alternativeButtonPublish.style.display = 'none';
+                emailTemplatePublishOriginalButton.style.display = 'none';
+                emailTemplatePublishAlternativeButton.style.display = 'none';
+                cancelButtonPublish.style.display = 'none';
+                sendButtonUniverse.style.display = 'none';
+                alternativeButtonUniverse.style.display = 'none';
+                emailTemplateUniverseOriginalButton.style.display = 'none';
+                emailTemplateUniverseAlternativeButton.style.display = 'none';
+                cancelButtonUniverse.style.display = 'none';
+                sendButtonReject.style.display = 'inline-block';
+                alternativeButtonReject.style.display = 'inline-block';
+                emailTemplateRejectOriginalButton.style.display = 'inline-block';
+                emailTemplateRejectAlternativeButton.style.display = 'none';
+                cancelButtonReject.style.display = 'inline-block';
+
+                review.style.backgroundColor = "#333";
+                review.style.color = "#fff";
+                publish.style.backgroundColor = "#333";
+                publish.style.color = "#fff";
+                universe.style.backgroundColor = "#333";
+                universe.style.color = "#fff";
+                reject.style.backgroundColor = buttonBackgroundColorReject;
+                reject.style.color = "#fff";
             }
-
-            // Reference to get hex background color: https://stackoverflow.com/questions/62693748/cannot-get-background-style-using-javascript
-            //Most browsers seem to return the RGB value
-            //Function to Convert RGB to Hex Code
-            function rgb2hex(rgb) {
-                rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-                function hex(x) {
-                    return ("0" + parseInt(x).toString(16)).slice(-2);
-                }
-                return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+            else if (reviewPublishUniverseRejectMoveOrDelete == "Move" || reviewPublishUniverseRejectMoveOrDelete == "Delete") {
+                review.style.backgroundColor = "#333";
+                review.style.color = "#fff";
+                publish.style.backgroundColor = "#333";
+                publish.style.color = "#fff";
+                universe.style.backgroundColor = "#333";
+                universe.style.color = "#fff";
+                reject.style.backgroundColor = "#333";
+                reject.style.color = "#fff";
             }
+        }
 
-            // function SendDataToGsFile(emailAnswer, sheetNamePublishUniverseOrReject) {
-            //   let emailSubject = document.getElementById('emailSubject').value;
-            //   let emailBody = document.getElementById('emailBody').value;
-            //   let sheetName = document.getElementById('responseSheetName').value;
-            //   let sheetRow = document.getElementById('responseRow').value;
-            //   //alert(emailBody);
-            //   google.script.host.close();
-            //   // References for google.script.run.function() call from HTML not working:
-            //   // https://issuetracker.google.com/issues/158644880?pli=1
-            //   // https://stackoverflow.com/questions/66780096/google-web-app-wont-run-when-logged-into-multiple-google-accounts
-            //   //google.script.run.GetEmailSubjectFromHtmlFile(emailSubject);
-            //   google.script.run.GetResponsesFromHtmlFile(emailSubject, emailBody, emailAnswer, sheetName, sheetRow, sheetNamePublishUniverseOrReject);
-            // }
+        function SetOnMouseEnterBody() {
+            if (reviewBody.style.display == 'block') {
+                bodyElement.style.backgroundColor = bodyBackgroundColorReview;
+            }
+            else if (publishUniverseOrRejectBody.style.display == 'block' && sendButtonPublish.style.display == 'inline-block') {
+                bodyElement.style.backgroundColor = bodyBackgroundColorPublish;
+            }
+            else if (publishUniverseOrRejectBody.style.display == 'block' && sendButtonUniverse.style.display == 'inline-block') {
+                bodyElement.style.backgroundColor = bodyBackgroundColorUniverse;
+            }
+            else if (publishUniverseOrRejectBody.style.display == 'block' && sendButtonReject.style.display == 'inline-block') {
+                bodyElement.style.backgroundColor = bodyBackgroundColorReject;
+            }
+            else {
+                bodyElement.style.backgroundColor = "#fff";
+            }
+        }
 
-            function sendDataToGsFile(emailAnswer, sheetNamePublishUniverseOrReject) {
-                var emailSubjectValue = document.getElementById('emailSubject').value;
-                var emailBodyValue = document.getElementById('emailBody').value;
-                var sheetNameValue = document.getElementById('responseSheetName').value;
-                var sheetRowValue = document.getElementById('responseRow').value;
-                var webAppUrl = document.getElementById('webAppUrl').value;
+        function SendInfoToGsFile(sheetName) {
+            const url = new URL(window.location.href);
+            const googleScriptUrl = url.searchParams.get('googleScriptUrl');
+            if (googleScriptUrl) {
+                fetch(googleScriptUrl + "?sheetName=" + encodeURIComponent(sheetName))
+                    .then(() => {
+                        console.log("SheetName Sent", sheetName);
+                    });
+            }
+        }
 
-                fetch(webAppUrl, {
+        function SendInfoForDelete() {
+            const url = new URL(window.location.href);
+            const googleScriptUrl = url.searchParams.get('googleScriptUrl');
+            if (googleScriptUrl) {
+                fetch(googleScriptUrl + "?delete=true")
+                    .then(() => {
+                        console.log("Delete Sent");
+                    });
+            }
+        }
+
+        function sendDataToGsFile(sendOrCancel, publishUniverseOrReject) {
+            const emailSubject = document.getElementById('emailSubject').value;
+            const emailBody = document.getElementById('emailBody').value;
+            const responseSheetName = document.getElementById('responseSheetName').value;
+            const responseRow = document.getElementById('responseRow').value;
+            const webAppUrl = document.getElementById('webAppUrl').value;
+            const url = new URL(window.location.href);
+            const googleScriptUrl = url.searchParams.get('googleScriptUrl');
+
+            if (googleScriptUrl) {
+                fetch(googleScriptUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                     },
                     body: new URLSearchParams({
-                        'emailSubject': emailSubjectValue,
-                        'emailBody': emailBodyValue,
-                        'emailAnswer': emailAnswer,
-                        'sheetName': sheetNameValue,
-                        'sheetRow': sheetRowValue,
-                        'sheetNamePublishUniverseOrReject': sheetNamePublishUniverseOrReject
+                        sendOrCancel: sendOrCancel,
+                        publishUniverseOrReject: publishUniverseOrReject,
+                        emailSubject: emailSubject,
+                        emailBody: emailBody,
+                        responseSheetName: responseSheetName,
+                        responseRow: responseRow,
+                        webAppUrl: webAppUrl
                     })
                 })
-                    .then(response => response.text()) // Or response.json() if your .gs returns JSON
+                    .then(response => response.text())
                     .then(data => {
-                        console.log('Success:', data);
-                        // Optionally display a message to the user in the HTML
-                        alert(data); // For a simple confirmation
-                        // If it was a cancel, you might want to navigate away or close the tab
-                        if (emailAnswer === 'CANCEL') {
-                            // Since it's a new tab, we can't use google.script.host.close()
-                            // You might want to provide a button to manually close or navigate back
-                            console.log('Cancel acknowledged.');
-                        }
+                        console.log("Data sent:", data);
+                        window.close();
                     })
-                    .catch((error) => {
-                        console.error('Error:', error);
-                        alert('An error occurred: ' + error);
+                    .catch(error => {
+                        console.error("Error sending data:", error);
                     });
             }
+        }
 
-            function SendInfoToGsFile(sheetToMoveToName) {
-                let sheetName = document.getElementById('responseSheetName').value;
-                let sheetRow = document.getElementById('responseRow').value;
-                google.script.host.close();
-                google.script.run.MoveToSheet(sheetName, sheetRow, sheetToMoveToName);
-            }
+        function SeeAlternativeEmail(publishUniverseOrReject) {
+            const emailSubject = document.getElementById('emailSubject');
+            const emailBody = document.getElementById('emailBody');
+            const emailSubjectAlternative = document.getElementById('emailSubjectAltenative');
+            const emailBodyAlternative = document.getElementById('emailBodyAltenative');
+            const alternativeButtonPublish = document.getElementById('alternativeButtonPublish');
+            const alternativeButtonUniverse = document.getElementById('alternativeButtonUniverse');
+            const alternativeButtonReject = document.getElementById('alternativeButtonReject');
+            const emailTemplatePublishOriginalButton = document.getElementById('emailTemplatePublishOriginalButton');
+            const emailTemplatePublishAlternativeButton = document.getElementById('emailTemplatePublishAlternativeButton');
+            const emailTemplateUniverseOriginalButton = document.getElementById('emailTemplateUniverseOriginalButton');
+            const emailTemplateUniverseAlternativeButton = document.getElementById('emailTemplateUniverseAlternativeButton');
+            const emailTemplateRejectOriginalButton = document.getElementById('emailTemplateRejectOriginalButton');
+            const emailTemplateRejectAlternativeButton = document.getElementById('emailTemplateRejectAlternativeButton');
 
-            function SendInfoForDelete() {
-                let sheetName = document.getElementById('responseSheetName').value;
-                let sheetRow = document.getElementById('responseRow').value;
-                google.script.host.close();
-                google.script.run.DeleteSheet(sheetName, sheetRow);
-            }
-
-            function SendInfoToOpenEmailTemplate(cellRangeToJumpTo, columnRangeToHide, columnRangeToHideSecond, rowRangeToHide) {
-                google.script.host.close();
-                google.script.run.OpenEmailTemplateAndJumpToCell(cellRangeToJumpTo, columnRangeToHide, columnRangeToHideSecond, rowRangeToHide);
-            }
-
-            function SeeAlternativeEmail(publishUniverseOrReject) {
-                if (publishUniverseOrReject == "Publish") {
-                    if (alternativeButtonPublish.innerText == "Alternative") {
-                        emailSubject.value = "<?= publishEmailSubjectAlternative ?>";
-                        emailBody.value = "<?= publishEmailBodyAlternative ?>";
-                        alternativeButtonPublish.innerText = "Original";
-                        emailTemplatePublishOriginalButton.style.display = "none";
-                        emailTemplatePublishAlternativeButton.style.display = "inline-block";
-                    }
-                    // alternativeButtonPublish.innerText == "See Original"
-                    else {
-                        emailSubject.value = "<?= publishEmailSubject ?>";
-                        emailBody.value = "<?= publishEmailBody ?>";
-                        alternativeButtonPublish.innerText = "Alternative";
-                        emailTemplatePublishOriginalButton.style.display = "inline-block";
-                        emailTemplatePublishAlternativeButton.style.display = "none";
-                    }
+            if (publishUniverseOrReject == 'Publish') {
+                if (alternativeButtonPublish.innerText == "Alternative") {
+                    emailSubject.value = "<?= publishEmailSubjectAlternative ?>";
+                    emailBody.value = "<?= publishEmailBodyAlternative ?>";
+                    alternativeButtonPublish.innerText = "Original";
+                    emailTemplatePublishOriginalButton.style.display = 'none';
+                    emailTemplatePublishAlternativeButton.style.display = 'inline-block';
                 }
-                else if (publishUniverseOrReject == "Universe") {
-                    if (alternativeButtonUniverse.innerText == "Alternative") {
-                        emailSubject.value = "<?= universeEmailSubjectAlternative ?>";
-                        emailBody.value = "<?= universeEmailBodyAlternative ?>";
-                        alternativeButtonUniverse.innerText = "Original";
-                        emailTemplateUniverseOriginalButton.style.display = "none";
-                        emailTemplateUniverseAlternativeButton.style.display = "inline-block";
-                    }
-                    // alternativeButtonUniverse.innerText == "See Original"
-                    else {
-                        emailSubject.value = "<?= universeEmailSubject ?>";
-                        emailBody.value = "<?= universeEmailBody ?>";
-                        alternativeButtonUniverse.innerText = "Alternative";
-                        emailTemplateUniverseOriginalButton.style.display = "inline-block";
-                        emailTemplateUniverseAlternativeButton.style.display = "none";
-                    }
+                else {
+                    emailSubject.value = "<?= publishEmailSubject ?>";
+                    emailBody.value = "<?= publishEmailBody ?>";
+                    alternativeButtonPublish.innerText = "Alternative";
+                    emailTemplatePublishOriginalButton.style.display = 'inline-block';
+                    emailTemplatePublishAlternativeButton.style.display = 'none';
                 }
-                else if (publishUniverseOrReject == "Reject") {
-                    if (alternativeButtonReject.innerText == "Alternative") {
-                        emailSubject.value = "<?= rejectEmailSubjectAlternative ?>";
-                        emailBody.value = "<?= rejectEmailBodyAlternative ?>";
-                        alternativeButtonReject.innerText = "Original";
-                        emailTemplateRejectOriginalButton.style.display = "none";
-                        emailTemplateRejectAlternativeButton.style.display = "inline-block";
-                    }
-                    // alternativeButtonReject.innerText == "See Original"
-                    else {
-                        emailSubject.value = "<?= rejectEmailSubject ?>";
-                        emailBody.value = "<?= rejectEmailBody ?>";
-                        alternativeButtonReject.innerText = "Alternative";
-                        emailTemplateRejectOriginalButton.style.display = "inline-block";
-                        emailTemplateRejectAlternativeButton.style.display = "none";
-                    }
+            }
+            else if (publishUniverseOrReject == 'Universe') {
+                if (alternativeButtonUniverse.innerText == "Alternative") {
+                    emailSubject.value = "<?= universeEmailSubjectAlternative ?>";
+                    emailBody.value = "<?= universeEmailBodyAlternative ?>";
+                    alternativeButtonUniverse.innerText = "Original";
+                    emailTemplateUniverseOriginalButton.style.display = 'none';
+                    emailTemplateUniverseAlternativeButton.style.display = 'inline-block';
                 }
-            }       
+                else {
+                    emailSubject.value = "<?= universeEmailSubject ?>";
+                    emailBody.value = "<?= universeEmailBody ?>";
+                    alternativeButtonUniverse.innerText = "Alternative";
+                    emailTemplateUniverseOriginalButton.style.display = 'inline-block';
+                    emailTemplateUniverseAlternativeButton.style.display = 'none';
+                }
+            }
+            else if (publishUniverseOrReject == 'Reject') {
+                if (alternativeButtonReject.innerText == "Alternative") {
+                    emailSubject.value = "<?= rejectEmailSubjectAlternative ?>";
+                    emailBody.value = "<?= rejectEmailBodyAlternative ?>";
+                    alternativeButtonReject.innerText = "Original";
+                    emailTemplateRejectOriginalButton.style.display = 'none';
+                    emailTemplateRejectAlternativeButton.style.display = 'inline-block';
+                }
+                else {
+                    emailSubject.value = "<?= rejectEmailSubject ?>";
+                    emailBody.value = "<?= rejectEmailBody ?>";
+                    alternativeButtonReject.innerText = "Alternative";
+                    emailTemplateRejectOriginalButton.style.display = 'inline-block';
+                    emailTemplateRejectAlternativeButton.style.display = 'none';
+                }
+            }
+        }
+
+        function SendInfoToOpenEmailTemplate(emailSubjectRange, emailBodyRange, ccRange, emailTemplateRange) {
+            const url = new URL(window.location.href);
+            const googleScriptUrl = url.searchParams.get('googleScriptUrl');
+            if (googleScriptUrl) {
+                fetch(googleScriptUrl + "?emailSubjectRange=" + encodeURIComponent(emailSubjectRange) +
+                    "&emailBodyRange=" + encodeURIComponent(emailBodyRange) +
+                    "&ccRange=" + encodeURIComponent(ccRange) +
+                    "&emailTemplateRange=" + encodeURIComponent(emailTemplateRange))
+                    .then(() => {
+                        console.log("Email Template Info Sent");
+                    });
+            }
+        }
     </script>
 </body>
 
