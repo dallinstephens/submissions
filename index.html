@@ -69,7 +69,9 @@
             const url = new URL(window.location.href);
             const googleScriptUrl = url.searchParams.get('googleScriptUrl');
             if (googleScriptUrl) {
-                fetch(googleScriptUrl).then(response => response.text()).then(data => displayData(data));
+                fetch(googleScriptUrl)
+                    .then(response => response.text())
+                    .then(data => displayData(data));
             }
         }
         getGoogleData();
