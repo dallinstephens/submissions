@@ -225,25 +225,19 @@
 
 <body>
     <h2 id="b1Display"></h2>
-    <div id="a2Display"></div>
-    <div id="b2Display"></div>
-    <div id="c2Display"></div>
-    <div id="d2Display"></div>
-    <div id="e2Display"></div>
-    <div id="f2Display"></div>
 
     <div id="rowDataContainer">
-        <div id="rowData0"></div>
-        <div id="rowData1"></div>
-        <div id="rowData2"></div>
-        <div id="rowData3"></div>
-        <div id="rowData4"></div>
-        <div id="rowData5"></div>
+        <div id="colA_Data"></div>
+        <div id="colB_Data"></div>
+        <div id="colC_Data"></div>
+        <div id="colD_Data"></div>
+        <div id="colE_Data"></div>
+        <div id="colF_Data"></div>
     </div>
 
     <p id="displayArea"></p>
     <input type="text" id="userInput" placeholder="Enter text">
-    <button onclick="sendInput()">Submit</button>
+    <button onclick="sendInput(); closeWindow();">Submit</button>
     <button onclick="closeWindow()">Close Window</button>
     <div id="app-container">
         <nav class="navbar">
@@ -409,7 +403,7 @@
 
             // Fill the pre-defined divs with row data
             for (var i = 0; i < rowValues.length; i++) {
-                var div = document.getElementById('rowData' + i);
+                var div = document.getElementById(['colA_Data', 'colB_Data', 'colC_Data', 'colD_Data', 'colE_Data', 'colF_Data'][i]);
                 if (div) {
                     div.textContent = rowValues[i];
                 }
@@ -423,16 +417,6 @@
                 fetch(googleScriptUrl)
                     .then(response => response.json())
                     .then(data => {
-                        if (data && data.a2f2Values && data.a2f2Values.length === 6) {
-                            document.getElementById("a2Display").innerHTML = data.a2f2Values[0];
-                            document.getElementById("b2Display").innerHTML = data.a2f2Values[1];
-                            document.getElementById("c2Display").innerHTML = data.a2f2Values[2];
-                            document.getElementById("d2Display").innerHTML = data.a2f2Values[3];
-                            document.getElementById("e2Display").innerHTML = data.a2f2Values[4];
-                            document.getElementById("f2Display").innerHTML = data.a2f2Values[5];
-                        } else {
-                            console.error("Data length is incorrect or data is null.");
-                        }
                         if (data && data.b1Value) {
                             document.getElementById("b1Display").innerHTML = data.b1Value;
                         } else {
