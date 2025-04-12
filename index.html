@@ -227,7 +227,6 @@
     <h2 id="b1Display"></h2>
 
     <div id="rowDataContainer">
-        <div id="colA_Data"></div>
         <div id="colB_Data"></div>
         <div id="colC_Data"></div>
         <div id="colD_Data"></div>
@@ -402,8 +401,8 @@
             var rowValues = data.rowValues;
 
             // Fill the pre-defined divs with row data
-            for (var i = 0; i < rowValues.length; i++) {
-                var div = document.getElementById(['colA_Data', 'colB_Data', 'colC_Data', 'colD_Data', 'colE_Data', 'colF_Data'][i]);
+            for (var i = 1; i < rowValues.length; i++) { // Start from index 1 to skip column A
+                var div = document.getElementById(['colB_Data', 'colC_Data', 'colD_Data', 'colE_Data', 'colF_Data'][i - 1]);
                 if (div) {
                     div.textContent = rowValues[i];
                 }
@@ -459,6 +458,8 @@
                 fetch(googleScriptUrl + "?userInput=" + encodeURIComponent(userInput))
                     .then(() => {
                         console.log("Data Sent", userInput);
+                        fetchData(); // Refresh the data after sending input
+                        closeWindow();
                     });
             }
         }
