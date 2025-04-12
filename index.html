@@ -60,6 +60,8 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({ userInput: userInput })
+                }).then(() => {
+                    console.log("Data Sent", userInput);
                 });
             }
         }
@@ -68,17 +70,11 @@
             document.getElementById("displayArea").innerHTML = data;
         }
 
-        async function getGoogleData() {
+        function getGoogleData() {
             const url = new URL(window.location.href);
             const googleScriptUrl = url.searchParams.get('googleScriptUrl');
             if (googleScriptUrl) {
-                try {
-                    const response = await fetch(googleScriptUrl);
-                    const data = await response.text();
-                    displayData(data);
-                } catch (error) {
-                    console.error("Error fetching data:", error);
-                }
+                fetch(googleScriptUrl).then(response => response.text()).then(data => displayData(data));
             }
         }
         getGoogleData();
