@@ -231,7 +231,15 @@
     <div id="d2Display"></div>
     <div id="e2Display"></div>
     <div id="f2Display"></div>
-    <div id="dataContainer"></div>
+
+    <div id="rowDataContainer">
+        <div id="rowData0"></div>
+        <div id="rowData1"></div>
+        <div id="rowData2"></div>
+        <div id="rowData3"></div>
+        <div id="rowData4"></div>
+        <div id="rowData5"></div>
+    </div>
 
     <p id="displayArea"></p>
     <input type="text" id="userInput" placeholder="Enter text">
@@ -399,11 +407,12 @@
             var data = JSON.parse(dataParam);
             var rowValues = data.rowValues;
 
-            var dataContainer = document.getElementById('dataContainer');
+            // Fill the pre-defined divs with row data
             for (var i = 0; i < rowValues.length; i++) {
-                var div = document.createElement('div');
-                div.textContent = rowValues[i];
-                dataContainer.appendChild(div);
+                var div = document.getElementById('rowData' + i);
+                if (div) {
+                    div.textContent = rowValues[i];
+                }
             }
         }
         //Your existing Javascript code
