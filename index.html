@@ -481,20 +481,6 @@
         }
 
         function SeeAlternativeEmail(publishUniverseOrReject) {
-            const emailSubject = document.getElementById('emailSubject');
-            const emailBody = document.getElementById('emailBody');
-            const emailSubjectAlternative = document.getElementById('emailSubjectAltenative');
-            const emailBodyAlternative = document.getElementById('emailBodyAltenative');
-            const alternativeButtonPublish = document.getElementById('alternativeButtonPublish');
-            const alternativeButtonUniverse = document.getElementById('alternativeButtonUniverse');
-            const alternativeButtonReject = document.getElementById('alternativeButtonReject');
-            const emailTemplatePublishOriginalButton = document.getElementById('emailTemplatePublishOriginalButton');
-            const emailTemplatePublishAlternativeButton = document.getElementById('emailTemplatePublishAlternativeButton');
-            const emailTemplateUniverseOriginalButton = document.getElementById('emailTemplateUniverseOriginalButton');
-            const emailTemplateUniverseAlternativeButton = document.getElementById('emailTemplateUniverseAlternativeButton');
-            const emailTemplateRejectOriginalButton = document.getElementById('emailTemplateRejectOriginalButton');
-            const emailTemplateRejectAlternativeButton = document.getElementById('emailTemplateRejectAlternativeButton');
-
             if (publishUniverseOrReject == 'Publish') {
                 if (alternativeButtonPublish.innerText == 'Alternative') {
                     emailSubject.value = emailSubjectAlternative.value;
