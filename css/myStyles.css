@@ -21,6 +21,22 @@
             --buttonBackgroundColorReject: #b30000;
         }
 
+        div#customModal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #333;
+            color: #fff;
+            padding: 20px;
+            border: 2px solid #fff;
+            border-radius: 25px;
+            /* Reference for poloroid card: https://www.w3schools.com/css/tryit.asp?filename=trycss3_box-shadow5 */
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
         button#close-button {
             position: absolute;
             top: 70px;

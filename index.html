@@ -11,11 +11,17 @@
 </head>
 
 <body>
+    <div id="customModal">
+        <p>Are you sure you want to close this window?</p>
+        <button onclick="closeModalAndWindow(true)">Yes</button>
+        <button onclick="closeModalAndWindow(false)">No</button>
+    </div>
+
     <h2 id="b1Display"></h2>
 
     <input type="text" id="userInput" placeholder="Enter text">
     <button onclick="sendData()">Submit</button>
-    <button id="close-button" onclick="closeWindow()">X</button>
+    <button id="close-button" onclick="showCustomModal()">X</button>
     <div id="app-container">
         <nav class="navbar">
             <ul>
@@ -249,8 +255,15 @@
         //     window.close();
         // }
 
-        function closeWindowWithConfirmation() {
-            if (confirm("Are you sure you want to close this window?")) {
+        function showCustomModal() {
+            console.log("showCustomModal() called"); // Add this line
+            document.getElementById('customModal').style.display = 'block';
+        }
+
+        function closeModalAndWindow(closeWindow) {
+            console.log("closeModalAndWindow() called with closeWindow:", closeWindow); // Add this line
+            document.getElementById('customModal').style.display = 'none';
+            if (closeWindow) {
                 window.close();
             }
         }
@@ -285,13 +298,14 @@
                     .then(() => {
                         console.log("Data Sent:", urlParams);
                         fetchData();
-                        closeWindowWithConfirmation(); // close window with confirmation.
+                        showCustomModal(); // show modal. // close window with confirmation.
                     })
                     .catch(error => {
                         console.error("Error sending data:", error);
                     });
             }
         }
+        showCustomModal();
 
         // function sendData() {
         //     const userInput = document.getElementById('userInput').value;
