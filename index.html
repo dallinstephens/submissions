@@ -90,6 +90,9 @@
                 <input type="hidden" id="publishEmailSubject">
                 <input type="hidden" id="universeEmailSubject">
                 <input type="hidden" id="rejectEmailSubject">
+                <input type="hidden" id="publishEmailBody">
+                <input type="hidden" id="universeEmailBody">
+                <input type="hidden" id="rejectEmailBody">
                 <input type="hidden" id="responseSheetName">
                 <input type="hidden" id="responseRow">
                 <input type="hidden" id="emailSubjectAltenative">
@@ -313,6 +316,7 @@
         }
 
         const reviewBody = document.getElementById('reviewBody');
+        reviewBody.style.display = 'block';
         const publishUniverseOrRejectBody = document.getElementById('publishUniverseOrRejectBody');
         const bodyElement = document.getElementById('mainContainer');
         const buttonElement = document.querySelectorAll("button");
