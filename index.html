@@ -266,15 +266,14 @@
             if (googleScriptUrl) {
                 // Collect data values
                 for (const item of data) {
-                    const dataElement = document.getElementById(item);
+                    const dataElement = document.getElementById(item.name);
+
                     if (dataElement) {
                         dataValues.push(dataElement.value);
-                    }
-                    else if (item !== undefined) {
-                        dataValues.push(item);
-                    }
-                    else {
-                        dataValues.push(undefined); // Or some default value if the data doesn't exist
+                    } else {
+                        // If element is not found, use item.value or a default
+                        dataValues.push(item.value || ''); // Use item.value if it exists, otherwise an empty string
+                        // Or: dataValues.push(item.value !== undefined ? item.value : 'default value');
                     }
                 }
 
