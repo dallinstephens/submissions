@@ -273,11 +273,13 @@
                     urlParams += `&dataToBeSent4=${encodeURIComponent(dataToBeSent4)}`;
                 }
 
+                console.log(googleScriptUrl + "?" + urlParams); // Add this line!
+
                 fetch(googleScriptUrl + "?" + urlParams)
                     .then(() => {
                         console.log("Data Sent:", urlParams);
                         fetchData();
-                        closeWindow();
+                        // closeWindow();
                     })
                     .catch(error => {
                         console.error("Error sending data:", error);
