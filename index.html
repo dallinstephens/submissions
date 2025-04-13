@@ -136,6 +136,48 @@
     </div>
 
     <script>
+        // Declare variables in the global scope
+        let reviewBody = document.getElementById('reviewBody');
+        let publishUniverseOrRejectBody = document.getElementById('publishUniverseOrRejectBody');
+        let bodyElement = document.getElementById('mainContainer');
+        let buttonElement = document.querySelectorAll("button");
+        let emailSubject = document.getElementById('emailSubject');
+        let emailBody = document.getElementById('emailBody');
+        let emailSubjectAlternative = document.getElementById('emailSubjectAltenative');
+        let emailBodyAlternative = document.getElementById('emailBodyAltenative');
+        let publishUniverseOrReject = document.getElementById('publishUniverseOrReject');
+        let sendButtonPublish = document.getElementById('sendButtonPublish');
+        let alternativeButtonPublish = document.getElementById('alternativeButtonPublish');
+        let emailTemplatePublishOriginalButton = document.getElementById('emailTemplatePublishOriginalButton');
+        let emailTemplatePublishAlternativeButton = document.getElementById('emailTemplatePublishAlternativeButton');
+        let cancelButtonPublish = document.getElementById('cancelButtonPublish');
+        let sendButtonUniverse = document.getElementById('sendButtonUniverse');
+        let alternativeButtonUniverse = document.getElementById('alternativeButtonUniverse');
+        let emailTemplateUniverseOriginalButton = document.getElementById('emailTemplateUniverseOriginalButton');
+        let emailTemplateUniverseAlternativeButton = document.getElementById('emailTemplateUniverseAlternativeButton');
+        let cancelButtonUniverse = document.getElementById('cancelButtonUniverse');
+        let sendButtonReject = document.getElementById('sendButtonReject');
+        let alternativeButtonReject = document.getElementById('alternativeButtonReject');
+        let emailTemplateRejectOriginalButton = document.getElementById('emailTemplateRejectOriginalButton');
+        let emailTemplateRejectAlternativeButton = document.getElementById('emailTemplateRejectAlternativeButton');
+        let cancelButtonReject = document.getElementById('cancelButtonReject');
+        let review = document.getElementById('review');
+        let publish = document.getElementById('publish');
+        let universe = document.getElementById('universe');
+        let reject = document.getElementById('reject');
+        let root = document.documentElement;
+        let navButtonHoverBackgroundColor = getComputedStyle(root).getPropertyValue('--navButtonHoverBackgroundColor');
+        let navButtonHoverColor = getComputedStyle(root).getPropertyValue('--navButtonHoverColor');
+        let bodyBackgroundColorReview = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorReview');
+        let bodyBackgroundColorPublish = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorPublish');
+        let bodyBackgroundColorUniverse = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorUniverse');
+        let bodyBackgroundColorReject = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorReject');
+        let buttonBackgroundColorReview = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorReview');
+        let buttonBackgroundColorPublish = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorPublish');
+        let buttonBackgroundColorUniverse = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorUniverse');
+        let buttonBackgroundColorReject = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorReject');
+        let mainContainer = document.getElementById('mainContainer');
+
         function getUrlParameter(name) {
             name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
             var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
@@ -617,48 +659,6 @@
                 document.getElementById('rejectEmailSubjectAlternative').value = rejectEmailSubjectAlternative;
                 document.getElementById('rejectEmailBodyAlternative').value = rejectEmailBodyAlternative;
             }
-
-            const reviewBody = document.getElementById('reviewBody');
-            reviewBody.style.display = 'block';
-            const publishUniverseOrRejectBody = document.getElementById('publishUniverseOrRejectBody');
-            const bodyElement = document.getElementById('mainContainer');
-            const buttonElement = document.querySelectorAll("button");
-            const emailSubject = document.getElementById('emailSubject');
-            const emailBody = document.getElementById('emailBody');
-            const emailSubjectAlternative = document.getElementById('emailSubjectAltenative');
-            const emailBodyAlternative = document.getElementById('emailBodyAltenative');
-            const publishUniverseOrReject = document.getElementById('publishUniverseOrReject');
-            const sendButtonPublish = document.getElementById('sendButtonPublish');
-            const alternativeButtonPublish = document.getElementById('alternativeButtonPublish');
-            const emailTemplatePublishOriginalButton = document.getElementById('emailTemplatePublishOriginalButton');
-            const emailTemplatePublishAlternativeButton = document.getElementById('emailTemplatePublishAlternativeButton');
-            const cancelButtonPublish = document.getElementById('cancelButtonPublish');
-            const sendButtonUniverse = document.getElementById('sendButtonUniverse');
-            const alternativeButtonUniverse = document.getElementById('alternativeButtonUniverse');
-            const emailTemplateUniverseOriginalButton = document.getElementById('emailTemplateUniverseOriginalButton');
-            const emailTemplateUniverseAlternativeButton = document.getElementById('emailTemplateUniverseAlternativeButton');
-            const cancelButtonUniverse = document.getElementById('cancelButtonUniverse');
-            const sendButtonReject = document.getElementById('sendButtonReject');
-            const alternativeButtonReject = document.getElementById('alternativeButtonReject');
-            const emailTemplateRejectOriginalButton = document.getElementById('emailTemplateRejectOriginalButton');
-            const emailTemplateRejectAlternativeButton = document.getElementById('emailTemplateRejectAlternativeButton');
-            const cancelButtonReject = document.getElementById('cancelButtonReject');
-            const review = document.getElementById('review');
-            const publish = document.getElementById('publish');
-            const universe = document.getElementById('universe');
-            const reject = document.getElementById('reject');
-            const root = document.documentElement;
-            const navButtonHoverBackgroundColor = getComputedStyle(root).getPropertyValue('--navButtonHoverBackgroundColor');
-            const navButtonHoverColor = getComputedStyle(root).getPropertyValue('--navButtonHoverColor');
-            const bodyBackgroundColorReview = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorReview');
-            const bodyBackgroundColorPublish = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorPublish');
-            const bodyBackgroundColorUniverse = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorUniverse');
-            const bodyBackgroundColorReject = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorReject');
-            const buttonBackgroundColorReview = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorReview');
-            const buttonBackgroundColorPublish = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorPublish');
-            const buttonBackgroundColorUniverse = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorUniverse');
-            const buttonBackgroundColorReject = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorReject');
-            const mainContainer = document.getElementById('mainContainer');
         });
     </script>
 </body>
