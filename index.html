@@ -264,7 +264,6 @@
                 <h3 id="f1SubmissionHeader"></h3>
                 <div id="colF_Data"></div>
                 <h3 id="j1SubmissionHeader"></h3>
-                <!-- The src is not included here in the iframes because they are inserted with JavaScript. -->
                 <div id="colJ_Data">
                     <iframe frameborder='0' height='55' width='100%'></iframe>
                 </div>
@@ -668,30 +667,28 @@
         }
 
         function SetOnMouseEnterBody() {
-            if (reviewBody.style.display == 'block') {
-                bodyElement.style.backgroundColor = bodyBackgroundColorReview;
-            }
-            else if (publishUniverseOrRejectBody.style.display == 'block' && sendButtonPublish.style.display == 'inline-block') {
-                bodyElement.style.backgroundColor = bodyBackgroundColorPublish;
-            }
-            else if (publishUniverseOrRejectBody.style.display == 'block' && sendButtonUniverse.style.display == 'inline-block') {
-                bodyElement.style.backgroundColor = bodyBackgroundColorUniverse;
-            }
-            else if (publishUniverseOrRejectBody.style.display == 'block' && sendButtonReject.style.display == 'inline-block') {
-                bodyElement.style.backgroundColor = bodyBackgroundColorReject;
-            }
-            else {
-                bodyElement.style.backgroundColor = "#fff";
-            }
+            review.style.backgroundColor = buttonBackgroundColorReview;
+            review.style.color = "#000";
+            publish.style.backgroundColor = "#333";
+            publish.style.color = "#fff";
+            universe.style.backgroundColor = "#333";
+            universe.style.color = "#fff";
+            reject.style.backgroundColor = "#333";
+            reject.style.color = "#fff";
         }
 
         function SendInfoToGsFile(sheetName) {
             const url = new URL(window.location.href);
             const googleScriptUrl = url.searchParams.get('googleScriptUrl');
+
             if (googleScriptUrl) {
                 fetch(googleScriptUrl + "?sheetName=" + encodeURIComponent(sheetName))
                     .then(() => {
-                        console.log("SheetName Sent", sheetName);
+                        console.log("Data Sent", sheetName);
+                        closeWindow();
+                    })
+                    .catch(error => {
+                        console.error("Error sending input:", error);
                     });
             }
         }
@@ -699,93 +696,48 @@
         function SendInfoForDelete() {
             const url = new URL(window.location.href);
             const googleScriptUrl = url.searchParams.get('googleScriptUrl');
+
             if (googleScriptUrl) {
                 fetch(googleScriptUrl + "?delete=true")
                     .then(() => {
                         console.log("Delete Sent");
-                    });
-            }
-        }
-
-        function sendDataToGsFile(sendOrCancel, publishUniverseOrReject) {
-            const emailSubject = document.getElementById('emailSubject').value;
-            const emailBody = document.getElementById('emailBody').value;
-            const responseSheetName = document.getElementById('responseSheetName').value;
-            const responseRow = document.getElementById('responseRow').value;
-            const webAppUrl = document.getElementById('webAppUrl').value;
-            const url = new URL(window.location.href);
-            const googleScriptUrl = url.searchParams.get('googleScriptUrl');
-
-            if (googleScriptUrl) {
-                fetch(googleScriptUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: new URLSearchParams({
-                        sendOrCancel: sendOrCancel,
-                        publishUniverseOrReject: publishUniverseOrReject,
-                        emailSubject: emailSubject,
-                        emailBody: emailBody,
-                        responseSheetName: responseSheetName,
-                        responseRow: responseRow,
-                        webAppUrl: webAppUrl
-                    })
-                })
-                    .then(response => response.text())
-                    .then(data => {
-                        console.log("Data sent:", data);
-                        window.close();
+                        closeWindow();
                     })
                     .catch(error => {
-                        console.error("Error sending data:", error);
+                        console.error("Error sending input:", error);
                     });
             }
         }
 
-        function SeeAlternativeEmail(publishUniverseOrReject) {
-            const emailSubject = document.getElementById('emailSubject');
-            const emailBody = document.getElementById('emailBody');
-            const emailSubjectAlternative = document.getElementById('emailSubjectAltenative');
-            const emailBodyAlternative = document.getElementById('emailBodyAltenative');
-            const alternativeButtonPublish = document.getElementById('alternativeButtonPublish');
-            const alternativeButtonUniverse = document.getElementById('alternativeButtonUniverse');
-            const alternativeButtonReject = document.getElementById('alternativeButtonReject');
-            const emailTemplatePublishOriginalButton = document.getElementById('emailTemplatePublishOriginalButton');
-            const emailTemplatePublishAlternativeButton = document.getElementById('emailTemplatePublishAlternativeButton');
-            const emailTemplateUniverseOriginalButton = document.getElementById('emailTemplateUniverseOriginalButton');
-            const emailTemplateUniverseAlternativeButton = document.getElementById('emailTemplateUniverseAlternativeButton');
-            const emailTemplateRejectOriginalButton = document.getElementById('emailTemplateRejectOriginalButton');
-            const emailTemplateRejectAlternativeButton = document.getElementById('emailTemplateRejectAlternativeButton');
-
-            if (publishUniverseOrReject == 'Publish') {
-                if (alternativeButtonPublish.innerText == 'Alternative') {
-                    emailSubject.value = emailSubjectAlternative.value;
-                    emailBody.value = emailBodyAlternative.value;
-                    alternativeButtonPublish.innerText = 'Original';
+        function SeeAlternativeEmail(reviewPublishUniverseReject) {
+            if (reviewPublishUniverseReject == "Publish") {
+                if (alternativeButtonPublish.innerText == "Alternative") {
+                    emailSubject.value = "<?= publishEmailSubjectAlternative ?>";
+                    emailBody.value = "<?= publishEmailBodyAlternative ?>";
+                    alternativeButtonPublish.innerText = "Original";
                     emailTemplatePublishOriginalButton.style.display = 'none';
                     emailTemplatePublishAlternativeButton.style.display = 'inline-block';
                 }
                 else {
                     emailSubject.value = "<?= publishEmailSubject ?>";
                     emailBody.value = "<?= publishEmailBody ?>";
-                    alternativeButtonPublish.innerText = 'Alternative';
+                    alternativeButtonPublish.innerText = "Alternative";
                     emailTemplatePublishOriginalButton.style.display = 'inline-block';
                     emailTemplatePublishAlternativeButton.style.display = 'none';
                 }
             }
-            else if (publishUniverseOrReject == 'Universe') {
-                if (alternativeButtonUniverse.innerText == 'Alternative') {
-                    emailSubject.value = emailSubjectAlternative.value;
-                    emailBody.value = emailBodyAlternative.value;
-                    alternativeButtonUniverse.innerText = 'Original';
+            else if (reviewPublishUniverseReject == "Universe") {
+                if (alternativeButtonUniverse.innerText == "Alternative") {
+                    emailSubject.value = "<?= universeEmailSubjectAlternative ?>";
+                    emailBody.value = "<?= universeEmailBodyAlternative ?>";
+                    alternativeButtonUniverse.innerText = "Original";
                     emailTemplateUniverseOriginalButton.style.display = 'none';
                     emailTemplateUniverseAlternativeButton.style.display = 'inline-block';
                 }
                 else {
                     emailSubject.value = "<?= universeEmailSubject ?>";
                     emailBody.value = "<?= universeEmailBody ?>";
-                    alternativeButtonUniverse.innerText = 'Alternative';
+                    alternativeButtonUniverse.innerText = "Alternative";
                     emailTemplateUniverseOriginalButton.style.display = 'inline-block';
                     emailTemplateUniverseAlternativeButton.style.display = 'none';
                 }
