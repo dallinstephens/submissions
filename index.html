@@ -14,7 +14,7 @@
     <h2 id="b1Display"></h2>
 
     <input type="text" id="userInput" placeholder="Enter text">
-    <button onclick="sendInput()">Submit</button>
+    <button onclick="sendData()">Submit</button>
     <button id="close-button" onclick="closeWindow()">X</button>
     <div id="app-container">
         <nav class="navbar">
@@ -108,13 +108,16 @@
                 <br><br>
                 <textarea id="emailBody"></textarea>
                 <div class="containerForButtons">
-                    <button id="sendButtonPublish" onclick="sendDataToGsFile('SEND','Publish')">Send</button>
+                    <!-- SEND EMAIL -->
+                    <button id="sendButtonPublish" onclick="sendData('Send Email','SEND','Publish')">Send</button>
                     <button id="sendButtonUniverse" onclick="sendDataToGsFile('SEND','Universe')">Send</button>
                     <button id="sendButtonReject" onclick="sendDataToGsFile('SEND','Reject')">Send</button>
+                    <!-- CHOOSE ORIGINAL OR ALTERNATIVE EMAIL TEMPLATE -->
                     <button id="alternativeButtonPublish" onclick="SeeAlternativeEmail('Publish')">Alternative</button>
                     <button id="alternativeButtonUniverse"
                         onclick="SeeAlternativeEmail('Universe')">Alternative</button>
                     <button id="alternativeButtonReject" onclick="SeeAlternativeEmail('Reject')">Alternative</button>
+                    <!-- OPEN EMAIL TEMPLATE -->
                     <button id="emailTemplatePublishOriginalButton"
                         onclick="SendInfoToOpenEmailTemplate('B1:C1','E:J','N/A','A18:J33')">Email Template</button>
                     <button id="emailTemplatePublishAlternativeButton"
@@ -127,6 +130,7 @@
                         onclick="SendInfoToOpenEmailTemplate('H1:I1','A:F','N/A','A18:J33')">Email Template</button>
                     <button id="emailTemplateRejectAlternativeButton"
                         onclick="SendInfoToOpenEmailTemplate('H17:I17','A:F','N/A','A1:J16')">Email Template</button>
+                    <!-- CANCEL, CLOSE WINDOW, AND OPEN CONFIRMATION MODAL DIALOG BOX -->
                     <button id="cancelButtonPublish" onclick="sendDataToGsFile('CANCEL','Publish')">Cancel</button>
                     <button id="cancelButtonUniverse" onclick="sendDataToGsFile('CANCEL','Universe')">Cancel</button>
                     <button id="cancelButtonReject" onclick="sendDataToGsFile('CANCEL','Reject')">Cancel</button>
@@ -245,40 +249,39 @@
             window.close();
         }
 
-        function sendInput() {
-            const inputIds = [
-                'userInput'//,
-                // 'variable1',
-                // 'variable2',
-                // 'variable3',
-                // 'variable4',
-                // 'variable5',
-                // 'variable6',
-                // 'variable7',
-                // 'variable8',
-                // 'variable9',
-                // 'variable10'
-            ]; // Array of input IDs
+        function sendData(action = undefined, dataToBeSent1 = undefined, dataToBeSent2 = undefined, dataToBeSent3 = undefined, dataToBeSent4 = undefined) {
+            const dataNames = [
+                'userInput',
+                action = action,
+                dataToBeSent1 = dataToBeSent1,
+                dataToBeSent2 = dataToBeSent2,
+                dataToBeSent3 = dataToBeSent3,
+                dataToBeSent4 = dataToBeSent4,
+            ]; // Array of data names
 
-            const inputValues = []; // Array to store input values
+            const dataValues = []; // Array to store data values
             const url = new URL(window.location.href);
             const googleScriptUrl = url.searchParams.get('googleScriptUrl');
 
             if (googleScriptUrl) {
-                // Collect input values
-                for (const inputId of inputIds) {
-                    const inputElement = document.getElementById(inputId);
-                    if (inputElement) {
-                        inputValues.push(inputElement.value);
-                    } else {
-                        inputValues.push(null); // Or some default value if the input doesn't exist
+                // Collect data values
+                for (const dataName of dataNames) {
+                    const dataElement = document.getElementById(dataName);
+                    if (dataElement) {
+                        dataValues.push(dataElement.value);
+                    }
+                    else if (dataName !== undefined) {
+                        dataValues.push(dataName);
+                    }
+                    else {
+                        dataValues.push(undefined); // Or some default value if the data doesn't exist
                     }
                 }
 
                 // Construct the URL parameters
                 let urlParams = '';
-                for (let i = 0; i < inputValues.length; i++) {
-                    urlParams += `${inputIds[i]}=${encodeURIComponent(inputValues[i])}&`;
+                for (let i = 0; i < dataValues.length; i++) {
+                    urlParams += `${dataNames[i]}=${encodeURIComponent(dataValues[i])}&`;
                 }
                 //remove the last "&"
                 urlParams = urlParams.slice(0, -1)
@@ -286,17 +289,17 @@
                 // Send the request
                 fetch(googleScriptUrl + "?" + urlParams)
                     .then(() => {
-                        console.log("Data Sent", inputValues);
-                        fetchData(); // Refresh the data after sending input
+                        console.log("Data Sent", dataValues);
+                        fetchData(); // Refresh the data after sending data
                         closeWindow(); // Close the window after the fetch request and data refresh
                     })
                     .catch(error => {
-                        console.error("Error sending input:", error);
+                        console.error("Error sending data:", error);
                     });
             }
         }
 
-        // function sendInput() {
+        // function sendData() {
         //     const userInput = document.getElementById('userInput').value;
         //     const url = new URL(window.location.href);
         //     const googleScriptUrl = url.searchParams.get('googleScriptUrl');
@@ -304,11 +307,11 @@
         //         fetch(googleScriptUrl + "?userInput=" + encodeURIComponent(userInput))
         //             .then(() => {
         //                 console.log("Data Sent", userInput);
-        //                 fetchData(); // Refresh the data after sending input
+        //                 fetchData(); // Refresh the data after sending data
         //                 closeWindow(); // Close the window after the fetch request and data refresh
         //             })
         //             .catch(error => {
-        //                 console.error("Error sending input:", error);
+        //                 console.error("Error sending data:", error);
         //             });
         //     }
         // }        
