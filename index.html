@@ -250,47 +250,34 @@
         }
 
         function sendData(action = undefined, dataToBeSent1 = undefined, dataToBeSent2 = undefined, dataToBeSent3 = undefined, dataToBeSent4 = undefined) {
-            const data = [
-                { name: 'userInput', value: 'userInput' },
-                { name: 'action', value: action },
-                { name: 'dataToBeSent1', value: dataToBeSent1 },
-                { name: 'dataToBeSent2', value: dataToBeSent2 },
-                { name: 'dataToBeSent3', value: dataToBeSent3 },
-                { name: 'dataToBeSent4', value: dataToBeSent4 }
-            ]; // Array of data
-
-            const dataValues = []; // Array to store data values
+            const userInput = document.getElementById('userInput').value;
             const url = new URL(window.location.href);
             const googleScriptUrl = url.searchParams.get('googleScriptUrl');
 
             if (googleScriptUrl) {
-                // Collect data values
-                for (const item of data) {
-                    const dataElement = document.getElementById(item.name);
+                let urlParams = `userInput=${encodeURIComponent(userInput)}`; // userInput will always be sent, even if empty
 
-                    if (dataElement) {
-                        dataValues.push(dataElement.value);
-                    } else {
-                        // If element is not found, use item.value or a default
-                        dataValues.push(item.value || ''); // Use item.value if it exists, otherwise an empty string
-                        // Or: dataValues.push(item.value !== undefined ? item.value : 'default value');
-                    }
+                if (action !== undefined) {
+                    urlParams += `&action=${encodeURIComponent(action)}`;
+                }
+                if (dataToBeSent1 !== undefined) {
+                    urlParams += `&dataToBeSent1=${encodeURIComponent(dataToBeSent1)}`;
+                }
+                if (dataToBeSent2 !== undefined) {
+                    urlParams += `&dataToBeSent2=${encodeURIComponent(dataToBeSent2)}`;
+                }
+                if (dataToBeSent3 !== undefined) {
+                    urlParams += `&dataToBeSent3=${encodeURIComponent(dataToBeSent3)}`;
+                }
+                if (dataToBeSent4 !== undefined) {
+                    urlParams += `&dataToBeSent4=${encodeURIComponent(dataToBeSent4)}`;
                 }
 
-                // Construct the URL parameters
-                let urlParams = '';
-                for (let i = 0; i < dataValues.length; i++) {
-                    urlParams += `${data[i]}=${encodeURIComponent(dataValues[i])}&`;
-                }
-                //remove the last "&"
-                urlParams = urlParams.slice(0, -1)
-
-                // Send the request
                 fetch(googleScriptUrl + "?" + urlParams)
                     .then(() => {
-                        console.log("Data Sent", dataValues);
-                        fetchData(); // Refresh the data after sending data
-                        closeWindow(); // Close the window after the fetch request and data refresh
+                        console.log("Data Sent:", urlParams);
+                        fetchData();
+                        closeWindow();
                     })
                     .catch(error => {
                         console.error("Error sending data:", error);
