@@ -88,11 +88,17 @@
             <div id="publishUniverseOrRejectBody" class="publishUniverseReject">
                 <input type="text" id="emailSubject">
                 <input type="hidden" id="publishEmailSubject">
+                <input type="hidden" id="publishEmailSubjectAlternative">
                 <input type="hidden" id="universeEmailSubject">
+                <input type="hidden" id="universeEmailSubjectAlternative">
                 <input type="hidden" id="rejectEmailSubject">
+                <input type="hidden" id="universeEmailSubjectAlternative">
                 <input type="hidden" id="publishEmailBody">
+                <input type="hidden" id="publishEmailBodyAlternative">
                 <input type="hidden" id="universeEmailBody">
+                <input type="hidden" id="universeEmailBodyAlternative">
                 <input type="hidden" id="rejectEmailBody">
+                <input type="hidden" id="rejectEmailBodyAlternative">
                 <input type="hidden" id="responseSheetName">
                 <input type="hidden" id="responseRow">
                 <input type="hidden" id="emailSubjectAltenative">
@@ -129,528 +135,530 @@
     </div>
 
     <script>
-        function getUrlParameter(name) {
-            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-            var results = regex.exec(location.search);
-            const returnValue = results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-            console.log("getUrlParameter(" + name + "): ", returnValue);
-            return returnValue;
-        }
-
-        var dataParam = getUrlParameter('data');
-        if (dataParam) {
-            var data = JSON.parse(dataParam);
-            var rowValues = data.rowValues;
-            console.log(rowValues);
-
-            // Fill the pre-defined divs with row data
-            for (var i = 0; i < rowValues.length; i++) { // Index 0 is column B. Skip column A because that is the checkbox column.
-                div = document.getElementById(['colB_Data', 'colC_Data', 'colD_Data', 'colE_Data', 'colF_Data', 'colG_Data', 'colH_Data', 'colI_Data', 'colJ_Data', 'colK_Data', 'colL_Data', 'colM_Data', 'colN_Data', 'colO_Data', 'colP_Data', 'colQ_Data', 'colR_Data'][i]);
-
-                if (i == 0) {
-                    // Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getDay
-                    // Sunday - Saturday : 0 - 6
-                    let dateInCell = new Date(rowValues[0]);
-                    let dayNumber = dateInCell.getDay();
-                    let month = dateInCell.toLocaleString('default', { month: 'short' });
-                    let date = dateInCell.getDate();
-                    let year = dateInCell.getFullYear();
-
-                    if (dayNumber == 0) {
-                        day = 'Sun';
-                    }
-                    else if (dayNumber == 1) {
-                        day = 'Mon';
-                    }
-                    else if (dayNumber == 2) {
-                        day = 'Tue';
-                    }
-                    else if (dayNumber == 3) {
-                        day = 'Wed';
-                    }
-                    else if (dayNumber == 4) {
-                        day = 'Thu';
-                    }
-                    else if (dayNumber == 5) {
-                        day = 'Fri';
-                    }
-                    else if (dayNumber == 6) {
-                        day = 'Sat';
-                    }
-
-                    let submissionDate = day + ' ' + month + ' ' + date + ', ' + year;
-                    div.textContent = submissionDate;
-                }
-                // For data columns I, J, K, and M from spreadsheet, there will be an iframe.
-                // Hence 7, 8, 9, 11
-                else if (i == 7 || i == 8 || i == 9 || i == 11) {
-                    if (div) {
-                        div.querySelector('iframe').src = rowValues[i];
-                    }
-                    else {
-                        document.getElementById('colJ_Data').querySelector('iframe').src = 'about:blank';
-                    }
-                }
-                else if (div) {
-                    div.textContent = rowValues[i];
-                }
+        document.addEventListener('DOMContentLoaded', function () {
+            function getUrlParameter(name) {
+                name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+                var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+                var results = regex.exec(location.search);
+                const returnValue = results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+                console.log("getUrlParameter(" + name + "): ", returnValue);
+                return returnValue;
             }
-            var responseSheetName = data.responseSheetName;
-            var responseRow = data.responseRow;
-            var publishEmailSubject = data.publishEmailSubject;
-            var publishEmailBody = data.publishEmailBody;
-            var publishEmailSubjectAlternative = data.publishEmailSubjectAlternative;
-            var publishEmailBodyAlternative = data.publishEmailBodyAlternative;
-            var universeEmailSubject = data.universeEmailSubject;
-            var universeEmailBody = data.universeEmailBody;
-            var universeEmailSubjectAlternative = data.universeEmailSubjectAlternative;
-            var universeEmailBodyAlternative = data.universeEmailBodyAlternative;
-            var rejectEmailSubject = data.rejectEmailSubject;
-            var rejectEmailBody = data.rejectEmailBody;
-            var rejectEmailSubjectAlternative = data.rejectEmailSubjectAlternative;
-            var rejectEmailBodyAlternative = data.rejectEmailBodyAlternative;
-            console.log("responseSheetName: " + data.responseSheetName);
-            console.log("responseRow: " + data.responseRow);
-            console.log("publishEmailSubject: " + data.publishEmailSubject);
-            console.log("publishEmailBody: " + data.publishEmailBody);
-            console.log("publishEmailSubjectAlternative: " + data.publishEmailSubjectAlternative);
-            console.log("publishEmailBodyAlternative: " + data.publishEmailBodyAlternative);
-            console.log("universeEmailSubject: " + data.universeEmailSubject);
-            console.log("universeEmailBody: " + data.universeEmailBody);
-            console.log("universeEmailSubjectAlternative: " + data.universeEmailSubjectAlternative);
-            console.log("universeEmailBodyAlternative: " + data.universeEmailBodyAlternative);
-            console.log("rejectEmailSubject: " + data.rejectEmailSubject);
-            console.log("rejectEmailBody: " + data.rejectEmailBody);
-            console.log("rejectEmailSubjectAlternative: " + data.rejectEmailSubjectAlternative);
-            console.log("rejectEmailBodyAlternative: " + data.rejectEmailBodyAlternative);
-            document.getElementById('responseSheetName').value = responseSheetName;
-            document.getElementById('responseRow').value = responseRow;
-            document.getElementById('publishEmailSubject').value = publishEmailSubject;
-            document.getElementById('publishEmailBody').value = publishEmailBody;
-            document.getElementById('publishEmailSubjectAlternative').value = publishEmailSubjectAlternative;
-            document.getElementById('publishEmailBodyAlternative').value = publishEmailBodyAlternative;
-            document.getElementById('universeEmailSubject').value = universeEmailSubject;
-            document.getElementById('universeEmailBody').value = universeEmailBody;
-            document.getElementById('universeEmailSubjectAlternative').value = universeEmailSubjectAlternative;
-            document.getElementById('universeEmailBodyAlternative').value = universeEmailBodyAlternative;
-            document.getElementById('rejectEmailSubject').value = rejectEmailSubject;
-            document.getElementById('rejectEmailBody').value = rejectEmailBody;
-            document.getElementById('rejectEmailSubjectAlternative').value = rejectEmailSubjectAlternative;
-            document.getElementById('rejectEmailBodyAlternative').value = rejectEmailBodyAlternative;
-        }
 
-        function fetchData() {
-            const url = new URL(window.location.href);
-            const googleScriptUrl = url.searchParams.get('googleScriptUrl');
-            if (googleScriptUrl) {
-                fetch(googleScriptUrl)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data && data.b1ToQ1SubmissionHeaders) {
-                            const values = data.b1ToQ1SubmissionHeaders;
-                            document.getElementById("b1SubmissionHeader").innerHTML = values[0];
-                            document.getElementById("c1SubmissionHeader").innerHTML = values[1];
-                            document.getElementById("d1SubmissionHeader").innerHTML = values[2];
-                            document.getElementById("e1SubmissionHeader").innerHTML = values[3];
-                            document.getElementById("f1SubmissionHeader").innerHTML = values[4];
-                            document.getElementById("g1SubmissionHeader").innerHTML = values[5];
-                            document.getElementById("h1SubmissionHeader").innerHTML = values[6];
-                            document.getElementById("i1SubmissionHeader").innerHTML = values[7];
-                            document.getElementById("j1SubmissionHeader").innerHTML = values[8];
-                            document.getElementById("k1SubmissionHeader").innerHTML = values[9];
-                            document.getElementById("l1SubmissionHeader").innerHTML = values[10];
-                            document.getElementById("m1SubmissionHeader").innerHTML = values[11];
-                            document.getElementById("n1SubmissionHeader").innerHTML = values[12];
-                            document.getElementById("o1SubmissionHeader").innerHTML = values[13];
-                            document.getElementById("p1SubmissionHeader").innerHTML = values[14];
-                            document.getElementById("q1SubmissionHeader").innerHTML = values[15];
-                        } else {
-                            console.error("B1:Q1 Submission Headers are null or undefined");
+            var dataParam = getUrlParameter('data');
+            if (dataParam) {
+                var data = JSON.parse(dataParam);
+                var rowValues = data.rowValues;
+                console.log(rowValues);
+
+                // Fill the pre-defined divs with row data
+                for (var i = 0; i < rowValues.length; i++) { // Index 0 is column B. Skip column A because that is the checkbox column.
+                    div = document.getElementById(['colB_Data', 'colC_Data', 'colD_Data', 'colE_Data', 'colF_Data', 'colG_Data', 'colH_Data', 'colI_Data', 'colJ_Data', 'colK_Data', 'colL_Data', 'colM_Data', 'colN_Data', 'colO_Data', 'colP_Data', 'colQ_Data', 'colR_Data'][i]);
+
+                    if (i == 0) {
+                        // Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getDay
+                        // Sunday - Saturday : 0 - 6
+                        let dateInCell = new Date(rowValues[0]);
+                        let dayNumber = dateInCell.getDay();
+                        let month = dateInCell.toLocaleString('default', { month: 'short' });
+                        let date = dateInCell.getDate();
+                        let year = dateInCell.getFullYear();
+
+                        if (dayNumber == 0) {
+                            day = 'Sun';
+                        }
+                        else if (dayNumber == 1) {
+                            day = 'Mon';
+                        }
+                        else if (dayNumber == 2) {
+                            day = 'Tue';
+                        }
+                        else if (dayNumber == 3) {
+                            day = 'Wed';
+                        }
+                        else if (dayNumber == 4) {
+                            day = 'Thu';
+                        }
+                        else if (dayNumber == 5) {
+                            day = 'Fri';
+                        }
+                        else if (dayNumber == 6) {
+                            day = 'Sat';
                         }
 
-                        if (data && data.b1Value) {
-                            document.getElementById("b1Display").innerHTML = data.b1Value;
-                        } else {
-                            console.error("Test!B1 value is null or undefined");
+                        let submissionDate = day + ' ' + month + ' ' + date + ', ' + year;
+                        div.textContent = submissionDate;
+                    }
+                    // For data columns I, J, K, and M from spreadsheet, there will be an iframe.
+                    // Hence 7, 8, 9, 11
+                    else if (i == 7 || i == 8 || i == 9 || i == 11) {
+                        if (div) {
+                            div.querySelector('iframe').src = rowValues[i];
                         }
-                    })
-                    .catch(error => {
-                        console.error("Error fetching data:", error);
-                    });
-            }
-        }
-
-        fetchData(); // Call fetchData immediately
-
-        function getGoogleData() {
-            const url = new URL(window.location.href);
-            const googleScriptUrl = url.searchParams.get('googleScriptUrl');
-            if (googleScriptUrl) {
-                fetch(googleScriptUrl)
-                    .then(response => response.text());
-            }
-        }
-
-        getGoogleData(); // Call getGoogleData immediately
-
-        function closeWindow() {
-            window.close();
-        }
-
-        function sendInput() {
-            const userInput = document.getElementById('userInput').value;
-            const url = new URL(window.location.href);
-            const googleScriptUrl = url.searchParams.get('googleScriptUrl');
-            if (googleScriptUrl) {
-                fetch(googleScriptUrl + "?userInput=" + encodeURIComponent(userInput))
-                    .then(() => {
-                        console.log("Data Sent", userInput);
-                        fetchData(); // Refresh the data after sending input
-                        closeWindow(); // Close the window after the fetch request and data refresh
-                    })
-                    .catch(error => {
-                        console.error("Error sending input:", error);
-                    });
-            }
-        }
-
-        const reviewBody = document.getElementById('reviewBody');
-        reviewBody.style.display = 'block';
-        const publishUniverseOrRejectBody = document.getElementById('publishUniverseOrRejectBody');
-        const bodyElement = document.getElementById('mainContainer');
-        const buttonElement = document.querySelectorAll("button");
-        const emailSubject = document.getElementById('emailSubject');
-        const emailBody = document.getElementById('emailBody');
-        const emailSubjectAlternative = document.getElementById('emailSubjectAltenative');
-        const emailBodyAlternative = document.getElementById('emailBodyAltenative');
-        const publishUniverseOrReject = document.getElementById('publishUniverseOrReject');
-        const sendButtonPublish = document.getElementById('sendButtonPublish');
-        const alternativeButtonPublish = document.getElementById('alternativeButtonPublish');
-        const emailTemplatePublishOriginalButton = document.getElementById('emailTemplatePublishOriginalButton');
-        const emailTemplatePublishAlternativeButton = document.getElementById('emailTemplatePublishAlternativeButton');
-        const cancelButtonPublish = document.getElementById('cancelButtonPublish');
-        const sendButtonUniverse = document.getElementById('sendButtonUniverse');
-        const alternativeButtonUniverse = document.getElementById('alternativeButtonUniverse');
-        const emailTemplateUniverseOriginalButton = document.getElementById('emailTemplateUniverseOriginalButton');
-        const emailTemplateUniverseAlternativeButton = document.getElementById('emailTemplateUniverseAlternativeButton');
-        const cancelButtonUniverse = document.getElementById('cancelButtonUniverse');
-        const sendButtonReject = document.getElementById('sendButtonReject');
-        const alternativeButtonReject = document.getElementById('alternativeButtonReject');
-        const emailTemplateRejectOriginalButton = document.getElementById('emailTemplateRejectOriginalButton');
-        const emailTemplateRejectAlternativeButton = document.getElementById('emailTemplateRejectAlternativeButton');
-        const cancelButtonReject = document.getElementById('cancelButtonReject');
-        const review = document.getElementById('review');
-        const publish = document.getElementById('publish');
-        const universe = document.getElementById('universe');
-        const reject = document.getElementById('reject');
-        const root = document.documentElement;
-        const navButtonHoverBackgroundColor = getComputedStyle(root).getPropertyValue('--navButtonHoverBackgroundColor');
-        const navButtonHoverColor = getComputedStyle(root).getPropertyValue('--navButtonHoverColor');
-        const bodyBackgroundColorReview = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorReview');
-        const bodyBackgroundColorPublish = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorPublish');
-        const bodyBackgroundColorUniverse = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorUniverse');
-        const bodyBackgroundColorReject = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorReject');
-        const buttonBackgroundColorReview = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorReview');
-        const buttonBackgroundColorPublish = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorPublish');
-        const buttonBackgroundColorUniverse = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorUniverse');
-        const buttonBackgroundColorReject = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorReject');
-        const mainContainer = document.getElementById('mainContainer');
-
-        function SetOnMouseOver(reviewPublishUniverseRejectMoveOrDelete) {
-            if (reviewPublishUniverseRejectMoveOrDelete == "Review") {
-                reviewBody.style.display = 'block';
-                publishUniverseOrRejectBody.style.display = 'none';
-                bodyElement.style.backgroundColor = bodyBackgroundColorReview;
-
-                review.style.backgroundColor = buttonBackgroundColorReview;
-                review.style.color = "#000";
-                publish.style.backgroundColor = "#333";
-                publish.style.color = "#fff";
-                universe.style.backgroundColor = "#333";
-                universe.style.color = "#fff";
-                reject.style.backgroundColor = "#333";
-                reject.style.color = "#fff";
-            }
-            else if (reviewPublishUniverseRejectMoveOrDelete == "Publish") {
-                reviewBody.style.display = 'none';
-                publishUniverseOrRejectBody.style.display = 'block';
-                bodyElement.style.backgroundColor = bodyBackgroundColorPublish;
-
-                for (let i = 0; i < buttonElement.length; i++) {
-                    buttonElement[i].style.backgroundColor = buttonBackgroundColorPublish;
-                    buttonElement[i].style.color = "#fff";
+                        else {
+                            document.getElementById('colJ_Data').querySelector('iframe').src = 'about:blank';
+                        }
+                    }
+                    else if (div) {
+                        div.textContent = rowValues[i];
+                    }
                 }
-
-                emailSubject.value = document.getElementById('publishEmailSubject').value;;
-                emailBody.value = document.getElementById('publishEmailBody').value;;
-                alternativeButtonPublish.innerText = "Alternative";
-
-                sendButtonPublish.style.display = 'inline-block';
-                alternativeButtonPublish.style.display = 'inline-block';
-                emailTemplatePublishOriginalButton.style.display = 'inline-block';
-                emailTemplatePublishAlternativeButton.style.display = 'none';
-                cancelButtonPublish.style.display = 'inline-block';
-                sendButtonUniverse.style.display = 'none';
-                alternativeButtonUniverse.style.display = 'none';
-                emailTemplateUniverseOriginalButton.style.display = 'none';
-                emailTemplateUniverseAlternativeButton.style.display = 'none';
-                cancelButtonUniverse.style.display = 'none';
-                sendButtonReject.style.display = 'none';
-                alternativeButtonReject.style.display = 'none';
-                emailTemplateRejectOriginalButton.style.display = 'none';
-                emailTemplateRejectAlternativeButton.style.display = 'none';
-                cancelButtonReject.style.display = 'none';
-
-                review.style.backgroundColor = "#333";
-                review.style.color = "#fff";
-                publish.style.backgroundColor = buttonBackgroundColorPublish;
-                publish.style.color = "#fff";
-                universe.style.backgroundColor = "#333";
-                universe.style.color = "#fff";
-                reject.style.backgroundColor = "#333";
-                reject.style.color = "#fff";
+                var responseSheetName = data.responseSheetName;
+                var responseRow = data.responseRow;
+                var publishEmailSubject = data.publishEmailSubject;
+                var publishEmailBody = data.publishEmailBody;
+                var publishEmailSubjectAlternative = data.publishEmailSubjectAlternative;
+                var publishEmailBodyAlternative = data.publishEmailBodyAlternative;
+                var universeEmailSubject = data.universeEmailSubject;
+                var universeEmailBody = data.universeEmailBody;
+                var universeEmailSubjectAlternative = data.universeEmailSubjectAlternative;
+                var universeEmailBodyAlternative = data.universeEmailBodyAlternative;
+                var rejectEmailSubject = data.rejectEmailSubject;
+                var rejectEmailBody = data.rejectEmailBody;
+                var rejectEmailSubjectAlternative = data.rejectEmailSubjectAlternative;
+                var rejectEmailBodyAlternative = data.rejectEmailBodyAlternative;
+                console.log("responseSheetName: " + data.responseSheetName);
+                console.log("responseRow: " + data.responseRow);
+                console.log("publishEmailSubject: " + data.publishEmailSubject);
+                console.log("publishEmailBody: " + data.publishEmailBody);
+                console.log("publishEmailSubjectAlternative: " + data.publishEmailSubjectAlternative);
+                console.log("publishEmailBodyAlternative: " + data.publishEmailBodyAlternative);
+                console.log("universeEmailSubject: " + data.universeEmailSubject);
+                console.log("universeEmailBody: " + data.universeEmailBody);
+                console.log("universeEmailSubjectAlternative: " + data.universeEmailSubjectAlternative);
+                console.log("universeEmailBodyAlternative: " + data.universeEmailBodyAlternative);
+                console.log("rejectEmailSubject: " + data.rejectEmailSubject);
+                console.log("rejectEmailBody: " + data.rejectEmailBody);
+                console.log("rejectEmailSubjectAlternative: " + data.rejectEmailSubjectAlternative);
+                console.log("rejectEmailBodyAlternative: " + data.rejectEmailBodyAlternative);
+                document.getElementById('responseSheetName').value = responseSheetName;
+                document.getElementById('responseRow').value = responseRow;
+                document.getElementById('publishEmailSubject').value = publishEmailSubject;
+                document.getElementById('publishEmailBody').value = publishEmailBody;
+                document.getElementById('publishEmailSubjectAlternative').value = publishEmailSubjectAlternative;
+                document.getElementById('publishEmailBodyAlternative').value = publishEmailBodyAlternative;
+                document.getElementById('universeEmailSubject').value = universeEmailSubject;
+                document.getElementById('universeEmailBody').value = universeEmailBody;
+                document.getElementById('universeEmailSubjectAlternative').value = universeEmailSubjectAlternative;
+                document.getElementById('universeEmailBodyAlternative').value = universeEmailBodyAlternative;
+                document.getElementById('rejectEmailSubject').value = rejectEmailSubject;
+                document.getElementById('rejectEmailBody').value = rejectEmailBody;
+                document.getElementById('rejectEmailSubjectAlternative').value = rejectEmailSubjectAlternative;
+                document.getElementById('rejectEmailBodyAlternative').value = rejectEmailBodyAlternative;
             }
-            else if (reviewPublishUniverseRejectMoveOrDelete == "Universe") {
-                reviewBody.style.display = 'none';
-                publishUniverseOrRejectBody.style.display = 'block';
-                bodyElement.style.backgroundColor = bodyBackgroundColorUniverse;
 
-                for (let i = 0; i < buttonElement.length; i++) {
-                    buttonElement[i].style.backgroundColor = buttonBackgroundColorUniverse;
-                    buttonElement[i].style.color = "#000";
+            function fetchData() {
+                const url = new URL(window.location.href);
+                const googleScriptUrl = url.searchParams.get('googleScriptUrl');
+                if (googleScriptUrl) {
+                    fetch(googleScriptUrl)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data && data.b1ToQ1SubmissionHeaders) {
+                                const values = data.b1ToQ1SubmissionHeaders;
+                                document.getElementById("b1SubmissionHeader").innerHTML = values[0];
+                                document.getElementById("c1SubmissionHeader").innerHTML = values[1];
+                                document.getElementById("d1SubmissionHeader").innerHTML = values[2];
+                                document.getElementById("e1SubmissionHeader").innerHTML = values[3];
+                                document.getElementById("f1SubmissionHeader").innerHTML = values[4];
+                                document.getElementById("g1SubmissionHeader").innerHTML = values[5];
+                                document.getElementById("h1SubmissionHeader").innerHTML = values[6];
+                                document.getElementById("i1SubmissionHeader").innerHTML = values[7];
+                                document.getElementById("j1SubmissionHeader").innerHTML = values[8];
+                                document.getElementById("k1SubmissionHeader").innerHTML = values[9];
+                                document.getElementById("l1SubmissionHeader").innerHTML = values[10];
+                                document.getElementById("m1SubmissionHeader").innerHTML = values[11];
+                                document.getElementById("n1SubmissionHeader").innerHTML = values[12];
+                                document.getElementById("o1SubmissionHeader").innerHTML = values[13];
+                                document.getElementById("p1SubmissionHeader").innerHTML = values[14];
+                                document.getElementById("q1SubmissionHeader").innerHTML = values[15];
+                            } else {
+                                console.error("B1:Q1 Submission Headers are null or undefined");
+                            }
+
+                            if (data && data.b1Value) {
+                                document.getElementById("b1Display").innerHTML = data.b1Value;
+                            } else {
+                                console.error("Test!B1 value is null or undefined");
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error fetching data:", error);
+                        });
                 }
-
-                emailSubject.value = document.getElementById('universeEmailSubject').value;;
-                emailBody.value = document.getElementById('universeEmailBody').value;;
-
-                sendButtonPublish.style.display = 'none';
-                alternativeButtonPublish.style.display = 'none';
-                emailTemplatePublishOriginalButton.style.display = 'none';
-                emailTemplatePublishAlternativeButton.style.display = 'none';
-                cancelButtonPublish.style.display = 'none';
-                sendButtonUniverse.style.display = 'inline-block';
-                alternativeButtonUniverse.style.display = 'inline-block';
-                emailTemplateUniverseOriginalButton.style.display = 'inline-block';
-                emailTemplateUniverseAlternativeButton.style.display = 'none';
-                cancelButtonUniverse.style.display = 'inline-block';
-                sendButtonReject.style.display = 'none';
-                alternativeButtonReject.style.display = 'none';
-                emailTemplateRejectOriginalButton.style.display = 'none';
-                emailTemplateRejectAlternativeButton.style.display = 'none';
-                cancelButtonReject.style.display = 'none';
-
-                review.style.backgroundColor = "#333";
-                review.style.color = "#fff";
-                publish.style.backgroundColor = "#333";
-                publish.style.color = "#fff";
-                universe.style.backgroundColor = buttonBackgroundColorUniverse;
-                universe.style.color = navButtonHoverColor;
-                reject.style.backgroundColor = "#333";
-                reject.style.color = "#fff";
             }
-            else if (reviewPublishUniverseRejectMoveOrDelete == "Reject") {
-                reviewBody.style.display = 'none';
-                publishUniverseOrRejectBody.style.display = 'block';
-                bodyElement.style.backgroundColor = bodyBackgroundColorReject;
 
-                for (let i = 0; i < buttonElement.length; i++) {
-                    buttonElement[i].style.backgroundColor = buttonBackgroundColorReject;
-                    buttonElement[i].style.color = "#fff";
+            fetchData(); // Call fetchData immediately
+
+            function getGoogleData() {
+                const url = new URL(window.location.href);
+                const googleScriptUrl = url.searchParams.get('googleScriptUrl');
+                if (googleScriptUrl) {
+                    fetch(googleScriptUrl)
+                        .then(response => response.text());
                 }
+            }
 
-                emailSubject.value = document.getElementById('rejectEmailSubject').value;;
-                emailBody.value = document.getElementById('rejectEmailBody').value;;
+            getGoogleData(); // Call getGoogleData immediately
 
-                sendButtonPublish.style.display = 'none';
-                alternativeButtonPublish.style.display = 'none';
-                emailTemplatePublishOriginalButton.style.display = 'none';
-                emailTemplatePublishAlternativeButton.style.display = 'none';
-                cancelButtonPublish.style.display = 'none';
-                sendButtonUniverse.style.display = 'none';
-                alternativeButtonUniverse.style.display = 'none';
-                emailTemplateUniverseOriginalButton.style.display = 'none';
-                emailTemplateUniverseAlternativeButton.style.display = 'none';
-                cancelButtonUniverse.style.display = 'none';
-                sendButtonReject.style.display = 'inline-block';
-                alternativeButtonReject.style.display = 'inline-block';
-                emailTemplateRejectOriginalButton.style.display = 'inline-block';
-                emailTemplateRejectAlternativeButton.style.display = 'none';
-                cancelButtonReject.style.display = 'inline-block';
+            function closeWindow() {
+                window.close();
+            }
 
-                review.style.backgroundColor = "#333";
-                review.style.color = "#fff";
-                publish.style.backgroundColor = "#333";
-                publish.style.color = "#fff";
-                universe.style.backgroundColor = "#333";
-                universe.style.color = "#fff";
-                reject.style.backgroundColor = buttonBackgroundColorReject;
-                reject.style.color = "#fff";
+            function sendInput() {
+                const userInput = document.getElementById('userInput').value;
+                const url = new URL(window.location.href);
+                const googleScriptUrl = url.searchParams.get('googleScriptUrl');
+                if (googleScriptUrl) {
+                    fetch(googleScriptUrl + "?userInput=" + encodeURIComponent(userInput))
+                        .then(() => {
+                            console.log("Data Sent", userInput);
+                            fetchData(); // Refresh the data after sending input
+                            closeWindow(); // Close the window after the fetch request and data refresh
+                        })
+                        .catch(error => {
+                            console.error("Error sending input:", error);
+                        });
+                }
             }
-            else if (reviewPublishUniverseRejectMoveOrDelete == "Move" || reviewPublishUniverseRejectMoveOrDelete == "Delete") {
-                review.style.backgroundColor = "#333";
-                review.style.color = "#fff";
-                publish.style.backgroundColor = "#333";
-                publish.style.color = "#fff";
-                universe.style.backgroundColor = "#333";
-                universe.style.color = "#fff";
-                reject.style.backgroundColor = "#333";
-                reject.style.color = "#fff";
-            }
-        }
 
-        function SetOnMouseEnterBody() {
-            if (reviewBody.style.display == 'block') {
-                bodyElement.style.backgroundColor = bodyBackgroundColorReview;
-            }
-            else if (publishUniverseOrRejectBody.style.display == 'block' && sendButtonPublish.style.display == 'inline-block') {
-                bodyElement.style.backgroundColor = bodyBackgroundColorPublish;
-            }
-            else if (publishUniverseOrRejectBody.style.display == 'block' && sendButtonUniverse.style.display == 'inline-block') {
-                bodyElement.style.backgroundColor = bodyBackgroundColorUniverse;
-            }
-            else if (publishUniverseOrRejectBody.style.display == 'block' && sendButtonReject.style.display == 'inline-block') {
-                bodyElement.style.backgroundColor = bodyBackgroundColorReject;
-            }
-            else {
-                bodyElement.style.backgroundColor = "#fff";
-            }
-        }
-
-        function SendInfoToGsFile(sheetName) {
-            const url = new URL(window.location.href);
-            const googleScriptUrl = url.searchParams.get('googleScriptUrl');
-            if (googleScriptUrl) {
-                fetch(googleScriptUrl + "?sheetName=" + encodeURIComponent(sheetName))
-                    .then(() => {
-                        console.log("SheetName Sent", sheetName);
-                    });
-            }
-        }
-
-        function SendInfoForDelete() {
-            const url = new URL(window.location.href);
-            const googleScriptUrl = url.searchParams.get('googleScriptUrl');
-            if (googleScriptUrl) {
-                fetch(googleScriptUrl + "?delete=true")
-                    .then(() => {
-                        console.log("Delete Sent");
-                    });
-            }
-        }
-
-        function sendDataToGsFile(sendOrCancel, publishUniverseOrReject) {
-            const emailSubject = document.getElementById('emailSubject').value;
-            const emailBody = document.getElementById('emailBody').value;
-            const responseSheetName = document.getElementById('responseSheetName').value;
-            const responseRow = document.getElementById('responseRow').value;
-            const webAppUrl = document.getElementById('webAppUrl').value;
-            const url = new URL(window.location.href);
-            const googleScriptUrl = url.searchParams.get('googleScriptUrl');
-
-            if (googleScriptUrl) {
-                fetch(googleScriptUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: new URLSearchParams({
-                        sendOrCancel: sendOrCancel,
-                        publishUniverseOrReject: publishUniverseOrReject,
-                        emailSubject: emailSubject,
-                        emailBody: emailBody,
-                        responseSheetName: responseSheetName,
-                        responseRow: responseRow,
-                        webAppUrl: webAppUrl
-                    })
-                })
-                    .then(response => response.text())
-                    .then(data => {
-                        console.log("Data sent:", data);
-                        window.close();
-                    })
-                    .catch(error => {
-                        console.error("Error sending data:", error);
-                    });
-            }
-        }
-
-        function SeeAlternativeEmail(publishUniverseOrReject) {
+            const reviewBody = document.getElementById('reviewBody');
+            reviewBody.style.display = 'block';
+            const publishUniverseOrRejectBody = document.getElementById('publishUniverseOrRejectBody');
+            const bodyElement = document.getElementById('mainContainer');
+            const buttonElement = document.querySelectorAll("button");
             const emailSubject = document.getElementById('emailSubject');
             const emailBody = document.getElementById('emailBody');
             const emailSubjectAlternative = document.getElementById('emailSubjectAltenative');
             const emailBodyAlternative = document.getElementById('emailBodyAltenative');
+            const publishUniverseOrReject = document.getElementById('publishUniverseOrReject');
+            const sendButtonPublish = document.getElementById('sendButtonPublish');
             const alternativeButtonPublish = document.getElementById('alternativeButtonPublish');
-            const alternativeButtonUniverse = document.getElementById('alternativeButtonUniverse');
-            const alternativeButtonReject = document.getElementById('alternativeButtonReject');
             const emailTemplatePublishOriginalButton = document.getElementById('emailTemplatePublishOriginalButton');
             const emailTemplatePublishAlternativeButton = document.getElementById('emailTemplatePublishAlternativeButton');
+            const cancelButtonPublish = document.getElementById('cancelButtonPublish');
+            const sendButtonUniverse = document.getElementById('sendButtonUniverse');
+            const alternativeButtonUniverse = document.getElementById('alternativeButtonUniverse');
             const emailTemplateUniverseOriginalButton = document.getElementById('emailTemplateUniverseOriginalButton');
             const emailTemplateUniverseAlternativeButton = document.getElementById('emailTemplateUniverseAlternativeButton');
+            const cancelButtonUniverse = document.getElementById('cancelButtonUniverse');
+            const sendButtonReject = document.getElementById('sendButtonReject');
+            const alternativeButtonReject = document.getElementById('alternativeButtonReject');
             const emailTemplateRejectOriginalButton = document.getElementById('emailTemplateRejectOriginalButton');
             const emailTemplateRejectAlternativeButton = document.getElementById('emailTemplateRejectAlternativeButton');
+            const cancelButtonReject = document.getElementById('cancelButtonReject');
+            const review = document.getElementById('review');
+            const publish = document.getElementById('publish');
+            const universe = document.getElementById('universe');
+            const reject = document.getElementById('reject');
+            const root = document.documentElement;
+            const navButtonHoverBackgroundColor = getComputedStyle(root).getPropertyValue('--navButtonHoverBackgroundColor');
+            const navButtonHoverColor = getComputedStyle(root).getPropertyValue('--navButtonHoverColor');
+            const bodyBackgroundColorReview = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorReview');
+            const bodyBackgroundColorPublish = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorPublish');
+            const bodyBackgroundColorUniverse = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorUniverse');
+            const bodyBackgroundColorReject = getComputedStyle(root).getPropertyValue('--bodyBackgroundColorReject');
+            const buttonBackgroundColorReview = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorReview');
+            const buttonBackgroundColorPublish = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorPublish');
+            const buttonBackgroundColorUniverse = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorUniverse');
+            const buttonBackgroundColorReject = getComputedStyle(root).getPropertyValue('--buttonBackgroundColorReject');
+            const mainContainer = document.getElementById('mainContainer');
 
-            if (publishUniverseOrReject == 'Publish') {
-                if (alternativeButtonPublish.innerText == 'Alternative') {
-                    emailSubject.value = emailSubjectAlternative.value;
-                    emailBody.value = emailBodyAlternative.value;
-                    alternativeButtonPublish.innerText = 'Original';
-                    emailTemplatePublishOriginalButton.style.display = 'none';
-                    emailTemplatePublishAlternativeButton.style.display = 'inline-block';
+            function SetOnMouseOver(reviewPublishUniverseRejectMoveOrDelete) {
+                if (reviewPublishUniverseRejectMoveOrDelete == "Review") {
+                    reviewBody.style.display = 'block';
+                    publishUniverseOrRejectBody.style.display = 'none';
+                    bodyElement.style.backgroundColor = bodyBackgroundColorReview;
+
+                    review.style.backgroundColor = buttonBackgroundColorReview;
+                    review.style.color = "#000";
+                    publish.style.backgroundColor = "#333";
+                    publish.style.color = "#fff";
+                    universe.style.backgroundColor = "#333";
+                    universe.style.color = "#fff";
+                    reject.style.backgroundColor = "#333";
+                    reject.style.color = "#fff";
                 }
-                else {
+                else if (reviewPublishUniverseRejectMoveOrDelete == "Publish") {
+                    reviewBody.style.display = 'none';
+                    publishUniverseOrRejectBody.style.display = 'block';
+                    bodyElement.style.backgroundColor = bodyBackgroundColorPublish;
+
+                    for (let i = 0; i < buttonElement.length; i++) {
+                        buttonElement[i].style.backgroundColor = buttonBackgroundColorPublish;
+                        buttonElement[i].style.color = "#fff";
+                    }
+
                     emailSubject.value = document.getElementById('publishEmailSubject').value;;
                     emailBody.value = document.getElementById('publishEmailBody').value;;
-                    alternativeButtonPublish.innerText = 'Alternative';
+                    alternativeButtonPublish.innerText = "Alternative";
+
+                    sendButtonPublish.style.display = 'inline-block';
+                    alternativeButtonPublish.style.display = 'inline-block';
                     emailTemplatePublishOriginalButton.style.display = 'inline-block';
                     emailTemplatePublishAlternativeButton.style.display = 'none';
-                }
-            }
-            else if (publishUniverseOrReject == 'Universe') {
-                if (alternativeButtonUniverse.innerText == 'Alternative') {
-                    emailSubject.value = emailSubjectAlternative.value;
-                    emailBody.value = emailBodyAlternative.value;
-                    alternativeButtonUniverse.innerText = 'Original';
+                    cancelButtonPublish.style.display = 'inline-block';
+                    sendButtonUniverse.style.display = 'none';
+                    alternativeButtonUniverse.style.display = 'none';
                     emailTemplateUniverseOriginalButton.style.display = 'none';
-                    emailTemplateUniverseAlternativeButton.style.display = 'inline-block';
+                    emailTemplateUniverseAlternativeButton.style.display = 'none';
+                    cancelButtonUniverse.style.display = 'none';
+                    sendButtonReject.style.display = 'none';
+                    alternativeButtonReject.style.display = 'none';
+                    emailTemplateRejectOriginalButton.style.display = 'none';
+                    emailTemplateRejectAlternativeButton.style.display = 'none';
+                    cancelButtonReject.style.display = 'none';
+
+                    review.style.backgroundColor = "#333";
+                    review.style.color = "#fff";
+                    publish.style.backgroundColor = buttonBackgroundColorPublish;
+                    publish.style.color = "#fff";
+                    universe.style.backgroundColor = "#333";
+                    universe.style.color = "#fff";
+                    reject.style.backgroundColor = "#333";
+                    reject.style.color = "#fff";
                 }
-                else {
+                else if (reviewPublishUniverseRejectMoveOrDelete == "Universe") {
+                    reviewBody.style.display = 'none';
+                    publishUniverseOrRejectBody.style.display = 'block';
+                    bodyElement.style.backgroundColor = bodyBackgroundColorUniverse;
+
+                    for (let i = 0; i < buttonElement.length; i++) {
+                        buttonElement[i].style.backgroundColor = buttonBackgroundColorUniverse;
+                        buttonElement[i].style.color = "#000";
+                    }
+
                     emailSubject.value = document.getElementById('universeEmailSubject').value;;
                     emailBody.value = document.getElementById('universeEmailBody').value;;
-                    alternativeButtonUniverse.innerText = 'Alternative';
+
+                    sendButtonPublish.style.display = 'none';
+                    alternativeButtonPublish.style.display = 'none';
+                    emailTemplatePublishOriginalButton.style.display = 'none';
+                    emailTemplatePublishAlternativeButton.style.display = 'none';
+                    cancelButtonPublish.style.display = 'none';
+                    sendButtonUniverse.style.display = 'inline-block';
+                    alternativeButtonUniverse.style.display = 'inline-block';
                     emailTemplateUniverseOriginalButton.style.display = 'inline-block';
                     emailTemplateUniverseAlternativeButton.style.display = 'none';
-                }
-            }
-            else if (publishUniverseOrReject == 'Reject') {
-                if (alternativeButtonReject.innerText == 'Alternative') {
-                    emailSubject.value = emailSubjectAlternative.value;
-                    emailBody.value = emailBodyAlternative.value;
-                    alternativeButtonReject.innerText = 'Original';
+                    cancelButtonUniverse.style.display = 'inline-block';
+                    sendButtonReject.style.display = 'none';
+                    alternativeButtonReject.style.display = 'none';
                     emailTemplateRejectOriginalButton.style.display = 'none';
-                    emailTemplateRejectAlternativeButton.style.display = 'inline-block';
+                    emailTemplateRejectAlternativeButton.style.display = 'none';
+                    cancelButtonReject.style.display = 'none';
+
+                    review.style.backgroundColor = "#333";
+                    review.style.color = "#fff";
+                    publish.style.backgroundColor = "#333";
+                    publish.style.color = "#fff";
+                    universe.style.backgroundColor = buttonBackgroundColorUniverse;
+                    universe.style.color = navButtonHoverColor;
+                    reject.style.backgroundColor = "#333";
+                    reject.style.color = "#fff";
                 }
-                else {
+                else if (reviewPublishUniverseRejectMoveOrDelete == "Reject") {
+                    reviewBody.style.display = 'none';
+                    publishUniverseOrRejectBody.style.display = 'block';
+                    bodyElement.style.backgroundColor = bodyBackgroundColorReject;
+
+                    for (let i = 0; i < buttonElement.length; i++) {
+                        buttonElement[i].style.backgroundColor = buttonBackgroundColorReject;
+                        buttonElement[i].style.color = "#fff";
+                    }
+
                     emailSubject.value = document.getElementById('rejectEmailSubject').value;;
                     emailBody.value = document.getElementById('rejectEmailBody').value;;
-                    alternativeButtonReject.innerText = 'Alternative';
+
+                    sendButtonPublish.style.display = 'none';
+                    alternativeButtonPublish.style.display = 'none';
+                    emailTemplatePublishOriginalButton.style.display = 'none';
+                    emailTemplatePublishAlternativeButton.style.display = 'none';
+                    cancelButtonPublish.style.display = 'none';
+                    sendButtonUniverse.style.display = 'none';
+                    alternativeButtonUniverse.style.display = 'none';
+                    emailTemplateUniverseOriginalButton.style.display = 'none';
+                    emailTemplateUniverseAlternativeButton.style.display = 'none';
+                    cancelButtonUniverse.style.display = 'none';
+                    sendButtonReject.style.display = 'inline-block';
+                    alternativeButtonReject.style.display = 'inline-block';
                     emailTemplateRejectOriginalButton.style.display = 'inline-block';
                     emailTemplateRejectAlternativeButton.style.display = 'none';
+                    cancelButtonReject.style.display = 'inline-block';
+
+                    review.style.backgroundColor = "#333";
+                    review.style.color = "#fff";
+                    publish.style.backgroundColor = "#333";
+                    publish.style.color = "#fff";
+                    universe.style.backgroundColor = "#333";
+                    universe.style.color = "#fff";
+                    reject.style.backgroundColor = buttonBackgroundColorReject;
+                    reject.style.color = "#fff";
+                }
+                else if (reviewPublishUniverseRejectMoveOrDelete == "Move" || reviewPublishUniverseRejectMoveOrDelete == "Delete") {
+                    review.style.backgroundColor = "#333";
+                    review.style.color = "#fff";
+                    publish.style.backgroundColor = "#333";
+                    publish.style.color = "#fff";
+                    universe.style.backgroundColor = "#333";
+                    universe.style.color = "#fff";
+                    reject.style.backgroundColor = "#333";
+                    reject.style.color = "#fff";
                 }
             }
-        }
 
-        function SendInfoToOpenEmailTemplate(range1, range2, range3, range4) {
-            const url = new URL(window.location.href);
-            const googleScriptUrl = url.searchParams.get('googleScriptUrl');
-            if (googleScriptUrl) {
-                fetch(googleScriptUrl + "?range1=" + encodeURIComponent(range1) + "&range2=" + encodeURIComponent(range2) + "&range3=" + encodeURIComponent(range3) + "&range4=" + encodeURIComponent(range4))
-                    .then(() => {
-                        console.log("Email Template Sent");
-                        window.close();
-                    });
+            function SetOnMouseEnterBody() {
+                if (reviewBody.style.display == 'block') {
+                    bodyElement.style.backgroundColor = bodyBackgroundColorReview;
+                }
+                else if (publishUniverseOrRejectBody.style.display == 'block' && sendButtonPublish.style.display == 'inline-block') {
+                    bodyElement.style.backgroundColor = bodyBackgroundColorPublish;
+                }
+                else if (publishUniverseOrRejectBody.style.display == 'block' && sendButtonUniverse.style.display == 'inline-block') {
+                    bodyElement.style.backgroundColor = bodyBackgroundColorUniverse;
+                }
+                else if (publishUniverseOrRejectBody.style.display == 'block' && sendButtonReject.style.display == 'inline-block') {
+                    bodyElement.style.backgroundColor = bodyBackgroundColorReject;
+                }
+                else {
+                    bodyElement.style.backgroundColor = "#fff";
+                }
             }
-        }
+
+            function SendInfoToGsFile(sheetName) {
+                const url = new URL(window.location.href);
+                const googleScriptUrl = url.searchParams.get('googleScriptUrl');
+                if (googleScriptUrl) {
+                    fetch(googleScriptUrl + "?sheetName=" + encodeURIComponent(sheetName))
+                        .then(() => {
+                            console.log("SheetName Sent", sheetName);
+                        });
+                }
+            }
+
+            function SendInfoForDelete() {
+                const url = new URL(window.location.href);
+                const googleScriptUrl = url.searchParams.get('googleScriptUrl');
+                if (googleScriptUrl) {
+                    fetch(googleScriptUrl + "?delete=true")
+                        .then(() => {
+                            console.log("Delete Sent");
+                        });
+                }
+            }
+
+            function sendDataToGsFile(sendOrCancel, publishUniverseOrReject) {
+                const emailSubject = document.getElementById('emailSubject').value;
+                const emailBody = document.getElementById('emailBody').value;
+                const responseSheetName = document.getElementById('responseSheetName').value;
+                const responseRow = document.getElementById('responseRow').value;
+                const webAppUrl = document.getElementById('webAppUrl').value;
+                const url = new URL(window.location.href);
+                const googleScriptUrl = url.searchParams.get('googleScriptUrl');
+
+                if (googleScriptUrl) {
+                    fetch(googleScriptUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: new URLSearchParams({
+                            sendOrCancel: sendOrCancel,
+                            publishUniverseOrReject: publishUniverseOrReject,
+                            emailSubject: emailSubject,
+                            emailBody: emailBody,
+                            responseSheetName: responseSheetName,
+                            responseRow: responseRow,
+                            webAppUrl: webAppUrl
+                        })
+                    })
+                        .then(response => response.text())
+                        .then(data => {
+                            console.log("Data sent:", data);
+                            window.close();
+                        })
+                        .catch(error => {
+                            console.error("Error sending data:", error);
+                        });
+                }
+            }
+
+            function SeeAlternativeEmail(publishUniverseOrReject) {
+                const emailSubject = document.getElementById('emailSubject');
+                const emailBody = document.getElementById('emailBody');
+                const emailSubjectAlternative = document.getElementById('emailSubjectAltenative');
+                const emailBodyAlternative = document.getElementById('emailBodyAltenative');
+                const alternativeButtonPublish = document.getElementById('alternativeButtonPublish');
+                const alternativeButtonUniverse = document.getElementById('alternativeButtonUniverse');
+                const alternativeButtonReject = document.getElementById('alternativeButtonReject');
+                const emailTemplatePublishOriginalButton = document.getElementById('emailTemplatePublishOriginalButton');
+                const emailTemplatePublishAlternativeButton = document.getElementById('emailTemplatePublishAlternativeButton');
+                const emailTemplateUniverseOriginalButton = document.getElementById('emailTemplateUniverseOriginalButton');
+                const emailTemplateUniverseAlternativeButton = document.getElementById('emailTemplateUniverseAlternativeButton');
+                const emailTemplateRejectOriginalButton = document.getElementById('emailTemplateRejectOriginalButton');
+                const emailTemplateRejectAlternativeButton = document.getElementById('emailTemplateRejectAlternativeButton');
+
+                if (publishUniverseOrReject == 'Publish') {
+                    if (alternativeButtonPublish.innerText == 'Alternative') {
+                        emailSubject.value = emailSubjectAlternative.value;
+                        emailBody.value = emailBodyAlternative.value;
+                        alternativeButtonPublish.innerText = 'Original';
+                        emailTemplatePublishOriginalButton.style.display = 'none';
+                        emailTemplatePublishAlternativeButton.style.display = 'inline-block';
+                    }
+                    else {
+                        emailSubject.value = document.getElementById('publishEmailSubject').value;;
+                        emailBody.value = document.getElementById('publishEmailBody').value;;
+                        alternativeButtonPublish.innerText = 'Alternative';
+                        emailTemplatePublishOriginalButton.style.display = 'inline-block';
+                        emailTemplatePublishAlternativeButton.style.display = 'none';
+                    }
+                }
+                else if (publishUniverseOrReject == 'Universe') {
+                    if (alternativeButtonUniverse.innerText == 'Alternative') {
+                        emailSubject.value = emailSubjectAlternative.value;
+                        emailBody.value = emailBodyAlternative.value;
+                        alternativeButtonUniverse.innerText = 'Original';
+                        emailTemplateUniverseOriginalButton.style.display = 'none';
+                        emailTemplateUniverseAlternativeButton.style.display = 'inline-block';
+                    }
+                    else {
+                        emailSubject.value = document.getElementById('universeEmailSubject').value;;
+                        emailBody.value = document.getElementById('universeEmailBody').value;;
+                        alternativeButtonUniverse.innerText = 'Alternative';
+                        emailTemplateUniverseOriginalButton.style.display = 'inline-block';
+                        emailTemplateUniverseAlternativeButton.style.display = 'none';
+                    }
+                }
+                else if (publishUniverseOrReject == 'Reject') {
+                    if (alternativeButtonReject.innerText == 'Alternative') {
+                        emailSubject.value = emailSubjectAlternative.value;
+                        emailBody.value = emailBodyAlternative.value;
+                        alternativeButtonReject.innerText = 'Original';
+                        emailTemplateRejectOriginalButton.style.display = 'none';
+                        emailTemplateRejectAlternativeButton.style.display = 'inline-block';
+                    }
+                    else {
+                        emailSubject.value = document.getElementById('rejectEmailSubject').value;;
+                        emailBody.value = document.getElementById('rejectEmailBody').value;;
+                        alternativeButtonReject.innerText = 'Alternative';
+                        emailTemplateRejectOriginalButton.style.display = 'inline-block';
+                        emailTemplateRejectAlternativeButton.style.display = 'none';
+                    }
+                }
+            }
+
+            function SendInfoToOpenEmailTemplate(range1, range2, range3, range4) {
+                const url = new URL(window.location.href);
+                const googleScriptUrl = url.searchParams.get('googleScriptUrl');
+                if (googleScriptUrl) {
+                    fetch(googleScriptUrl + "?range1=" + encodeURIComponent(range1) + "&range2=" + encodeURIComponent(range2) + "&range3=" + encodeURIComponent(range3) + "&range4=" + encodeURIComponent(range4))
+                        .then(() => {
+                            console.log("Email Template Sent");
+                            window.close();
+                        });
+                }
+            }
+        });
     </script>
 </body>
 
