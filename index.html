@@ -250,14 +250,14 @@
         }
 
         function sendData(action = undefined, dataToBeSent1 = undefined, dataToBeSent2 = undefined, dataToBeSent3 = undefined, dataToBeSent4 = undefined) {
-            const dataNames = [
-                'userInput',
-                'action' = action,
-                'dataToBeSent1' = dataToBeSent1,
-                'dataToBeSent2' = dataToBeSent2,
-                'dataToBeSent3' = dataToBeSent3,
-                'dataToBeSent4' = dataToBeSent4,
-            ]; // Array of data names
+            const data = [
+                { name: 'userInput', value: 'userInput' },
+                { name: 'action', value: action },
+                { name: 'dataToBeSent1', value: dataToBeSent1 },
+                { name: 'dataToBeSent2', value: dataToBeSent2 },
+                { name: 'dataToBeSent3', value: dataToBeSent3 },
+                { name: 'dataToBeSent4', value: dataToBeSent4 }
+            ]; // Array of data
 
             const dataValues = []; // Array to store data values
             const url = new URL(window.location.href);
@@ -265,13 +265,13 @@
 
             if (googleScriptUrl) {
                 // Collect data values
-                for (const dataName of dataNames) {
-                    const dataElement = document.getElementById(dataName);
+                for (const item of data) {
+                    const dataElement = document.getElementById(item);
                     if (dataElement) {
                         dataValues.push(dataElement.value);
                     }
-                    else if (dataName !== undefined) {
-                        dataValues.push(dataName);
+                    else if (item !== undefined) {
+                        dataValues.push(item);
                     }
                     else {
                         dataValues.push(undefined); // Or some default value if the data doesn't exist
@@ -281,7 +281,7 @@
                 // Construct the URL parameters
                 let urlParams = '';
                 for (let i = 0; i < dataValues.length; i++) {
-                    urlParams += `${dataNames[i]}=${encodeURIComponent(dataValues[i])}&`;
+                    urlParams += `${data[i]}=${encodeURIComponent(dataValues[i])}&`;
                 }
                 //remove the last "&"
                 urlParams = urlParams.slice(0, -1)
