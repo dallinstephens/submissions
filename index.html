@@ -226,6 +226,14 @@
 <body>
     <h2 id="b1Display"></h2>
 
+    <div id="rowDataContainer">
+        <div id="colB_Data"></div>
+        <div id="colC_Data"></div>
+        <div id="colD_Data"></div>
+        <div id="colE_Data"></div>
+        <div id="colF_Data"></div>
+    </div>
+
     <p id="displayArea"></p>
     <input type="text" id="userInput" placeholder="Enter text">
     <button onclick="sendInput()">Submit</button>
@@ -261,41 +269,62 @@
                 <h3 id="c1SubmissionHeader"></h3>
                 <h3 id="d1SubmissionHeader"></h3>
                 <h3>Submission Date</h3>
-                <div id="colB_Data"></div>
+                <div>
+                    <?= contentB ?>
+                </div>
                 <h3 id="e1SubmissionHeader"></h3>
-                <div id="colE_Data"></div>
+                <div>
+                    <?= contentE ?>
+                </div>
                 <h3 id="f1SubmissionHeader"></h3>
-                <div id="colF_Data"></div>
+                <div>
+                    <?= contentF ?>
+                </div>
                 <h3 id="j1SubmissionHeader"></h3>
-                <div id="colJ_Data">
-                    <iframe frameborder='0' height='55' width='100%'></iframe>
+                <div>
+                    <iframe frameborder='0' height='55' width='100%' src=<?=contentJ ?>></iframe>
                 </div>
                 <h3 id="k1SubmissionHeader"></h3>
-                <div id="colK_Data">
-                    <iframe frameborder='0' height='1000' width='100%'></iframe>
+                <div>
+                    <iframe frameborder='0' height='1000' width='100%' src=<?=contentK ?>></iframe>
                 </div>
                 <h3 id="i1SubmissionHeader"></h3>
-                <div id="colI_Data">
-                    <iframe frameborder='0' height='300' width='100%'></iframe>
+                <div>
+                    <iframe frameborder='0' height='300' width='100%' src=<?=contentI ?>></iframe>
                 </div>
                 <h3 id="m1SubmissionHeader"></h3>
-                <div id="colM_Data">
-                    <iframe frameborder="0" allowfullscreen="" style="width:100%; height:400px;"></iframe>
+                <div>
+                    <iframe src=<?=contentM ?> frameborder="0" allowfullscreen="" style="width:100%;
+                        height:400px;"></iframe>
                 </div>
                 <h3 id="g1SubmissionHeader"></h3>
-                <div id="colG_Data"></div>
+                <div>
+                    <?= contentG ?>
+                </div>
                 <h3 id="h1SubmissionHeader"></h3>
-                <div id="colH_Data"></div>
+                <div>
+                    <?= contentH ?>
+                </div>
                 <h3 id="l1SubmissionHeader"></h3>
-                <div id="colL_Data"></div>
+                <div>
+                    <?= contentL ?>
+                </div>
                 <h3 id="n1SubmissionHeader"></h3>
-                <div id="colN_Data"></div>
+                <div>
+                    <?= contentN ?>
+                </div>
                 <h3 id="o1SubmissionHeader"></h3>
-                <div id="colO_Data"></div>
+                <div>
+                    <?= contentO ?>
+                </div>
                 <h3 id="p1SubmissionHeader"></h3>
-                <div id="colP_Data"></div>
+                <div>
+                    <?= contentP ?>
+                </div>
                 <h3 id="q1SubmissionHeader"></h3>
-                <div id="colQ_Data"></div>
+                <div>
+                    <?= contentQ ?>
+                </div>
             </div>
 
             <div id="publishUniverseOrRejectBody" class="publishUniverseReject">
@@ -346,36 +375,26 @@
         }
 
         var dataParam = getUrlParameter('data');
-        console.log("dataParam:", dataParam); // Added console log
-
         if (dataParam) {
-            try {
-                var data = JSON.parse(dataParam);
-                console.log("Parsed data:", data); // Added console log
-                var rowValues = data.rowValues;
+            var data = JSON.parse(dataParam);
+            var rowValues = data.rowValues;
 
-                // Fill the pre-defined divs with row data
-                for (var i = 0; i < rowValues.length; i++) {
-                    div = document.getElementById(['colB_Data', 'colC_Data', 'colD_Data', 'colE_Data', 'colF_Data', 'colG_Data', 'colH_Data', 'colI_Data', 'colJ_Data', 'colK_Data', 'colL_Data', 'colM_Data', 'colN_Data', 'colO_Data', 'colP_Data', 'colQ_Data', 'colR_Data'][i]);
-                    if (div) {
-                        div.textContent = rowValues[i];
-                        console.log("Setting div:", div.id, "to:", rowValues[i]); // Added console log
-                    }
+            // Fill the pre-defined divs with row data
+            for (var i = 0; i < rowValues.length; i++) { // Index 0 is column B. Skip column A because that is the checkbox column.
+                var div = document.getElementById(['colB_Data', 'colC_Data', 'colD_Data', 'colE_Data', 'colF_Data'][i]);
+                if (div) {
+                    div.textContent = rowValues[i];
                 }
-            } catch (error) {
-                console.error("Error parsing or setting data:", error); // Added console log
             }
         }
 
         function fetchData() {
-            const googleScriptUrl = getUrlParameter('googleScriptUrl');
-            console.log("googleScriptUrl:", googleScriptUrl); // Added console log
-
+            const url = new URL(window.location.href);
+            const googleScriptUrl = url.searchParams.get('googleScriptUrl');
             if (googleScriptUrl) {
                 fetch(googleScriptUrl)
                     .then(response => response.json())
                     .then(data => {
-                        console.log("Fetched data:", data); // Added console log
                         if (data && data.b1ToQ1SubmissionHeaders) {
                             const values = data.b1ToQ1SubmissionHeaders;
                             document.getElementById("b1SubmissionHeader").innerHTML = values[0];
@@ -394,53 +413,6 @@
                             document.getElementById("o1SubmissionHeader").innerHTML = values[13];
                             document.getElementById("p1SubmissionHeader").innerHTML = values[14];
                             document.getElementById("q1SubmissionHeader").innerHTML = values[15];
-
-                            // Populate iframe src attributes
-                            if (document.getElementById('colJ_Data')) {
-                                const srcJ = values[9];
-                                if (srcJ) {
-                                    document.getElementById('colJ_Data').querySelector('iframe').src = srcJ;
-                                } else {
-                                    document.getElementById('colJ_Data').querySelector('iframe').src = 'about:blank';
-                                }
-                            }
-                            if (document.getElementById('colK_Data')) {
-                                const srcK = values[10];
-                                if (srcK) {
-                                    document.getElementById('colK_Data').querySelector('iframe').src = srcK;
-                                } else {
-                                    document.getElementById('colK_Data').querySelector('iframe').src = 'about:blank';
-                                }
-                            }
-                            if (document.getElementById('colI_Data')) {
-                                const srcI = values[8];
-                                if (srcI) {
-                                    document.getElementById('colI_Data').querySelector('iframe').src = srcI;
-                                } else {
-                                    document.getElementById('colI_Data').querySelector('iframe').src = 'about:blank';
-                                }
-                            }
-                            if (document.getElementById('colM_Data')) {
-                                const srcM = values[12];
-                                if (srcM) {
-                                    document.getElementById('colM_Data').querySelector('iframe').src = srcM;
-                                } else {
-                                    document.getElementById('colM_Data').querySelector('iframe').src = 'about:blank';
-                                }
-                            }
-
-                            //populate div tags
-                            document.getElementById("colB_Data").innerHTML = values[0];
-                            document.getElementById("colE_Data").innerHTML = values[3];
-                            document.getElementById("colF_Data").innerHTML = values[4];
-                            document.getElementById("colG_Data").innerHTML = values[5];
-                            document.getElementById("colH_Data").innerHTML = values[6];
-                            document.getElementById("colL_Data").innerHTML = values[10];
-                            document.getElementById("colN_Data").innerHTML = values[12];
-                            document.getElementById("colO_Data").innerHTML = values[13];
-                            document.getElementById("colP_Data").innerHTML = values[14];
-                            document.getElementById("colQ_Data").innerHTML = values[15];
-
                         } else {
                             console.error("B1:Q1 Submission Headers are null or undefined");
                         }
@@ -680,28 +652,30 @@
         }
 
         function SetOnMouseEnterBody() {
-            review.style.backgroundColor = buttonBackgroundColorReview;
-            review.style.color = "#000";
-            publish.style.backgroundColor = "#333";
-            publish.style.color = "#fff";
-            universe.style.backgroundColor = "#333";
-            universe.style.color = "#fff";
-            reject.style.backgroundColor = "#333";
-            reject.style.color = "#fff";
+            if (reviewBody.style.display == 'block') {
+                bodyElement.style.backgroundColor = bodyBackgroundColorReview;
+            }
+            else if (publishUniverseOrRejectBody.style.display == 'block' && sendButtonPublish.style.display == 'inline-block') {
+                bodyElement.style.backgroundColor = bodyBackgroundColorPublish;
+            }
+            else if (publishUniverseOrRejectBody.style.display == 'block' && sendButtonUniverse.style.display == 'inline-block') {
+                bodyElement.style.backgroundColor = bodyBackgroundColorUniverse;
+            }
+            else if (publishUniverseOrRejectBody.style.display == 'block' && sendButtonReject.style.display == 'inline-block') {
+                bodyElement.style.backgroundColor = bodyBackgroundColorReject;
+            }
+            else {
+                bodyElement.style.backgroundColor = "#fff";
+            }
         }
 
         function SendInfoToGsFile(sheetName) {
             const url = new URL(window.location.href);
             const googleScriptUrl = url.searchParams.get('googleScriptUrl');
-
             if (googleScriptUrl) {
                 fetch(googleScriptUrl + "?sheetName=" + encodeURIComponent(sheetName))
                     .then(() => {
-                        console.log("Data Sent", sheetName);
-                        closeWindow();
-                    })
-                    .catch(error => {
-                        console.error("Error sending input:", error);
+                        console.log("SheetName Sent", sheetName);
                     });
             }
         }
@@ -709,48 +683,93 @@
         function SendInfoForDelete() {
             const url = new URL(window.location.href);
             const googleScriptUrl = url.searchParams.get('googleScriptUrl');
-
             if (googleScriptUrl) {
                 fetch(googleScriptUrl + "?delete=true")
                     .then(() => {
                         console.log("Delete Sent");
-                        closeWindow();
-                    })
-                    .catch(error => {
-                        console.error("Error sending input:", error);
                     });
             }
         }
 
-        function SeeAlternativeEmail(reviewPublishUniverseReject) {
-            if (reviewPublishUniverseReject == "Publish") {
-                if (alternativeButtonPublish.innerText == "Alternative") {
-                    emailSubject.value = "<?= publishEmailSubjectAlternative ?>";
-                    emailBody.value = "<?= publishEmailBodyAlternative ?>";
-                    alternativeButtonPublish.innerText = "Original";
+        function sendDataToGsFile(sendOrCancel, publishUniverseOrReject) {
+            const emailSubject = document.getElementById('emailSubject').value;
+            const emailBody = document.getElementById('emailBody').value;
+            const responseSheetName = document.getElementById('responseSheetName').value;
+            const responseRow = document.getElementById('responseRow').value;
+            const webAppUrl = document.getElementById('webAppUrl').value;
+            const url = new URL(window.location.href);
+            const googleScriptUrl = url.searchParams.get('googleScriptUrl');
+
+            if (googleScriptUrl) {
+                fetch(googleScriptUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        sendOrCancel: sendOrCancel,
+                        publishUniverseOrReject: publishUniverseOrReject,
+                        emailSubject: emailSubject,
+                        emailBody: emailBody,
+                        responseSheetName: responseSheetName,
+                        responseRow: responseRow,
+                        webAppUrl: webAppUrl
+                    })
+                })
+                    .then(response => response.text())
+                    .then(data => {
+                        console.log("Data sent:", data);
+                        window.close();
+                    })
+                    .catch(error => {
+                        console.error("Error sending data:", error);
+                    });
+            }
+        }
+
+        function SeeAlternativeEmail(publishUniverseOrReject) {
+            const emailSubject = document.getElementById('emailSubject');
+            const emailBody = document.getElementById('emailBody');
+            const emailSubjectAlternative = document.getElementById('emailSubjectAltenative');
+            const emailBodyAlternative = document.getElementById('emailBodyAltenative');
+            const alternativeButtonPublish = document.getElementById('alternativeButtonPublish');
+            const alternativeButtonUniverse = document.getElementById('alternativeButtonUniverse');
+            const alternativeButtonReject = document.getElementById('alternativeButtonReject');
+            const emailTemplatePublishOriginalButton = document.getElementById('emailTemplatePublishOriginalButton');
+            const emailTemplatePublishAlternativeButton = document.getElementById('emailTemplatePublishAlternativeButton');
+            const emailTemplateUniverseOriginalButton = document.getElementById('emailTemplateUniverseOriginalButton');
+            const emailTemplateUniverseAlternativeButton = document.getElementById('emailTemplateUniverseAlternativeButton');
+            const emailTemplateRejectOriginalButton = document.getElementById('emailTemplateRejectOriginalButton');
+            const emailTemplateRejectAlternativeButton = document.getElementById('emailTemplateRejectAlternativeButton');
+
+            if (publishUniverseOrReject == 'Publish') {
+                if (alternativeButtonPublish.innerText == 'Alternative') {
+                    emailSubject.value = emailSubjectAlternative.value;
+                    emailBody.value = emailBodyAlternative.value;
+                    alternativeButtonPublish.innerText = 'Original';
                     emailTemplatePublishOriginalButton.style.display = 'none';
                     emailTemplatePublishAlternativeButton.style.display = 'inline-block';
                 }
                 else {
                     emailSubject.value = "<?= publishEmailSubject ?>";
                     emailBody.value = "<?= publishEmailBody ?>";
-                    alternativeButtonPublish.innerText = "Alternative";
+                    alternativeButtonPublish.innerText = 'Alternative';
                     emailTemplatePublishOriginalButton.style.display = 'inline-block';
                     emailTemplatePublishAlternativeButton.style.display = 'none';
                 }
             }
-            else if (reviewPublishUniverseReject == "Universe") {
-                if (alternativeButtonUniverse.innerText == "Alternative") {
-                    emailSubject.value = "<?= universeEmailSubjectAlternative ?>";
-                    emailBody.value = "<?= universeEmailBodyAlternative ?>";
-                    alternativeButtonUniverse.innerText = "Original";
+            else if (publishUniverseOrReject == 'Universe') {
+                if (alternativeButtonUniverse.innerText == 'Alternative') {
+                    emailSubject.value = emailSubjectAlternative.value;
+                    emailBody.value = emailBodyAlternative.value;
+                    alternativeButtonUniverse.innerText = 'Original';
                     emailTemplateUniverseOriginalButton.style.display = 'none';
                     emailTemplateUniverseAlternativeButton.style.display = 'inline-block';
                 }
                 else {
                     emailSubject.value = "<?= universeEmailSubject ?>";
                     emailBody.value = "<?= universeEmailBody ?>";
-                    alternativeButtonUniverse.innerText = "Alternative";
+                    alternativeButtonUniverse.innerText = 'Alternative';
                     emailTemplateUniverseOriginalButton.style.display = 'inline-block';
                     emailTemplateUniverseAlternativeButton.style.display = 'none';
                 }
