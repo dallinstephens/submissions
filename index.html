@@ -141,9 +141,44 @@
             // Fill the pre-defined divs with row data
             for (var i = 0; i < rowValues.length; i++) { // Index 0 is column B. Skip column A because that is the checkbox column.
                 div = document.getElementById(['colB_Data', 'colC_Data', 'colD_Data', 'colE_Data', 'colF_Data', 'colG_Data', 'colH_Data', 'colI_Data', 'colJ_Data', 'colK_Data', 'colL_Data', 'colM_Data', 'colN_Data', 'colO_Data', 'colP_Data', 'colQ_Data', 'colR_Data'][i]);
+
+                if (i == 0) {
+                    // Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getDay
+                    // Sunday - Saturday : 0 - 6
+                    let dateInCell = new Date(rowValues[0]);
+                    let dayNumber = dateInCell.getDay();
+                    let month = dateInCell.toLocaleString('default', { month: 'short' });
+                    let date = dateInCell.getDate();
+                    let year = dateInCell.getFullYear();
+
+                    if (dayNumber == 0) {
+                        day = 'Sun';
+                    }
+                    else if (dayNumber == 1) {
+                        day = 'Mon';
+                    }
+                    else if (dayNumber == 2) {
+                        day = 'Tue';
+                    }
+                    else if (dayNumber == 3) {
+                        day = 'Wed';
+                    }
+                    else if (dayNumber == 4) {
+                        day = 'Thu';
+                    }
+                    else if (dayNumber == 5) {
+                        day = 'Fri';
+                    }
+                    else if (dayNumber == 6) {
+                        day = 'Sat';
+                    }
+
+                    let submissionDate = day + ' ' + month + ' ' + date + ', ' + year;
+                    div.textContent = submissionDate;
+                }
                 // For data columns I, J, K, and M from spreadsheet, there will be an iframe.
                 // Hence 7, 8, 9, 11
-                if (i == 7 || i == 8 || i == 9 || i == 11) {
+                else if (i == 7 || i == 8 || i == 9 || i == 11) {
                     if (div) {
                         div.querySelector('iframe').src = rowValues[i];
                     }
