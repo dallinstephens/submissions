@@ -87,11 +87,11 @@
 
             <div id="publishUniverseOrRejectBody" class="publishUniverseReject">
                 <input type="text" id="emailSubject">
-                <input type="hidden" id="responseSheetName" value="<?= responseSheetName ?>">
-                <input type="hidden" id="responseRow" value="<?= responseRow ?>">
+                <input type="hidden" id="responseSheetName">
+                <input type="hidden" id="responseRow">
                 <input type="hidden" id="emailSubjectAltenative">
                 <input type="hidden" id="emailBodyAltenative">
-                <input type="hidden" id="webAppUrl" value="<?= webAppUrl ?>">
+                <input type="hidden" id="webAppUrl">
                 <br><br>
                 <textarea id="emailBody"></textarea>
                 <div class="containerForButtons">
@@ -190,6 +190,48 @@
                     div.textContent = rowValues[i];
                 }
             }
+            var responseSheetName = data.responseSheetName;
+            var responseRow = data.responseRow;
+            var publishEmailSubject = data.publishEmailSubject;
+            var publishEmailBody = data.publishEmailBody;
+            var publishEmailSubjectAlternative = data.publishEmailSubjectAlternative;
+            var publishEmailBodyAlternative = data.publishEmailBodyAlternative;
+            var universeEmailSubject = data.universeEmailSubject;
+            var universeEmailBody = data.universeEmailBody;
+            var universeEmailSubjectAlternative = data.universeEmailSubjectAlternative;
+            var universeEmailBodyAlternative = data.universeEmailBodyAlternative;
+            var rejectEmailSubject = data.rejectEmailSubject;
+            var rejectEmailBody = data.rejectEmailBody;
+            var rejectEmailSubjectAlternative = data.rejectEmailSubjectAlternative;
+            var rejectEmailBodyAlternative = data.rejectEmailBodyAlternative;
+            console.log("responseSheetName: " + data.responseSheetName);
+            console.log("responseRow: " + data.responseRow);
+            console.log("publishEmailSubject: " + data.publishEmailSubject);
+            console.log("publishEmailBody: " + data.publishEmailBody);
+            console.log("publishEmailSubjectAlternative: " + data.publishEmailSubjectAlternative);
+            console.log("publishEmailBodyAlternative: " + data.publishEmailBodyAlternative);
+            console.log("universeEmailSubject: " + data.universeEmailSubject);
+            console.log("universeEmailBody: " + data.universeEmailBody);
+            console.log("universeEmailSubjectAlternative: " + data.universeEmailSubjectAlternative);
+            console.log("universeEmailBodyAlternative: " + data.universeEmailBodyAlternative);
+            console.log("rejectEmailSubject: " + data.rejectEmailSubject);
+            console.log("rejectEmailBody: " + data.rejectEmailBody);
+            console.log("rejectEmailSubjectAlternative: " + data.rejectEmailSubjectAlternative);
+            console.log("rejectEmailBodyAlternative: " + data.rejectEmailBodyAlternative);
+            document.getElementById('responseSheetName').value = responseSheetName;
+            document.getElementById('responseRow').value = responseRow;
+            document.getElementById('publishEmailSubject').value = publishEmailSubject;
+            document.getElementById('publishEmailBody').value = publishEmailBody;
+            document.getElementById('publishEmailSubjectAlternative').value = publishEmailSubjectAlternative;
+            document.getElementById('publishEmailBodyAlternative').value = publishEmailBodyAlternative;
+            document.getElementById('universeEmailSubject').value = universeEmailSubject;
+            document.getElementById('universeEmailBody').value = universeEmailBody;
+            document.getElementById('universeEmailSubjectAlternative').value = universeEmailSubjectAlternative;
+            document.getElementById('universeEmailBodyAlternative').value = universeEmailBodyAlternative;
+            document.getElementById('rejectEmailSubject').value = rejectEmailSubject;
+            document.getElementById('rejectEmailBody').value = rejectEmailBody;
+            document.getElementById('rejectEmailSubjectAlternative').value = rejectEmailSubjectAlternative;
+            document.getElementById('rejectEmailBodyAlternative').value = rejectEmailBodyAlternative;
         }
 
         function fetchData() {
@@ -333,8 +375,8 @@
                     buttonElement[i].style.color = "#fff";
                 }
 
-                emailSubject.value = "<?= publishEmailSubject ?>";
-                emailBody.value = "<?= publishEmailBody ?>";
+                emailSubject.value = document.getElementById('publishEmailSubject').value;;
+                emailBody.value = document.getElementById('publishEmailBody').value;;
                 alternativeButtonPublish.innerText = "Alternative";
 
                 sendButtonPublish.style.display = 'inline-block';
@@ -372,8 +414,8 @@
                     buttonElement[i].style.color = "#000";
                 }
 
-                emailSubject.value = "<?= universeEmailSubject ?>";
-                emailBody.value = "<?= universeEmailBody ?>";
+                emailSubject.value = document.getElementById('universeEmailSubject').value;;
+                emailBody.value = document.getElementById('universeEmailBody').value;;
 
                 sendButtonPublish.style.display = 'none';
                 alternativeButtonPublish.style.display = 'none';
@@ -410,8 +452,8 @@
                     buttonElement[i].style.color = "#fff";
                 }
 
-                emailSubject.value = "<?= rejectEmailSubject ?>";
-                emailBody.value = "<?= rejectEmailBody ?>";
+                emailSubject.value = document.getElementById('rejectEmailSubject').value;;
+                emailBody.value = document.getElementById('rejectEmailBody').value;;
 
                 sendButtonPublish.style.display = 'none';
                 alternativeButtonPublish.style.display = 'none';
@@ -550,8 +592,8 @@
                     emailTemplatePublishAlternativeButton.style.display = 'inline-block';
                 }
                 else {
-                    emailSubject.value = "<?= publishEmailSubject ?>";
-                    emailBody.value = "<?= publishEmailBody ?>";
+                    emailSubject.value = document.getElementById('publishEmailSubject').value;;
+                    emailBody.value = document.getElementById('publishEmailBody').value;;
                     alternativeButtonPublish.innerText = 'Alternative';
                     emailTemplatePublishOriginalButton.style.display = 'inline-block';
                     emailTemplatePublishAlternativeButton.style.display = 'none';
@@ -566,8 +608,8 @@
                     emailTemplateUniverseAlternativeButton.style.display = 'inline-block';
                 }
                 else {
-                    emailSubject.value = "<?= universeEmailSubject ?>";
-                    emailBody.value = "<?= universeEmailBody ?>";
+                    emailSubject.value = document.getElementById('universeEmailSubject').value;;
+                    emailBody.value = document.getElementById('universeEmailBody').value;;
                     alternativeButtonUniverse.innerText = 'Alternative';
                     emailTemplateUniverseOriginalButton.style.display = 'inline-block';
                     emailTemplateUniverseAlternativeButton.style.display = 'none';
@@ -582,8 +624,8 @@
                     emailTemplateRejectAlternativeButton.style.display = 'inline-block';
                 }
                 else {
-                    emailSubject.value = "<?= rejectEmailSubject ?>";
-                    emailBody.value = "<?= rejectEmailBody ?>";
+                    emailSubject.value = document.getElementById('rejectEmailSubject').value;;
+                    emailBody.value = document.getElementById('rejectEmailBody').value;;
                     alternativeButtonReject.innerText = 'Alternative';
                     emailTemplateRejectOriginalButton.style.display = 'inline-block';
                     emailTemplateRejectAlternativeButton.style.display = 'none';
