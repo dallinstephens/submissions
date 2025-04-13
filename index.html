@@ -483,8 +483,8 @@
         function SeeAlternativeEmail(publishUniverseOrReject) {
             if (publishUniverseOrReject == 'Publish') {
                 if (alternativeButtonPublish.innerText == 'Alternative') {
-                    emailSubject.value = emailSubjectAlternative.value;
-                    emailBody.value = emailBodyAlternative.value;
+                    emailSubject.value = publishEmailSubjectAlternative.value;
+                    emailBody.value = publishEmailBodyAlternative.value;
                     alternativeButtonPublish.innerText = 'Original';
                     emailTemplatePublishOriginalButton.style.display = 'none';
                     emailTemplatePublishAlternativeButton.style.display = 'inline-block';
@@ -499,8 +499,8 @@
             }
             else if (publishUniverseOrReject == 'Universe') {
                 if (alternativeButtonUniverse.innerText == 'Alternative') {
-                    emailSubject.value = emailSubjectAlternative.value;
-                    emailBody.value = emailBodyAlternative.value;
+                    emailSubject.value = universeEmailSubjectAlternative.value;
+                    emailBody.value = universeEmailBodyAlternative.value;
                     alternativeButtonUniverse.innerText = 'Original';
                     emailTemplateUniverseOriginalButton.style.display = 'none';
                     emailTemplateUniverseAlternativeButton.style.display = 'inline-block';
@@ -515,8 +515,8 @@
             }
             else if (publishUniverseOrReject == 'Reject') {
                 if (alternativeButtonReject.innerText == 'Alternative') {
-                    emailSubject.value = emailSubjectAlternative.value;
-                    emailBody.value = emailBodyAlternative.value;
+                    emailSubject.value = rejectEmailSubjectAlternative.value;
+                    emailBody.value = rejectEmailBodyAlternative.value;
                     alternativeButtonReject.innerText = 'Original';
                     emailTemplateRejectOriginalButton.style.display = 'none';
                     emailTemplateRejectAlternativeButton.style.display = 'inline-block';
