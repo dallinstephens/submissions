@@ -266,88 +266,42 @@
         <div id="mainContainer" onmouseenter="SetOnMouseEnterBody()">
             <div id="reviewBody">
                 <h3>Submission Date</h3>
-                <div>
-                    <?= contentB ?>
+                <div id="colB_Data"></div>
+                <h3 id="e1SubmissionHeader"></h3>
+                <div id="colE_Data"></div>
+                <h3 id="f1SubmissionHeader"></h3>
+                <div id="colF_Data"></div>
+                <h3 id="j1SubmissionHeader"></h3>
+                <!-- The src is not included here in the iframes because they are inserted with JavaScript. -->
+                <div id="colJ_Data">
+                    <iframe frameborder='0' height='55' width='100%'></iframe>
                 </div>
-                <h3>
-                    <?= headerE ?>
-                </h3>
-                <div>
-                    <?= contentE ?>
+                <h3 id="k1SubmissionHeader"></h3>
+                <div id="colK_Data">
+                    <iframe frameborder='0' height='1000' width='100%'></iframe>
                 </div>
-                <h3>
-                    <?= headerF ?>
-                </h3>
-                <div>
-                    <?= contentF ?>
+                <h3 id="i1SubmissionHeader"></h3>
+                <div id="colI_Data">
+                    <iframe frameborder='0' height='300' width='100%'></iframe>
                 </div>
-                <h3>
-                    <?= headerJ ?>
-                </h3>
-                <div>
-                    <iframe frameborder='0' height='55' width='100%' src=<?=contentJ ?>></iframe>
+                <h3 id="m1SubmissionHeader"></h3>
+                <div id="colM_Data">
+                    <iframe frameborder="0" allowfullscreen="" style="width:100%; height:400px;"></iframe>
                 </div>
-                <h3>
-                    <?= headerK ?>
-                </h3>
-                <div>
-                    <iframe frameborder='0' height='1000' width='100%' src=<?=contentK ?>></iframe>
-                </div>
-                <h3>
-                    <?= headerI ?>
-                </h3>
-                <div>
-                    <iframe frameborder='0' height='300' width='100%' src=<?=contentI ?>></iframe>
-                </div>
-                <h3>
-                    <?= headerM ?>
-                </h3>
-                <div>
-                    <iframe src=<?=contentM ?> frameborder="0" allowfullscreen="" style="width:100%;
-                        height:400px;"></iframe>
-                </div>
-                <h3>
-                    <?= headerG ?>
-                </h3>
-                <div>
-                    <?= contentG ?>
-                </div>
-                <h3>
-                    <?= headerH ?>
-                </h3>
-                <div>
-                    <?= contentH ?>
-                </div>
-                <h3>
-                    <?= headerL ?>
-                </h3>
-                <div>
-                    <?= contentL ?>
-                </div>
-                <h3>
-                    <?= headerN ?>
-                </h3>
-                <div>
-                    <?= contentN ?>
-                </div>
-                <h3>
-                    <?= headerO ?>
-                </h3>
-                <div>
-                    <?= contentO ?>
-                </div>
-                <h3>
-                    <?= headerP ?>
-                </h3>
-                <div>
-                    <?= contentP ?>
-                </div>
-                <h3>
-                    <?= headerQ ?>
-                </h3>
-                <div>
-                    <?= contentQ ?>
-                </div>
+                <h3 id="g1SubmissionHeader"></h3>
+                <div id="colG_Data"></div>
+                <h3 id="h1SubmissionHeader"></h3>
+                <div id="colH_Data"></div>
+                <h3 id="l1SubmissionHeader"></h3>
+                <div id="colL_Data"></div>
+                <h3 id="n1SubmissionHeader"></h3>
+                <div id="colN_Data"></div>
+                <h3 id="o1SubmissionHeader"></h3>
+                <div id="colO_Data"></div>
+                <h3 id="p1SubmissionHeader"></h3>
+                <div id="colP_Data"></div>
+                <h3 id="q1SubmissionHeader"></h3>
+                <div id="colQ_Data"></div>
             </div>
 
             <div id="publishUniverseOrRejectBody" class="publishUniverseReject">
@@ -404,24 +358,93 @@
 
             // Fill the pre-defined divs with row data
             for (var i = 0; i < rowValues.length; i++) { // Index 0 is column B. Skip column A because that is the checkbox column.
-                var div = document.getElementById(['colB_Data', 'colC_Data', 'colD_Data', 'colE_Data', 'colF_Data'][i]);
+                div = document.getElementById(['colB_Data', 'colC_Data', 'colD_Data', 'colE_Data', 'colF_Data', 'colG_Data', 'colH_Data', 'colI_Data', 'colJ_Data', 'colK_Data', 'colL_Data', 'colM_Data', 'colN_Data', 'colO_Data', 'colP_Data', 'colQ_Data', 'colR_Data'][i]);
                 if (div) {
                     div.textContent = rowValues[i];
                 }
             }
         }
-        //Your existing Javascript code
+
         function fetchData() {
-            const url = new URL(window.location.href);
-            const googleScriptUrl = url.searchParams.get('googleScriptUrl');
+            const googleScriptUrl = getUrlParameter('googleScriptUrl');
+
             if (googleScriptUrl) {
                 fetch(googleScriptUrl)
                     .then(response => response.json())
                     .then(data => {
+                        if (data && data.b1ToQ1SubmissionHeaders) {
+                            const values = data.b1ToQ1SubmissionHeaders;
+                            document.getElementById("b1SubmissionHeader").innerHTML = values[0];
+                            document.getElementById("c1SubmissionHeader").innerHTML = values[1];
+                            document.getElementById("d1SubmissionHeader").innerHTML = values[2];
+                            document.getElementById("e1SubmissionHeader").innerHTML = values[3];
+                            document.getElementById("f1SubmissionHeader").innerHTML = values[4];
+                            document.getElementById("g1SubmissionHeader").innerHTML = values[5];
+                            document.getElementById("h1SubmissionHeader").innerHTML = values[6];
+                            document.getElementById("i1SubmissionHeader").innerHTML = values[7];
+                            document.getElementById("j1SubmissionHeader").innerHTML = values[8];
+                            document.getElementById("k1SubmissionHeader").innerHTML = values[9];
+                            document.getElementById("l1SubmissionHeader").innerHTML = values[10];
+                            document.getElementById("m1SubmissionHeader").innerHTML = values[11];
+                            document.getElementById("n1SubmissionHeader").innerHTML = values[12];
+                            document.getElementById("o1SubmissionHeader").innerHTML = values[13];
+                            document.getElementById("p1SubmissionHeader").innerHTML = values[14];
+                            document.getElementById("q1SubmissionHeader").innerHTML = values[15];
+
+                            // Populate iframe src attributes
+                            if (document.getElementById('colJ_Data')) {
+                                const srcJ = values[9];
+                                if (srcJ) {
+                                    document.getElementById('colJ_Data').querySelector('iframe').src = srcJ;
+                                } else {
+                                    document.getElementById('colJ_Data').querySelector('iframe').src = 'about:blank';
+                                }
+                            }
+                            if (document.getElementById('colK_Data')) {
+                                const srcK = values[10];
+                                if (srcK) {
+                                    document.getElementById('colK_Data').querySelector('iframe').src = srcK;
+                                } else {
+                                    document.getElementById('colK_Data').querySelector('iframe').src = 'about:blank';
+                                }
+                            }
+                            if (document.getElementById('colI_Data')) {
+                                const srcI = values[8];
+                                if (srcI) {
+                                    document.getElementById('colI_Data').querySelector('iframe').src = srcI;
+                                } else {
+                                    document.getElementById('colI_Data').querySelector('iframe').src = 'about:blank';
+                                }
+                            }
+                            if (document.getElementById('colM_Data')) {
+                                const srcM = values[12];
+                                if (srcM) {
+                                    document.getElementById('colM_Data').querySelector('iframe').src = srcM;
+                                } else {
+                                    document.getElementById('colM_Data').querySelector('iframe').src = 'about:blank';
+                                }
+                            }
+
+                            //populate div tags
+                            document.getElementById("colB_Data").innerHTML = values[0];
+                            document.getElementById("colE_Data").innerHTML = values[3];
+                            document.getElementById("colF_Data").innerHTML = values[4];
+                            document.getElementById("colG_Data").innerHTML = values[5];
+                            document.getElementById("colH_Data").innerHTML = values[6];
+                            document.getElementById("colL_Data").innerHTML = values[10];
+                            document.getElementById("colN_Data").innerHTML = values[12];
+                            document.getElementById("colO_Data").innerHTML = values[13];
+                            document.getElementById("colP_Data").innerHTML = values[14];
+                            document.getElementById("colQ_Data").innerHTML = values[15];
+
+                        } else {
+                            console.error("B1:Q1 Submission Headers are null or undefined");
+                        }
+
                         if (data && data.b1Value) {
                             document.getElementById("b1Display").innerHTML = data.b1Value;
                         } else {
-                            console.error("B1 value is null or undefined");
+                            console.error("Test!B1 value is null or undefined");
                         }
                     })
                     .catch(error => {
