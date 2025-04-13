@@ -343,26 +343,36 @@
         }
 
         var dataParam = getUrlParameter('data');
-        if (dataParam) {
-            var data = JSON.parse(dataParam);
-            var rowValues = data.rowValues;
+        console.log("dataParam:", dataParam); // Added console log
 
-            // Fill the pre-defined divs with row data
-            for (var i = 0; i < rowValues.length; i++) { // Index 0 is column B. Skip column A because that is the checkbox column.
-                div = document.getElementById(['colB_Data', 'colC_Data', 'colD_Data', 'colE_Data', 'colF_Data', 'colG_Data', 'colH_Data', 'colI_Data', 'colJ_Data', 'colK_Data', 'colL_Data', 'colM_Data', 'colN_Data', 'colO_Data', 'colP_Data', 'colQ_Data', 'colR_Data'][i]);
-                if (div) {
-                    div.textContent = rowValues[i];
+        if (dataParam) {
+            try {
+                var data = JSON.parse(dataParam);
+                console.log("Parsed data:", data); // Added console log
+                var rowValues = data.rowValues;
+
+                // Fill the pre-defined divs with row data
+                for (var i = 0; i < rowValues.length; i++) {
+                    div = document.getElementById(['colB_Data', 'colC_Data', 'colD_Data', 'colE_Data', 'colF_Data', 'colG_Data', 'colH_Data', 'colI_Data', 'colJ_Data', 'colK_Data', 'colL_Data', 'colM_Data', 'colN_Data', 'colO_Data', 'colP_Data', 'colQ_Data', 'colR_Data'][i]);
+                    if (div) {
+                        div.textContent = rowValues[i];
+                        console.log("Setting div:", div.id, "to:", rowValues[i]); // Added console log
+                    }
                 }
+            } catch (error) {
+                console.error("Error parsing or setting data:", error); // Added console log
             }
         }
 
         function fetchData() {
             const googleScriptUrl = getUrlParameter('googleScriptUrl');
+            console.log("googleScriptUrl:", googleScriptUrl); // Added console log
 
             if (googleScriptUrl) {
                 fetch(googleScriptUrl)
                     .then(response => response.json())
                     .then(data => {
+                        console.log("Fetched data:", data); // Added console log
                         if (data && data.b1ToQ1SubmissionHeaders) {
                             const values = data.b1ToQ1SubmissionHeaders;
                             document.getElementById("b1SubmissionHeader").innerHTML = values[0];
