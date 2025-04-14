@@ -32,14 +32,14 @@
                 <li class="dropdown">
                     <a id="move" href="javascript:void(0)" class="dropbtn" onmouseover="SetOnMouseOver('Move')">Move</a>
                     <div class="dropdown-content">
-                        <a href="#" onclick="sendData('Move','Form Reponses 1'); return false">Form Responses</a>
-                        <a href="#" onclick="sendData('Move','Master Submissions'); return false">Master
+                        <a href="#" onclick="sendData('Move','MOVE','Form Reponses 1'); return false">Form Responses</a>
+                        <a href="#" onclick="sendData('Move','MOVE','Master Submissions'); return false">Master
                             Submissions</a>
-                        <a href="#" onclick="sendData('Move','Publish'); return false">Publish</a>
-                        <a href="#" onclick="sendData('Move','Universe'); return false">Universe</a>
-                        <a href="#" onclick="sendData('Move','Reject'); return false">Reject</a>
-                        <a href="#" onclick="sendData('Move','Finished'); return false">Finished</a>
-                        <a href="#" onclick="sendData('Move','Archive'); return false">Archive</a>
+                        <a href="#" onclick="sendData('Move','MOVE','Publish'); return false">Publish</a>
+                        <a href="#" onclick="sendData('Move','MOVE','Universe'); return false">Universe</a>
+                        <a href="#" onclick="sendData('Move','MOVE','Reject'); return false">Reject</a>
+                        <a href="#" onclick="sendData('Move','MOVE','Finished'); return false">Finished</a>
+                        <a href="#" onclick="sendData('Move','MOVE','Archive'); return false">Archive</a>
                     </div>
                 </li>
                 <li class="delete"><a id="delete" href="#" onclick="SendInfoForDelete(); return false"
@@ -115,9 +115,12 @@
                 <textarea id="emailBody"></textarea>
                 <div class="containerForButtons">
                     <!-- SEND EMAIL -->
-                    <button id="sendButtonPublish" onclick="sendData('Send Email','SEND','Publish')">Send</button>
-                    <button id="sendButtonUniverse" onclick="sendData('Send Email','SEND','Universe')">Send</button>
-                    <button id="sendButtonReject" onclick="sendData('Send Email','SEND','Reject')">Send</button>
+                    <button id="sendButtonPublish"
+                        onclick="sendData('Send Email','SEND','Publish',emailSubject.value, emailBody.value)">Send</button>
+                    <button id="sendButtonUniverse"
+                        onclick="sendData('Send Email','SEND','Universe',emailSubject.value, emailBody.value)">Send</button>
+                    <button id="sendButtonReject"
+                        onclick="sendData('Send Email','SEND','Reject',emailSubject.value, emailBody.value)">Send</button>
                     <!-- CHOOSE ORIGINAL OR ALTERNATIVE EMAIL TEMPLATE -->
                     <button id="alternativeButtonPublish" onclick="SeeAlternativeEmail('Publish')">Alternative</button>
                     <button id="alternativeButtonUniverse"
