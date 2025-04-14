@@ -21,7 +21,7 @@
 
     <input type="text" id="userInput" placeholder="Enter text">
     <button onclick="sendData()">Submit</button>
-    <button id="close-button" onclick="showCustomModal()">X</button>
+    <button id="close-button" onclick="closeWindow()">X</button>
     <div id="app-container">
         <nav class="navbar">
             <ul>
@@ -271,6 +271,10 @@
             }
         }
 
+        function closeWindow() {
+            window.close();
+        }
+
         function sendData(action = undefined, dataToBeSent1 = undefined, dataToBeSent2 = undefined, dataToBeSent3 = undefined, dataToBeSent4 = undefined) {
             const userInput = document.getElementById('userInput').value;
             const url = new URL(window.location.href);
@@ -301,7 +305,7 @@
                     .then(() => {
                         console.log("Data Sent:", urlParams);
                         fetchData();
-                        showCustomModal(); // show modal. // close window with confirmation.
+                        closeWindow(); // close window
                     })
                     .catch(error => {
                         console.error("Error sending data:", error);
