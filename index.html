@@ -205,7 +205,11 @@
             const googleScriptUrl = url.searchParams.get('googleScriptUrl');
             console.log(googleScriptUrl);
             if (googleScriptUrl) {
-                fetch(googleScriptUrl)
+                fetch(googleScriptUrl, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
                     .then(response => response.json())
                     .then(data => {
                         if (data && data.b1ToQ1SubmissionHeaders) {
