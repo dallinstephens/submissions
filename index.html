@@ -201,25 +201,6 @@
             return returnValue;
         }
 
-        document.querySelectorAll('#emailTemplatePublishOriginalButton, #emailTemplatePublishAlternativeButton, #emailTemplateUniverseOriginalButton, #emailTemplateUniverseAlternativeButton, #emailTemplateRejectOriginalButton, #emailTemplateRejectAlternativeButton').forEach(button => {
-            button.addEventListener('click', function () {
-                var sheetName = this.dataset.sheetName; // Use 'this' to refer to the clicked button
-                var googleScriptUrl = getUrlParameter("googleScriptUrl");
-
-                if (sheetName === "Email Templates") {
-                    if (googleScriptUrl) {
-                        fetch(googleScriptUrl + "?sheetName=" + encodeURIComponent(sheetName))
-                            .then(response => response.text())
-                            .then(url => {
-                                window.open(url, "_blank");
-                            });
-                    } else {
-                        alert("Google Script URL not found.");
-                    }
-                }
-            });
-        });
-
         document.getElementById("openSheetButton").addEventListener("click", function () {
             var googleScriptUrl = getUrlParameter("googleScriptUrl");
             if (googleScriptUrl) {
@@ -313,6 +294,20 @@
             const userInput = document.getElementById('userInput').value;
             const url = new URL(window.location.href);
             const googleScriptUrl = url.searchParams.get('googleScriptUrl');
+
+            var sheetName = this.dataset.sheetName; // Use 'this' to refer to the clicked button
+
+            if (sheetName === "Email Templates") {
+                if (googleScriptUrl) {
+                    fetch(googleScriptUrl + "?sheetName=" + encodeURIComponent(sheetName))
+                        .then(response => response.text())
+                        .then(url => {
+                            window.open(url, "_blank");
+                        });
+                } else {
+                    alert("Google Script URL not found.");
+                }
+            }
 
             if (googleScriptUrl) {
                 let urlParams = `userInput=${encodeURIComponent(userInput)}`; // userInput will always be sent, even if empty
