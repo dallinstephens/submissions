@@ -252,10 +252,6 @@
 
         getGoogleData(); // Call getGoogleData immediately
 
-        // function closeWindow() {
-        //     window.close();
-        // }
-
         function showCustomModal() {
             console.log("showCustomModal() called"); // Add this line
             document.getElementById('customModal').style.display = 'block';
@@ -285,7 +281,6 @@
                         .then(response => response.text())
                         .then(url => {
                             window.open(url, "_self");
-                            closeWindow(); // close window
                         });
                 } else {
                     alert("Google Script URL not found.");
