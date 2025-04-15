@@ -298,7 +298,8 @@
                             // Add the range parameter to the url.
                             const range = dataToBeSent5; // 'A1:C10'; // Specify the desired range (e.g., A1:C10)
                             url += '&range=' + encodeURIComponent(range);
-                            url += '&embedded=true'; // Hide the toolbars                            
+                            url += '&embedded=true'; // Hide the toolbars
+                            url += '&output=html'; // Get the HTML output                         
 
                             const iframe = document.getElementById('emailTemplatesIframe');
                             iframe.src = url;
