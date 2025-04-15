@@ -282,7 +282,7 @@
                     fetch(googleScriptUrl + "?sheetName=" + encodeURIComponent(sheetName))
                         .then(response => response.text())
                         .then(url => {
-                            window.open(url, "_blank");
+                            window.open(url, "_self");
                         });
                 } else {
                     alert("Google Script URL not found.");
