@@ -282,11 +282,14 @@
                     fetch(googleScriptUrl + "?sheetName=" + encodeURIComponent(sheetName))
                         .then(response => response.text())
                         .then(url => {
+                            console.log("Template URL: " + url); // Add this line
+                            console.log("window.opener: " + window.opener); // Add this line
+
                             if (window.opener) {
-                                window.opener.location.href = url; // Open in the opener window
-                                window.close(); // Close the current window (index.html)
+                                window.opener.location.href = url;
+                                window.close();
                             } else {
-                                window.open(url, "_self"); // Fallback if no opener (e.g., direct access)
+                                window.open(url, "_self");
                             }
                         });
                 } else {
