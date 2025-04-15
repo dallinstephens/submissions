@@ -203,7 +203,8 @@
                 fetch(googleScriptUrl)
                     .then(response => response.json())
                     .then(data => {
-                        console.log("Data from Apps Script:", data);
+                        console.log("publishEmailSubjectAlternative:", data.publishEmailSubjectAlternative);
+                        console.log("universeEmailSubjectAlternative:", data.universeEmailSubjectAlternative);
 
                         if (data && data.b1ToQ1SubmissionHeaders) {
                             const values = data.b1ToQ1SubmissionHeaders;
