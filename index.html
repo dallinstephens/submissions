@@ -48,11 +48,6 @@
         </nav>
 
         <div id="mainContainer" onmouseenter="SetOnMouseEnterBody()">
-            <button id="closeTemplateButton">Close Template</button>
-            <div id="iframeContainer">
-                <iframe id="emailTemplatesIframe" style="width: 100%; height: 600px;"></iframe>
-            </div>
-
             <div id="reviewBody">
                 <h3 id="b1SubmissionHeader"></h3>
                 <h3 id="c1SubmissionHeader"></h3>
@@ -133,17 +128,17 @@
                     <button id="alternativeButtonReject" onclick="SeeAlternativeEmail('Reject')">Alternative</button>
                     <!-- OPEN EMAIL TEMPLATE -->
                     <button id="emailTemplatePublishOriginalButton"
-                        onclick="sendData('TEMPLATE','B1:C1','E:J','N/A','A18:J33','A1:D17')">Email Template</button>
+                        onclick="sendData('TEMPLATE','B1:C1','E:J','N/A','A18:J33')">Email Template</button>
                     <button id="emailTemplatePublishAlternativeButton"
-                        onclick="sendData('TEMPLATE','B17:C17','E:J','N/A','A1:J16','A17:D33')">Email Template</button>
+                        onclick="sendData('TEMPLATE','B17:C17','E:J','N/A','A1:J16')">Email Template</button>
                     <button id="emailTemplateUniverseOriginalButton"
-                        onclick="sendData('TEMPLATE','E1:F1','A:C','H:J','A18:J33','D1:G17')">Email Template</button>
+                        onclick="sendData('TEMPLATE','E1:F1','A:C','H:J','A18:J33')">Email Template</button>
                     <button id="emailTemplateUniverseAlternativeButton"
-                        onclick="sendData('TEMPLATE','E17:F17','A:C','H:J','A1:J16','D17:G33')">Email Template</button>
+                        onclick="sendData('TEMPLATE','E17:F17','A:C','H:J','A1:J16')">Email Template</button>
                     <button id="emailTemplateRejectOriginalButton"
-                        onclick="sendData('TEMPLATE','H1:I1','A:F','N/A','A18:J33','G1:J17')">Email Template</button>
+                        onclick="sendData('TEMPLATE','H1:I1','A:F','N/A','A18:J33')">Email Template</button>
                     <button id="emailTemplateRejectAlternativeButton"
-                        onclick="sendData('TEMPLATE','H17:I17','A:F','N/A','A1:J16','G17:J33')">Email Template</button>
+                        onclick="sendData('TEMPLATE','H17:I17','A:F','N/A','A1:J16')">Email Template</button>
                     <!-- CANCEL, CLOSE WINDOW, AND OPEN CONFIRMATION MODAL DIALOG BOX -->
                     <button id="cancelButton" onclick="closeWindow()">Cancel</button>
                 </div>
@@ -276,15 +271,7 @@
             window.close();
         }
 
-        function closeTemplate() {
-            document.getElementById('iframeContainer').style.display = 'none'; // Hide the container
-            document.getElementById('closeTemplateButton').style.display = 'none'; // Hide the button
-            SetOnMouseEnterBody();
-        }
-
-        document.getElementById('closeTemplateButton').onclick = closeTemplate;
-
-        function sendData(action = undefined, dataToBeSent1 = undefined, dataToBeSent2 = undefined, dataToBeSent3 = undefined, dataToBeSent4 = undefined, dataToBeSent5 = undefined) {
+        function sendData(action = undefined, dataToBeSent1 = undefined, dataToBeSent2 = undefined, dataToBeSent3 = undefined, dataToBeSent4 = undefined) {
             const userInput = document.getElementById('userInput').value;
             const url = new URL(window.location.href);
             const googleScriptUrl = url.searchParams.get('googleScriptUrl');
@@ -295,17 +282,12 @@
                     fetch(googleScriptUrl + "?sheetName=" + encodeURIComponent(sheetName))
                         .then(response => response.text())
                         .then(url => {
-                            // Add the range parameter to the url.
-                            const range = dataToBeSent5; // 'A1:C10'; // Specify the desired range (e.g., A1:C10)
-                            url += '&range=' + encodeURIComponent(range);
-                            url += '&embedded=true'; // Hide the toolbars
-                            url += '&output=html'; // Get the HTML output                         
-
-                            const iframe = document.getElementById('emailTemplatesIframe');
-                            iframe.src = url;
-
-                            document.getElementById('iframeContainer').style.display = 'block';
-                            document.getElementById('closeTemplateButton').style.display = 'block';
+                            if (window.opener) {
+                                window.opener.location.href = url; // Open in the opener window
+                                window.close(); // Close the current window (index.html)
+                            } else {
+                                window.open(url, "_self"); // Fallback if no opener (e.g., direct access)
+                            }
                         });
                 } else {
                     alert("Google Script URL not found.");
