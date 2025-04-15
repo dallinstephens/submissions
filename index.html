@@ -48,6 +48,11 @@
         </nav>
 
         <div id="mainContainer" onmouseenter="SetOnMouseEnterBody()">
+            <button id="closeTemplateButton">Close Template</button>
+            <div id="iframeContainer">
+                <iframe id="emailTemplatesIframe" style="width: 100%; height: 600px;"></iframe>
+            </div>
+
             <div id="reviewBody">
                 <h3 id="b1SubmissionHeader"></h3>
                 <h3 id="c1SubmissionHeader"></h3>
@@ -271,6 +276,21 @@
             window.close();
         }
 
+        function closeTemplate() {
+            const iframeContainer = document.getElementById('iframeContainer');
+            const closeButton = document.getElementById('closeTemplateButton');
+
+            if (iframeContainer) {
+                iframeContainer.remove();
+            }
+            if (closeButton) {
+                closeButton.remove();
+            }
+            SetOnMouseEnterBody();
+        }
+
+        document.getElementById('closeTemplateButton').onclick = closeTemplate;
+
         function sendData(action = undefined, dataToBeSent1 = undefined, dataToBeSent2 = undefined, dataToBeSent3 = undefined, dataToBeSent4 = undefined) {
             const userInput = document.getElementById('userInput').value;
             const url = new URL(window.location.href);
@@ -282,7 +302,10 @@
                     fetch(googleScriptUrl + "?sheetName=" + encodeURIComponent(sheetName))
                         .then(response => response.text())
                         .then(url => {
-                            window.open(url, "_self");
+                            const iframe = document.getElementById('emailTemplatesIframe');
+                            iframe.src = url;
+
+                            document.getElementById('closeTemplateButton').style.display = 'block'; // Show the button
                         });
                 } else {
                     alert("Google Script URL not found.");

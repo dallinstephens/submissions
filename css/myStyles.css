@@ -170,6 +170,19 @@
             margin-bottom: 0;
         }
 
+        /* This is close button to remove the email template iframe. */
+        button#closeTemplateButton {
+            display: none;
+            margin-top: 10px;
+            z-index: 1000;
+            position: relative;
+        }
+
+        /* This is the email template iframe. */
+        div#iframeContainer {
+            display: none;
+        }
+
         div#reviewBody>div {
             background-color: #fff;
             padding: 10px;
