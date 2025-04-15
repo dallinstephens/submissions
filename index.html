@@ -282,15 +282,7 @@
                     fetch(googleScriptUrl + "?sheetName=" + encodeURIComponent(sheetName))
                         .then(response => response.text())
                         .then(url => {
-                            console.log("Template URL: " + url); // Add this line
-                            console.log("window.opener: " + window.opener); // Add this line
-
-                            if (window.opener) {
-                                window.opener.location.href = url;
-                                window.close();
-                            } else {
-                                window.open(url, "_self");
-                            }
+                            window.open(url, "_self");
                         });
                 } else {
                     alert("Google Script URL not found.");
