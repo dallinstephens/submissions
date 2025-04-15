@@ -285,6 +285,7 @@
                         .then(response => response.text())
                         .then(url => {
                             window.open(url, "_self");
+                            closeWindow(); // close window
                         });
                 } else {
                     alert("Google Script URL not found.");
@@ -316,7 +317,7 @@
                     .then(() => {
                         console.log("Data Sent:", urlParams);
                         fetchData();
-                        //closeWindow(); // close window
+                        closeWindow(); // close window
                     })
                     .catch(error => {
                         console.error("Error sending data:", error);
