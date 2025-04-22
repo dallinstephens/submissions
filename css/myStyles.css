@@ -55,6 +55,7 @@
         div#app-container {
             margin: 0 20%;
             width: 60%;
+            background: yellow;
         }
 
         .navbar {
