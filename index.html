@@ -18,6 +18,7 @@
     </div>
 
     <!-- <h2 id="b1Display"></h2> -->
+    <div id="closingPopup">Closing Window...</div> 
 
     <input type="hidden" id="userInput" placeholder="Enter text">
     <!-- <button onclick="sendData()">Submit</button> -->
@@ -266,6 +267,8 @@
         }
 
         function closeWindow() {
+            var popup = document.getElementById("closingPopup");
+            popup.style.display = 'block'; // Make the popup visible
             window.close();
         }
 

@@ -256,3 +256,16 @@
         h3#d1SubmissionHeader {
             display: none;
         }
+
+        #closingPopup {
+            display: none; /* Initially hide the popup */
+            position: fixed; /* To center it on the screen */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            z-index: 1000; /* To ensure it's on top of other elements */
+          }
