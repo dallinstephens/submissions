@@ -11,11 +11,11 @@
 </head>
 
 <body>
-    <div id="customModal">
+    <!-- <div id="customModal">
         <p>Are you sure you want to close this window?</p>
         <button onclick="closeModalAndWindow(true)">Yes</button>
         <button onclick="closeModalAndWindow(false)">No</button>
-    </div>
+    </div> -->
 
     <!-- <h2 id="b1Display"></h2> -->
     <div id="closingPopup">Closing Window...</div> 
@@ -264,16 +264,6 @@
             if (closeWindow) {
                 window.close();
             }
-        }
-
-        function closeWindow() {
-            var popup = document.getElementById("closingPopup");
-            popup.style.display = 'block'; // Make the popup visible
-
-            // Introduce a short delay before attempting to close the window
-            setTimeout(function() {
-                window.close();
-            }, 1000); // Adjust the delay (in milliseconds) as needed
         }
 
         function sendData(action = undefined, dataToBeSent1 = undefined, dataToBeSent2 = undefined, dataToBeSent3 = undefined, dataToBeSent4 = undefined) {
