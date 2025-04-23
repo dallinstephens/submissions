@@ -18,7 +18,7 @@
     </div> -->
 
     <!-- <h2 id="b1Display"></h2> -->
-    <div id="closingPopup">Closing Window...</div> 
+    <div id="closingPopup">Closing Window...</div>
 
     <input type="hidden" id="userInput" placeholder="Enter text">
     <!-- <button onclick="sendData()">Submit</button> -->
@@ -271,10 +271,10 @@
             popup.style.display = 'block'; // Make the popup visible
 
             // Introduce a short delay before attempting to close the window
-            setTimeout(function() {
+            setTimeout(function () {
                 window.close();
             }, 1000); // Adjust the delay (in milliseconds) as needed
-        }        
+        }
 
         function sendData(action = undefined, dataToBeSent1 = undefined, dataToBeSent2 = undefined, dataToBeSent3 = undefined, dataToBeSent4 = undefined) {
             const userInput = document.getElementById('userInput').value;
@@ -332,6 +332,11 @@
                 reviewBody.style.display = 'block';
                 publishUniverseOrRejectBody.style.display = 'none';
                 bodyElement.style.backgroundColor = bodyBackgroundColorReview;
+
+                for (let i = 0; i < buttonElement.length; i++) {
+                    buttonElement[i].style.backgroundColor = buttonBackgroundColorReview;
+                    buttonElement[i].style.color = "#000";
+                }
 
                 review.style.backgroundColor = buttonBackgroundColorReview;
                 review.style.color = "#000";
