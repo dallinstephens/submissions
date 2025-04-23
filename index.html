@@ -48,7 +48,7 @@
             </ul>
         </nav>
 
-        <div id="mainContainer" onmouseenter="SetOnMouseEnterBody()">
+        <div id="mainContainer"> <!-- onmouseenter="SetOnMouseEnterBody()" -->
             <div id="reviewBody">
                 <h3 id="b1SubmissionHeader"></h3>
                 <h3 id="c1SubmissionHeader"></h3>
@@ -465,23 +465,23 @@
             }
         }
 
-        function SetOnMouseEnterBody() {
-            if (reviewBody.style.display == 'block') {
-                bodyElement.style.backgroundColor = bodyBackgroundColorReview;
-            }
-            else if (publishUniverseOrRejectBody.style.display == 'block' && sendButtonPublish.style.display == 'inline-block') {
-                bodyElement.style.backgroundColor = bodyBackgroundColorPublish;
-            }
-            else if (publishUniverseOrRejectBody.style.display == 'block' && sendButtonUniverse.style.display == 'inline-block') {
-                bodyElement.style.backgroundColor = bodyBackgroundColorUniverse;
-            }
-            else if (publishUniverseOrRejectBody.style.display == 'block' && sendButtonReject.style.display == 'inline-block') {
-                bodyElement.style.backgroundColor = bodyBackgroundColorReject;
-            }
-            else {
-                bodyElement.style.backgroundColor = "#fff";
-            }
-        }
+        // function SetOnMouseEnterBody() {
+        //     if (reviewBody.style.display == 'block') {
+        //         bodyElement.style.backgroundColor = bodyBackgroundColorReview;
+        //     }
+        //     else if (publishUniverseOrRejectBody.style.display == 'block' && sendButtonPublish.style.display == 'inline-block') {
+        //         bodyElement.style.backgroundColor = bodyBackgroundColorPublish;
+        //     }
+        //     else if (publishUniverseOrRejectBody.style.display == 'block' && sendButtonUniverse.style.display == 'inline-block') {
+        //         bodyElement.style.backgroundColor = bodyBackgroundColorUniverse;
+        //     }
+        //     else if (publishUniverseOrRejectBody.style.display == 'block' && sendButtonReject.style.display == 'inline-block') {
+        //         bodyElement.style.backgroundColor = bodyBackgroundColorReject;
+        //     }
+        //     else {
+        //         bodyElement.style.backgroundColor = "#fff";
+        //     }
+        // }
 
         function SeeAlternativeEmail(publishUniverseOrReject) {
             if (publishUniverseOrReject == 'Publish') {
